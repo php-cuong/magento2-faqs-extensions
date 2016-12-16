@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="prototype/windows/themes/default.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="PHPCuong\Faq\Block\Adminhtml\Faq\Edit" name="phpcuong_faq_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tabs" name="phpcuong_faq_edit_tabs">
+                <block class="PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab\General" name="phpcuong_faq_edit_tab_general"/>
+                <block class="PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab\Content" name="phpcuong_faq_edit_tab_content"/>
+                <block class="PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab\SearchEngineOptimisation" name="phpcuong_faq_edit_tab_optimisation"/>
+                <block class="PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab\Websites" name="phpcuong_faq_edit_tab_websites"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">general_section</argument>
+                    <argument name="block" xsi:type="string">phpcuong_faq_edit_tab_general</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">content_section</argument>
+                    <argument name="block" xsi:type="string">phpcuong_faq_edit_tab_content</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">optimisation_section</argument>
+                    <argument name="block" xsi:type="string">phpcuong_faq_edit_tab_optimisation</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">websites_section</argument>
+                    <argument name="block" xsi:type="string">phpcuong_faq_edit_tab_websites</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

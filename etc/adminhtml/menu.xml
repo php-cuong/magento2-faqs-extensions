@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="PHPCuong_Faq::faqs" title="FAQs" module="PHPCuong_Faq" sortOrder="60" resource="PHPCuong_Faq::faqs"/>
+        <add id="PHPCuong_Faq::faq" title="Manage FAQs" module="PHPCuong_Faq" sortOrder="61" parent="PHPCuong_Faq::faqs" action="phpcuong/faq" resource="PHPCuong_Faq::faq"/>
+        <add id="PHPCuong_Faq::category" title="Manage Categories" module="PHPCuong_Faq" sortOrder="62" parent="PHPCuong_Faq::faqs" action="phpcuong/faqcat" resource="PHPCuong_Faq::faq"/>
+    </menu>
+</config>
