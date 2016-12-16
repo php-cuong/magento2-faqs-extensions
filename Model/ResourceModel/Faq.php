@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 03:25:51
+ * @Last Modified time: 2016-12-17 06:28:28
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -56,5 +56,50 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         }
 
         return parent::_afterLoad($object);
+    }
+
+    /**
+     * after save callback
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return parent
+     */
+    protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $this->saveFaqRelation($object);
+        return parent::_afterSave($object);
+    }
+
+    /**
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return $this
+     */
+    protected function saveFaqRelation(\Magento\Framework\Model\AbstractModel $object)
+    {
+        $category_id = $object->getData('category_id');
+        $faq_id = $object->getData('faq_id');
+        $stores = $object->getData('stores');
+
+        if ($faq_id && (int) $faq_id > 0) {
+
+            $adapter = $this->getConnection();
+
+            $where = ['faq_id = ?' => (int) $faq_id];
+            $bind = ['category_id' => (int)$category_id];
+            $adapter->update($this->getTable('phpcuong_faq_category_id'), $bind, $where);
+
+            $condition = ['faq_id = ?' => (int) $faq_id];
+            $adapter->delete($this->getTable('phpcuong_faq_store'), $condition);
+
+            $data = [];
+            foreach ($stores as $store_id) {
+                $data[] = [
+                    'faq_id' => (int) $faq_id,
+                    'store_id' => (int) $store_id
+                ];
+            }
+            $adapter->insertMultiple($this->getTable('phpcuong_faq_store'), $data);
+        }
+        return $this;
     }
 }
