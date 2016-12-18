@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 17:33:52
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 18:33:44
+ * @Last Modified time: 2016-12-18 02:28:41
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -71,14 +71,14 @@ class Edit extends \Magento\Backend\App\Action
     public function execute()
     {
         // Get ID and create model
-        $id = (int) $this->getRequest()->getParam('faq_id');
+        $id = $this->getRequest()->getParam('faq_id');
         $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faq');
         $model->setData([]);
         // Initial checking
-        if ($id && $id > 0) {
+        if ($id && (int) $id > 0) {
             $model->load($id);
             if (!$model->getFaqId()) {
-                $this->messageManager->addError(__('This region no longer exists.'));
+                $this->messageManager->addError(__('This FAQ no longer exists.'));
                 /** \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
                 $resultRedirect = $this->resultRedirectFactory->create();
                 return $resultRedirect->setPath('*/*/');

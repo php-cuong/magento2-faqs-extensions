@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 00:11:08
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 03:33:37
+ * @Last Modified time: 2016-12-18 01:37:06
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -81,6 +81,24 @@ class InstallSchema implements InstallSchemaInterface
             ['nullable' => false, 'default' => '0'],
             'FAQ Sort Order'
         )->addColumn(
+            'liked',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['nullable' => false, 'default' => '0'],
+            'The number of liked'
+        )->addColumn(
+            'disliked',
+            \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+            null,
+            ['nullable' => false, 'default' => '0'],
+            'The number of disliked'
+        )->addColumn(
+            'viewed',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['nullable' => false, 'default' => '0'],
+            'The number of viewed'
+        )->addColumn(
             'most_frequently',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,
@@ -126,13 +144,13 @@ class InstallSchema implements InstallSchemaInterface
             'faq_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
             null,
-            ['identity' => true, 'nullable' => false, 'primary' => true],
+            ['identity' => true, 'nullable' => false],
             'FAQ ID'
         )->addColumn(
             'store_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,
-            ['unsigned' => true, 'nullable' => false, 'primary' => true],
+            ['unsigned' => true, 'nullable' => false],
             'Store ID'
         )->addIndex(
             $installer->getIdxName('phpcuong_faq_store', ['store_id']),
@@ -244,13 +262,13 @@ class InstallSchema implements InstallSchemaInterface
             'category_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,
-            ['identity' => true, 'nullable' => false, 'primary' => true],
+            ['identity' => true, 'nullable' => false],
             'Category ID'
         )->addColumn(
             'store_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
             null,
-            ['unsigned' => true, 'nullable' => false, 'primary' => true],
+            ['unsigned' => true, 'nullable' => false],
             'Store ID'
         )->addIndex(
             $installer->getIdxName('phpcuong_faq_category_store', ['store_id']),
@@ -279,12 +297,6 @@ class InstallSchema implements InstallSchemaInterface
          */
         $table = $installer->getConnection()->newTable(
             $installer->getTable('phpcuong_faq_category_id')
-        )->addColumn(
-            'id',
-            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-            null,
-            ['identity' => true, 'nullable' => false, 'primary' => true],
-            'ID'
         )->addColumn(
             'faq_id',
             \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,

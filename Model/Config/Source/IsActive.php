@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 04:12:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 02:26:08
+ * @Last Modified time: 2016-12-18 02:05:05
  */
 
 namespace PHPCuong\Faq\Model\Config\Source;
@@ -28,8 +28,8 @@ class IsActive implements \Magento\Framework\Option\ArrayInterface
     public function getStatusOptions()
     {
         $options = [
-            self::STATUS_ENABLED => __('Active'),
             self::STATUS_DISABLED => __('InActive'),
+            self::STATUS_ENABLED => __('Active')
         ];
 
         $this->_options = $options;

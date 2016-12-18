@@ -152,8 +152,34 @@
                         <item name="label" xsi:type="string" translate="true">Delete</item>
                         <item name="url" xsi:type="url" path="phpcuong/faq/massDelete"/>
                         <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete Faqs</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected Faqs?</item>
+                            <item name="title" xsi:type="string" translate="true">Delete FAQs</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected FAQs?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+             <action name="deactivate">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">deactivate</item>
+                        <item name="label" xsi:type="string" translate="true">Deactivate</item>
+                        <item name="url" xsi:type="url" path="phpcuong/faq/massDisable"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Deactivate FAQs</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to deactivate selected FAQs?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="activate">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">activate</item>
+                        <item name="label" xsi:type="string" translate="true">Activate</item>
+                        <item name="url" xsi:type="url" path="phpcuong/faq/massEnable"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Activate FAQs</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you wan't to activate selected FAQs?</item>
                         </item>
                     </item>
                 </argument>
@@ -195,6 +221,30 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="viewed">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Viewed</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="liked">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Liked</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="disliked">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Disliked</item>
                     <item name="dataType" xsi:type="string">text</item>
                 </item>
             </argument>

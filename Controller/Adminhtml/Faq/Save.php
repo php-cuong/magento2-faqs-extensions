@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 05:09:06
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 05:38:08
+ * @Last Modified time: 2016-12-18 02:29:29
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -54,7 +54,7 @@ class Save extends \Magento\Backend\App\Action
             /** @var \PHPCuong\Region\Model\Region $model */
             $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faq')->load($id);
             if (!$model->getFaqId() && $id) {
-                $this->messageManager->addError(__('This region no longer exists.'));
+                $this->messageManager->addError(__('This FAQ no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
 
@@ -67,7 +67,7 @@ class Save extends \Magento\Backend\App\Action
 
             try {
                 $model->save();
-                $this->messageManager->addSuccess(__('You saved the faq.'));
+                $this->messageManager->addSuccess(__('You saved the FAQ.'));
 
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['faq_id' => $model->getFaqId()]);
@@ -76,7 +76,7 @@ class Save extends \Magento\Backend\App\Action
             } catch (LocalizedException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the faq.'));
+                $this->messageManager->addException($e, __('Something went wrong while saving the FAQ.'));
             }
 
             $this->_getSession()->setFormData($data);

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 00:18:36
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 04:56:11
+ * @Last Modified time: 2016-12-18 02:07:47
  */
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
 
@@ -194,6 +194,9 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
                     'hidden',
                     ['name' => 'faq_id']
                 );
+            }
+            if (empty($formData->getIsActive())) {
+                $formData->setIsActive('1');
             }
             $form->setValues($formData->getData());
         }
