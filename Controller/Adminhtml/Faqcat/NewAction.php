@@ -3,12 +3,12 @@
 /**
  *
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-16 17:34:02
+ * @Date                2016-12-19 23:12:34
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 23:16:48
+ * @Last Modified time: 2016-12-19 23:17:17
  */
 
-namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
+namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
 
 class NewAction extends \Magento\Backend\App\Action
 {
@@ -17,7 +17,7 @@ class NewAction extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'PHPCuong_Faq::faq_create';
+    const ADMIN_RESOURCE = 'PHPCuong_Faq::category_create';
 
     /**
      * @var \Magento\Backend\Model\View\Result\Forward

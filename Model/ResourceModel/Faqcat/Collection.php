@@ -3,9 +3,9 @@
 /**
  *
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-16 16:38:14
+ * @Date                2016-12-19 22:06:29
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 16:38:40
+ * @Last Modified time: 2016-12-19 22:07:05
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel\Faqcat;

@@ -3,11 +3,11 @@
 /**
  *
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-17 00:18:36
+ * @Date                2016-12-19 23:30:17
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 02:15:53
+ * @Last Modified time: 2016-12-20 02:13:27
  */
-namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
+namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
 
 class General extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Backend\Block\Widget\Tab\TabInterface
@@ -24,12 +24,6 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
      * @var \PHPCuong\Faq\Model\Config\Source\Yesno
      */
     protected $_yesNo;
-    /**
-     * Category
-     *
-     * @var \PHPCuong\Faq\Model\Config\Source\Category
-     */
-    protected $_category;
     /**
      * Core registry
      *
@@ -50,7 +44,6 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
      * @param array $data
      */
     public function __construct(
-        \PHPCuong\Faq\Model\Config\Source\Category $category,
         \PHPCuong\Faq\Model\Config\Source\Yesno $yesNo,
         \PHPCuong\Faq\Model\Config\Source\IsActive $status,
         \Magento\Backend\Block\Template\Context $context,
@@ -59,7 +52,6 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
         \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory,
         array $data = []
     ) {
-        $this->_category = $category;
         $this->_yesNo    = $yesNo;
         $this->_status   = $status;
         $this->_themeLabelFactory = $themeLabelFactory;
@@ -153,29 +145,6 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
         );
 
         $fieldset->addField(
-            'most_frequently',
-            'select',
-            [
-                'name'   => 'most_frequently',
-                'label'  => __('Most frequently'),
-                'title'  => __('Most frequently'),
-                'values' => $this->_yesNo->getYesnoOptions()
-            ]
-        );
-
-        $fieldset->addField(
-            'category_id',
-            'select',
-            [
-                'name'   => 'category_id',
-                'label'  => __('Category'),
-                'title'  => __('Category'),
-                'values' => $this->_category->getCategoryOptions(),
-                'required' => true
-            ]
-        );
-
-        $fieldset->addField(
             'sort_order',
             'text',
             [
@@ -186,13 +155,13 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
             ]
         );
 
-        $formData = $this->_coreRegistry->registry('phpcuong_faq');
+        $formData = $this->_coreRegistry->registry('phpcuong_faqcat');
         if ($formData) {
-            if ($formData->getFaqId()) {
+            if ($formData->getCategoryId()) {
                 $fieldset->addField(
-                    'faq_id',
+                    'category_id',
                     'hidden',
-                    ['name' => 'faq_id']
+                    ['name' => 'category_id']
                 );
             }
             if ($formData->getIsActive() == null) {

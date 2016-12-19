@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:09:30
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 23:23:39
+ * @Last Modified time: 2016-12-19 22:37:57
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;
@@ -70,7 +70,7 @@ class FaqActions extends \Magento\Ui\Component\Listing\Columns\Column
                 $name = $this->getData('name');
                 if (isset($item['faq_id'])) {
                     $item[$name]['edit'] = [
-                        'href' => $this->_urlBuilder->getUrl(self::FAQ_URL_PATH_DELETE, ['faq_id' => $item['faq_id']]),
+                        'href' => $this->_urlBuilder->getUrl(self::FAQ_URL_PATH_EDIT, ['faq_id' => $item['faq_id']]),
                         'label' => __('Edit')
                     ];
                     $item[$name]['delete'] = [

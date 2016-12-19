@@ -5,20 +5,12 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:11:40
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 02:13:14
- */
-
-<?php
-
-/**
- *
- * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-16 02:09:30
- * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 02:11:14
+ * @Last Modified time: 2016-12-19 22:39:30
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;
+
+use \PHPCuong\Faq\Model\ResourceModel\Faq as faqResourceModel;
 
 class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
 {
@@ -27,19 +19,22 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
      *
      * @var string
      */
-    const URL_PATH_EDIT = 'phpcuong/faqcat/edit';
+    const FAQ_CATEGORY_URL_PATH_EDIT = 'phpcuong/faqcat/edit';
     /**
-     * Url path  to delete
+     * Url path to delete
      *
      * @var string
      */
-    const URL_PATH_DELETE = 'phpcuong/faqcat/delete';
+    const FAQ_CATEGORY_URL_PATH_DELETE = 'phpcuong/faqcat/delete';
     /**
      * URL builder
      *
      * @var \Magento\Framework\UrlInterface
      */
     protected $_urlBuilder;
+
+    /** @var UrlBuilder */
+    protected $_actionUrlBuilder;
     /**
      * constructor
      *
@@ -51,6 +46,7 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
      */
     public function __construct(
         \Magento\Framework\UrlInterface $urlBuilder,
+        \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder $actionUrlBuilder,
         \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
         \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
         array $components = [],
@@ -58,6 +54,7 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
     )
     {
         $this->_urlBuilder = $urlBuilder;
+        $this->_actionUrlBuilder = $actionUrlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
     /**
@@ -70,30 +67,28 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
+                $name = $this->getData('name');
                 if (isset($item['category_id'])) {
-                    $item[$this->getData('name')] = [
-                        'edit' => [
-                            'href' => $this->_urlBuilder->getUrl(
-                                static::URL_PATH_EDIT,
-                                [
-                                    'category_id' => $item['category_id']
-                                ]
-                            ),
-                            'label' => __('Edit')
-                        ],
-                        'delete' => [
-                            'href' => $this->_urlBuilder->getUrl(
-                                static::URL_PATH_DELETE,
-                                [
-                                    'category_id' => $item['category_id']
-                                ]
-                            ),
-                            'label' => __('Delete'),
-                            'confirm' => [
-                                'title' => __('Delete "${ $.$data.title }"'),
-                                'message' => __('Are you sure you wan\'t to delete the faqcat "${ $.$data.title }" ?')
-                            ]
+                    $item[$name]['edit'] = [
+                        'href' => $this->_urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_EDIT, ['category_id' => $item['category_id']]),
+                        'label' => __('Edit')
+                    ];
+                    $item[$name]['delete'] = [
+                        'href' => $this->_urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_DELETE, ['category_id' => $item['category_id']]),
+                        'label' => __('Delete'),
+                        'confirm' => [
+                            'title' => __('Delete ${ $.$data.title }'),
+                            'message' => __('Are you sure you wan\'t to delete a ${ $.$data.title } record?')
                         ]
+                    ];
+                }
+                if (isset($item['identifier'])) {
+                    $item[$name]['preview'] = [
+                        'href' => $this->_actionUrlBuilder->getUrl($item['identifier'],
+                            isset($item['store_id']) ? $item['store_id'] : null,
+                            null
+                        ),
+                        'label' => __('View')
                     ];
                 }
             }

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 02:40:45
+ * @Last Modified time: 2016-12-20 03:13:45
  */
 
 namespace PHPCuong\Faq\Block;
@@ -33,6 +33,14 @@ class Question extends \Magento\Framework\View\Element\Template
      * @var \Magento\Framework\View\Page\Config
      */
     protected $_pageConfig;
+
+    protected $_faqContent;
+
+    protected $_faqTitle;
+
+    protected $_faqCreated;
+
+    protected $_faqViewed;
 
     /**
      * @param Context $context
@@ -70,7 +78,12 @@ class Question extends \Magento\Framework\View\Element\Template
     protected function _prepareLayout()
     {
         $faq = $this->getFaq();
-        $faqTitle = $faq->getTitle();
+
+        $this->_faqContent = $faq->getContent();
+        $this->_faqTitle   = $faq->getTitle();
+        $this->_faqCreated = $faq->getCreationTime();
+        $this->_faqViewed  = $faq->getViewed();
+
         $breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs');
 
         $breadcrumbsBlock->addCrumb(
@@ -106,16 +119,16 @@ class Question extends \Magento\Framework\View\Element\Template
         $breadcrumbsBlock->addCrumb(
             'faq.question.view',
             [
-                'label' => $faqTitle,
-                'title' => $faqTitle
+                'label' => $this->_faqTitle,
+                'title' => $this->_faqTitle
             ]
         );
 
-        $this->_pageConfig->getTitle()->set($faqTitle);
+        $this->_pageConfig->getTitle()->set($this->_faqTitle);
 
-        $this->_pageConfig->setKeywords($faq->getMetaKeywords()? $faq->getMetaKeywords() : $faqTitle);
+        $this->_pageConfig->setKeywords($faq->getMetaKeywords()? $faq->getMetaKeywords() : $this->_faqTitle);
 
-        $this->_pageConfig->setDescription($faq->getMetaDescription()? $faq->getMetaDescription() : $faqTitle);
+        $this->_pageConfig->setDescription($faq->getMetaDescription()? $faq->getMetaDescription() : $this->_faqTitle);
 
         return parent::_prepareLayout();
     }
@@ -125,7 +138,7 @@ class Question extends \Magento\Framework\View\Element\Template
      */
     public function getFaqContent()
     {
-        return $this->getFaq()->getContent();
+        return $this->_faqContent;
     }
 
     /**
@@ -133,6 +146,22 @@ class Question extends \Magento\Framework\View\Element\Template
      */
     public function getFaqTitle()
     {
-        return $this->getFaq()->getTitle();
+        return $this->_faqTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFaqCreated()
+    {
+        return $this->_faqCreated;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFaqViewed()
+    {
+        return $this->_faqViewed;
     }
 }

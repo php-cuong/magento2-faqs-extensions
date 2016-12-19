@@ -3,12 +3,12 @@
 /**
  *
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-17 05:09:06
+ * @Date                2016-12-20 00:23:20
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 00:25:20
+ * @Last Modified time: 2016-12-20 03:20:34
  */
 
-namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
+namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Exception\LocalizedException;
@@ -49,39 +49,34 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
         if ($data) {
 
-            $id = $this->getRequest()->getParam('faq_id');
+            $id = $this->getRequest()->getParam('category_id');
 
-            /** @var \PHPCuong\Faq\Model\Faq $model */
-            $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faq')->load($id);
-            if (!$model->getFaqId() && $id) {
-                $this->messageManager->addError(__('This FAQ no longer exists.'));
+            /** @var \PHPCuong\Faq\Model\Faqcat $model */
+            $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faqcat')->load($id);
+            if (!$model->getCategoryId() && $id) {
+                $this->messageManager->addError(__('This Category no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
 
             $model->setData($data);
 
-            $this->_eventManager->dispatch(
-                'faq_faq_prepare_save',
-                ['faq' => $model, 'request' => $this->getRequest()]
-            );
-
             try {
                 $model->save();
-                $this->messageManager->addSuccess(__('You saved the FAQ.'));
+                $this->messageManager->addSuccess(__('You saved the Category.'));
 
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['faq_id' => $model->getFaqId()]);
+                    return $resultRedirect->setPath('*/*/edit', ['category_id' => $model->getCategoryId()]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the FAQ.'));
+                $this->messageManager->addException($e, __('Something went wrong while saving the Category.'));
             }
 
             $this->_getSession()->setFormData($data);
-            if ($this->getRequest()->getParam('faq_id')) {
-                return $resultRedirect->setPath('*/*/edit', ['faq_id' => $this->getRequest()->getParam('faq_id')]);
+            if ($this->getRequest()->getParam('category_id')) {
+                return $resultRedirect->setPath('*/*/edit', ['category_id' => $this->getRequest()->getParam('category_id')]);
             }
             return $resultRedirect->setPath('*/*/new');
         }

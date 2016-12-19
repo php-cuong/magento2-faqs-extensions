@@ -22,10 +22,19 @@
             <argument name="resourceModel" xsi:type="string">PHPCuong\Faq\Model\ResourceModel\Faq</argument>
         </arguments>
     </type>
+    <type name="PHPCuong\Faq\Model\ResourceModel\Faqcat\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">phpcuong_faq_category</argument>
+            <argument name="eventPrefix" xsi:type="string">phpcuong_faqcat_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">faqcat_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">PHPCuong\Faq\Model\ResourceModel\Faqcat</argument>
+        </arguments>
+    </type>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="faq_listing_data_source" xsi:type="string">PHPCuong\Faq\Model\ResourceModel\Faq\Grid\Collection</item>
+                <item name="faqcat_listing_data_source" xsi:type="string">PHPCuong\Faq\Model\ResourceModel\Faqcat\Grid\Collection</item>
             </argument>
         </arguments>
     </type>

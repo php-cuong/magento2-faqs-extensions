@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 04:43:54
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 18:31:33
+ * @Last Modified time: 2016-12-19 22:35:55
  */
 
 namespace PHPCuong\Faq\Model\Config\Source\Admin;
@@ -19,6 +19,7 @@ class User implements \Magento\Framework\Option\ArrayInterface
     ) {
         $this->userFactory = $userFactory;
     }
+
     /**
      * @return array
      */

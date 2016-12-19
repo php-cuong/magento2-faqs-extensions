@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 00:11:08
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 01:37:06
+ * @Last Modified time: 2016-12-19 22:30:38
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -237,9 +237,6 @@ class InstallSchema implements InstallSchemaInterface
             null,
             ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE],
             'Category Modification Time'
-        )->addIndex(
-            $installer->getIdxName('phpcuong_faq_category', ['identifier']),
-            ['identifier']
         )->addIndex(
             $setup->getIdxName(
                 $installer->getTable('phpcuong_faq_category'),

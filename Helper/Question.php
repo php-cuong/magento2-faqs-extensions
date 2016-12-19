@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 17:35:37
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 02:07:37
+ * @Last Modified time: 2016-12-19 21:17:03
  */
 /**
  * Copyright © 2016 Magento. All rights reserved.
@@ -94,6 +94,28 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     {
         if (!empty($this->_faqData['content'])) {
             return $this->_faqData['content'];
+        }
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreationTime()
+    {
+        if (!empty($this->_faqData['creation_time'])) {
+            return $this->_faqData['creation_time'];
+        }
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getViewed()
+    {
+        if (!empty($this->_faqData['viewed'])) {
+            return $this->_faqData['viewed'];
         }
         return '';
     }

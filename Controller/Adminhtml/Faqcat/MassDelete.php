@@ -3,29 +3,27 @@
 /**
  *
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-18 03:00:47
+ * @Date                2016-12-20 02:17:36
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 02:19:50
+ * @Last Modified time: 2016-12-20 03:00:28
  */
 
-namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
+namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
-use PHPCuong\Faq\Model\ResourceModel\Faq\CollectionFactory;
+use PHPCuong\Faq\Model\ResourceModel\Faqcat\CollectionFactory;
+use PHPCuong\Faq\Model\ResourceModel\Faqcat;
 
-/**
- * Class MassDisable
- */
-class MassEnable extends \Magento\Backend\App\Action
+class MassDelete extends \Magento\Backend\App\Action
 {
     /**
      * Authorization level of a basic admin session
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'PHPCuong_Faq::faq_edit';
+    const ADMIN_RESOURCE = 'PHPCuong_Faq::category_delete';
     /**
      * @var Filter
      */
@@ -57,13 +55,27 @@ class MassEnable extends \Magento\Backend\App\Action
     public function execute()
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
+        $collectionSize = $collection->getSize();
 
-        foreach ($collection as $item) {
-            $item->setIsActive(1);
-            $item->save();
+        foreach ($collection as $page) {
+
+            $page->delete();
+
+            $category_id = $page->getData()['category_id'];
+
+            $url_rewrite_model = $this->_objectManager->create('Magento\UrlRewrite\Model\UrlRewrite');
+
+            $urls_rewrite = $url_rewrite_model->getCollection()
+            ->addFieldToFilter('entity_type', Faqcat::FAQ_CATEGORY_ENTITY_TYPE)
+            ->addFieldToFilter('entity_id', $category_id)
+            ->load()->getData();
+            foreach ($urls_rewrite as $value) {
+                $url_rewrite_model = $this->_objectManager->create('Magento\UrlRewrite\Model\UrlRewrite');
+                $url_rewrite_model->load($value['url_rewrite_id'])->delete();
+            }
         }
 
-        $this->messageManager->addSuccess(__('A total of %1 record(s) have been activated.', $collection->getSize()));
+        $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $collectionSize));
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

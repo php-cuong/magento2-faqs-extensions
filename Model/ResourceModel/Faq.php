@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 22:29:12
+ * @Last Modified time: 2016-12-20 03:27:12
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -253,7 +253,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $flag = 0;
         foreach ($stores as $store) {
             if ($store == Store::DEFAULT_STORE_ID) {
-                $_stores = $this->_storeManager->getStores();
+                $_stores = $this->_storeManager->getStores(true, true);
                 foreach ($_stores as $value) {
                     if ($value->getData()['is_active']) {
                         $rs[] = $value->getData()['store_id'];
@@ -262,7 +262,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 break;
             }
         }
-        $stores   = array_unique($stores + $rs);
+        $stores   = array_unique(array_merge($stores, $rs));
         return $stores;
     }
 
@@ -273,6 +273,11 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected function saveFaqRelation(AbstractModel $object)
     {
         $category_id = $object->getData('category_id');
+
+        if (is_array($category_id)) {
+            $category_id = $category_id[0];
+        }
+
         $faq_id = $object->getData('faq_id');
 
         $stores = $this->getStores($object);
@@ -287,8 +292,8 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 $adapter->delete($this->getTable('phpcuong_faq_category_id'), $condition);
 
                 $faq_category = [
-                    'faq_id' => (int) $faq_id,
-                    'category_id' => (int) $category_id
+                    'faq_id' => $faq_id,
+                    'category_id' => $category_id
                 ];
                 $adapter->insertMultiple($this->getTable('phpcuong_faq_category_id'), $faq_category);
             }
