@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 02:58:10
+ * @Last Modified time: 2016-12-21 04:58:22
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -273,7 +273,8 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             ->where('faq_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
             ->where('faq.faq_id <> ?', $faq_id)
             ->where('faq.is_active = ?', '1')
-            ->where('faqcat.category_id = ?', $category_id);
+            ->where('faqcat.category_id = ?', $category_id)
+            ->order('faq.sort_order ASC');
         if ($results = $this->getConnection()->fetchAll($select)) {
             return $results;
         }

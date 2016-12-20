@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 01:34:56
+ * @Last Modified time: 2016-12-21 05:00:12
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -253,7 +253,8 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             ->join(['cat_store' => $this->getTable('phpcuong_faq_category_store')], 'cat.category_id = cat_store.category_id', ['store_id'])
             ->where('cat.is_active =?', '1')
             ->where('cat_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
-            ->group('cat.category_id');
+            ->group('cat.category_id')
+            ->order('cat.sort_order ASC');
 
         return $this->getConnection()->fetchAll($select);
     }
