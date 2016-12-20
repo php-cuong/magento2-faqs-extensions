@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 00:11:08
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 22:30:38
+ * @Last Modified time: 2016-12-20 23:54:44
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -213,6 +213,12 @@ class InstallSchema implements InstallSchemaInterface
             null,
             ['nullable' => false, 'default' => '1'],
             'Admin User ID'
+        )->addColumn(
+            'count',
+            \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+            null,
+            ['nullable' => false, 'default' => '0'],
+            'Number of FAQs in Category'
         )->addColumn(
             'is_active',
             \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,

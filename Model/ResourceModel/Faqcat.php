@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 02:39:11
+ * @Last Modified time: 2016-12-21 01:34:56
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -21,6 +21,7 @@ use PHPCuong\Faq\Model\Config\Source\Urlkey;
 class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     const FAQ_CATEGORY_ENTITY_TYPE = 'faq-category';
+
     /**
      * Store manager
      *
@@ -87,10 +88,9 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(AbstractModel $object)
     {
-        if (empty($object->getData('identifier'))) {
-            $identifier = $this->_urlKey->generateIdentifier($object->getTitle());
-            $object->setIdentifier($identifier);
-        }
+        $identifier = empty($object->getData('identifier')) ? $object->getTitle() : $object->getData('identifier');
+
+        $object->setIdentifier($this->_urlKey->generateIdentifier($identifier));
 
         if ($this->duplicateCategoryIdentifier($object)) {
             throw new LocalizedException(
@@ -212,8 +212,8 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 ];
                 $adapter->delete($this->getTable('url_rewrite'), $url_rewrite_condition);
 
-                $target_path  = 'faq/category/view/category_id/'.$category_id;
-                $request_path = Faq::FAQ_CATEGORY_PATH.'/'.$object->getIdentifier().'.html';
+                $target_path  = Faq::FAQ_CATEGORY_TARGET_PATH.$category_id;
+                $request_path = Faq::FAQ_CATEGORY_PATH.'/'.$object->getIdentifier().Faq::FAQ_DOT_HTML;
 
                 $data = [];
                 $url_rewrite_data = [];
@@ -239,5 +239,22 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             }
         }
         return $this;
+    }
+
+    /**
+    * @return array;
+    */
+    public function getCategoriesList()
+    {
+        $adapter = $this->getConnection();
+
+        $select = $adapter->select()
+            ->from(['cat' => $this->getTable('phpcuong_faq_category')])
+            ->join(['cat_store' => $this->getTable('phpcuong_faq_category_store')], 'cat.category_id = cat_store.category_id', ['store_id'])
+            ->where('cat.is_active =?', '1')
+            ->where('cat_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
+            ->group('cat.category_id');
+
+        return $this->getConnection()->fetchAll($select);
     }
 }

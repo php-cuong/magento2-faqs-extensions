@@ -5,12 +5,9 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 17:35:37
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 21:17:03
+ * @Last Modified time: 2016-12-21 02:33:54
  */
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace PHPCuong\Faq\Helper;
 
 use Magento\Framework\App\Action\Action;
@@ -31,18 +28,36 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     protected $_faqData;
 
     /**
+     * @var \Magento\User\Model\UserFactory
+     */
+    protected $_userFactory;
+
+    /**
      * Constructor
      *
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel
+     * @param \Magento\User\Model\UserFactory $userFactory
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
-        \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel
+        \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel,
+        \Magento\User\Model\UserFactory $userFactory
     ) {
         $this->_faqResourceModel     = $faqResourceModel;
+        $this->_userFactory = $userFactory;
         parent::__construct($context);
+    }
+
+    public function getFullName()
+    {
+        $user_id = ($this->_faqData['user_id'] != null) ? $this->_faqData['user_id'] : '';
+        $admin_user = $this->_userFactory->create()->load($user_id);
+        if ($admin_user->getUserId()) {
+            return trim($admin_user->getFirstname().' '.$admin_user->getLastname());
+        }
+        return '';
     }
 
     /**
@@ -52,6 +67,17 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $this->_faqData = $this->_faqResourceModel->getFaqStore($faq_id);
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFaqId()
+    {
+        if (!empty($this->_faqData['faq_id'])) {
+            return $this->_faqData['faq_id'];
+        }
+        return '';
     }
 
     /**
@@ -104,7 +130,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCreationTime()
     {
         if (!empty($this->_faqData['creation_time'])) {
-            return $this->_faqData['creation_time'];
+            $date = new \DateTime($this->_faqData['creation_time']);
+            return $date->format('M d, Y H:i:s A');;
         }
         return '';
     }
@@ -139,5 +166,21 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
             return $this->_faqData['identifier'];
         }
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryId()
+    {
+        if (!empty($this->_faqData['category_id'])) {
+            return $this->_faqData['category_id'];
+        }
+        return '';
+    }
+
+    public function getRelatedQuestion($faq_id = null, $category_id = null)
+    {
+        return $this->_faqResourceModel->getRelatedQuestion($faq_id, $category_id);
     }
 }

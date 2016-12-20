@@ -5,15 +5,16 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 03:13:45
+ * @Last Modified time: 2016-12-21 03:01:42
  */
 
-namespace PHPCuong\Faq\Block;
+namespace PHPCuong\Faq\Block\Question;
 
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\View\Page\Config;
+use PHPCuong\Faq\Model\ResourceModel\Faq;
 
 class Question extends \Magento\Framework\View\Element\Template
 {
@@ -32,15 +33,21 @@ class Question extends \Magento\Framework\View\Element\Template
     /**
      * @var \Magento\Framework\View\Page\Config
      */
-    protected $_pageConfig;
+    protected $_pageConfig = null;
 
-    protected $_faqContent;
+    protected $_faqContent = null;
 
-    protected $_faqTitle;
+    protected $_faqTitle = null;
 
-    protected $_faqCreated;
+    protected $_faqCreated = null;
 
-    protected $_faqViewed;
+    protected $_faqViewed = null;
+
+    protected $_userFullName = null;
+
+    protected $_faqCategoryTitle = null;
+
+    protected $_relatedQuestion = null;
 
     /**
      * @param Context $context
@@ -79,10 +86,11 @@ class Question extends \Magento\Framework\View\Element\Template
     {
         $faq = $this->getFaq();
 
-        $this->_faqContent = $faq->getContent();
-        $this->_faqTitle   = $faq->getTitle();
-        $this->_faqCreated = $faq->getCreationTime();
-        $this->_faqViewed  = $faq->getViewed();
+        $this->_faqContent   = $faq->getContent();
+        $this->_faqTitle     = $faq->getTitle();
+        $this->_faqCreated   = $faq->getCreationTime();
+        $this->_faqViewed    = $faq->getViewed();
+        $this->_userFullName = $faq->getFullName();
 
         $breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs');
 
@@ -106,12 +114,19 @@ class Question extends \Magento\Framework\View\Element\Template
 
         $faqCategory = $this->getFaqCategory();
         if ($identifier = $faqCategory->getCategoryIndentifier()) {
+
+            $link = $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_CATEGORY_PATH.'/'.$identifier.Faq::FAQ_DOT_HTML;
+
+            $this->_faqCategoryTitle = '<a href="'.$link.'">'.$faqCategory->getTitle().'</a>';
+
+            $this->_relatedQuestion = $this->_questionHelper->getRelatedQuestion($faq->getFaqId(), $faqCategory->getCategoryId());
+
             $breadcrumbsBlock->addCrumb(
                 'faq.category',
                 [
                     'label' => $faqCategory->getTitle(),
                     'title' => $faqCategory->getTitle(),
-                    'link'  => $this->_storeManager->getStore()->getBaseUrl().'faq/category/'.$identifier.'.html'
+                    'link'  => $link
                 ]
             );
         }
@@ -131,6 +146,19 @@ class Question extends \Magento\Framework\View\Element\Template
         $this->_pageConfig->setDescription($faq->getMetaDescription()? $faq->getMetaDescription() : $this->_faqTitle);
 
         return parent::_prepareLayout();
+    }
+
+    public function getFaqCategoryTitle()
+    {
+        return $this->_faqCategoryTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->_userFullName;
     }
 
     /**
@@ -163,5 +191,25 @@ class Question extends \Magento\Framework\View\Element\Template
     public function getFaqViewed()
     {
         return $this->_faqViewed;
+    }
+
+    public function getRelatedQuestion()
+    {
+        return $this->_relatedQuestion;
+    }
+
+    public function getFaqPath()
+    {
+        return Faq::FAQ_QUESTION_PATH;
+    }
+
+    public function getFaqDotHtml()
+    {
+        return Faq::FAQ_DOT_HTML;
+    }
+
+    public function getBaseUrlStore()
+    {
+        return $this->_storeManager->getStore()->getBaseUrl();
     }
 }

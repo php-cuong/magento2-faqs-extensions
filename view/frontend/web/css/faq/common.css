@@ -1,0 +1,49 @@
+/*
+* @Author: Ngo Quang Cuong
+* @Date:   2016-12-20 21:41:27
+* @Last Modified by:   nquangcuong
+* @Last Modified time: 2016-12-21 02:52:25
+*/
+/* faq content */
+.faq-content {
+  font-family: "Open Sans",sans-serif;
+  font-weight: 400;
+  color: #797979;
+}
+.faq-content h1 {
+  margin-bottom: 15px;
+  font-family: "Open Sans",sans-serif;
+  font-weight: bold;
+}
+.faq-content h2, .faq-content h3, .faq-content h4, .faq-content h5 {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  line-height: 1.4;
+  font-family: "Open Sans",sans-serif;
+  font-weight: bold;
+}
+.faq-content .created-by {
+  font-size: 1.2rem;
+  color: #a3a3a3;
+}
+.faq-content .details .content {
+  margin-top: 15px;
+}
+.faq-content .details .feedback {
+  margin-top: 15px;
+}
+.faq-content .related-question {
+  margin-top: 30px;
+}
+/* sider left category */
+.block-faq-category .block-title {
+  margin: 0 0 20px;
+}
+.block-faq-category .block-title strong {
+  font-size: 18px;
+  font-weight: 300;
+}
+.block-faq-category .block-content .items .item a .count{
+  color: #858585;
+  padding-right: 5px;
+}

@@ -1,0 +1,18 @@
+<?php if ($this->getFaqCategoriesList()): ?>
+    <div class="block block-faq-category">
+        <div class="block-title">
+            <strong><?php echo __('FAQ Categories'); ?></strong>
+        </div>
+        <div class="block-content">
+            <ol class="items">
+                <?php foreach($this->getFaqCategoriesList() as $fclist): ?>
+                    <li class="item">
+                        <a href="<?php echo $this->getBaseUrlStore().$this->getFaqCategoryPath(); ?>/<?php echo $fclist['identifier'].$this->getFaqDotHtml(); ?>">
+                            <?php echo $fclist['title']; ?> <span class="count">(<?php echo $fclist['count']; ?>)</span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+<?php endif; ?>

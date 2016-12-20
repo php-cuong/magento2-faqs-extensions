@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 23:04:58
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 01:24:45
+ * @Last Modified time: 2016-12-20 23:08:11
  */
 
 namespace PHPCuong\Faq\Model\Config\Source;
@@ -18,6 +18,10 @@ class Urlkey {
 
         $string = strtolower($string);
 
+        while (stristr($string, '-')) {
+            $string = str_replace('-', ' ', $string);
+        }
+
         while (stristr($string, '  ')) {
             $string = str_replace('  ', ' ', $string);
         }
@@ -27,6 +31,10 @@ class Urlkey {
         $string = $filter->filter($string);
 
         $string = str_replace(' ', '-', $string);
+
+        while (stristr($string, '--')) {
+            $string = str_replace('--', '-', $string);
+        }
 
         return $string;
     }

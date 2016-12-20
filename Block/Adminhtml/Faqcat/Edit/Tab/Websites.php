@@ -5,10 +5,12 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 23:54:01
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 23:55:10
+ * @Last Modified time: 2016-12-21 02:02:20
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
+
+use Magento\Store\Model\Store;
 
 class Websites extends \Magento\Backend\Block\Widget\Form\Generic implements
     \Magento\Backend\Block\Widget\Tab\TabInterface
@@ -145,6 +147,9 @@ class Websites extends \Magento\Backend\Block\Widget\Form\Generic implements
         }
 
         if ($formData) {
+            if ($formData->getStores() == null) {
+                $formData->setStores([Store::DEFAULT_STORE_ID]);
+            }
             $form->setValues($formData->getData());
         }
 

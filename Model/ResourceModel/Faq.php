@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 03:27:12
+ * @Last Modified time: 2016-12-21 02:58:10
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -36,6 +36,15 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     const FAQ_QUESTION_PATH = 'faq';
 
     const FAQ_CATEGORY_PATH = 'faq/category';
+
+    const FAQ_ENTITY_TYPE = 'faq-question';
+
+    const FAQ_DOT_HTML = '.html';
+
+    const FAQ_QUESTION_TARGET_PATH = 'faq/question/view/faq_id/';
+
+    const FAQ_CATEGORY_TARGET_PATH = 'faq/category/view/category_id/';
+
     /**
      * @param Context $context
      * @param StoreManagerInterface $storeManager
@@ -101,10 +110,9 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(AbstractModel $object)
     {
-        if (empty($object->getData('identifier'))) {
-            $identifier = $this->_urlKey->generateIdentifier($object->getTitle());
-            $object->setIdentifier($identifier);
-        }
+        $identifier = empty($object->getData('identifier')) ? $object->getTitle() : $object->getData('identifier');
+
+        $object->setIdentifier($this->_urlKey->generateIdentifier($identifier));
 
         if ($this->duplicateFaqIdentifier($object)) {
             throw new LocalizedException(
@@ -227,12 +235,46 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 'faqcat.category_id = cat.category_id',
                 ['title', 'identifier']
             )
+            ->joinLeft(
+                ['cat_store' => $this->getTable('phpcuong_faq_category_store')],
+                'faqcat.category_id = cat_store.category_id',
+                ['store_id']
+            )
+            ->where('cat_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
             ->where('faq.faq_id = ?', $faq_id)
             ->where('cat.is_active = ?', '1')
             ->group('faq.faq_id')
             ->limit(1);
-
         if ($results = $this->getConnection()->fetchRow($select)) {
+            return $results;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param $faq_id
+     * @return array|boolen
+     */
+    public function getRelatedQuestion($faq_id = null, $category_id = null)
+    {
+        $select = $this->getConnection()->select()
+            ->from(['faq' => $this->getMainTable()])
+            ->joinLeft(
+                ['faq_store' => $this->getTable('phpcuong_faq_store')],
+                'faq.faq_id = faq_store.faq_id',
+                ['store_id']
+            )
+            ->joinLeft(
+                ['faqcat' => $this->getTable('phpcuong_faq_category_id')],
+                'faq.faq_id = faqcat.faq_id',
+                ['category_id']
+            )
+            ->where('faq_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
+            ->where('faq.faq_id <> ?', $faq_id)
+            ->where('faq.is_active = ?', '1')
+            ->where('faqcat.category_id = ?', $category_id);
+        if ($results = $this->getConnection()->fetchAll($select)) {
             return $results;
         }
         return false;
@@ -267,6 +309,28 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * @param $category_id
+     * @return $this
+     */
+    public function updateNumberOfFaqsInCategory($category_id)
+    {
+        $adapter = $this->getConnection();
+
+        $select = $adapter->select()
+            ->from(['fci' => $this->getTable('phpcuong_faq_category_id')])
+            ->where('fci.category_id =?', (int) $category_id);
+
+        $faq_category_results = $this->getConnection()->fetchAll($select);
+
+        $adapter->update($this->getTable('phpcuong_faq_category'),
+            ['count' => count($faq_category_results)],
+            ['category_id = ?' => (int) $category_id]
+        );
+
+        return $this;
+    }
+
+    /**
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return $this
      */
@@ -292,17 +356,20 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 $adapter->delete($this->getTable('phpcuong_faq_category_id'), $condition);
 
                 $faq_category = [
-                    'faq_id' => $faq_id,
-                    'category_id' => $category_id
+                    'faq_id' => (int) $faq_id,
+                    'category_id' => (int) $category_id
                 ];
                 $adapter->insertMultiple($this->getTable('phpcuong_faq_category_id'), $faq_category);
+
+                // update number of FAQs in category
+                $this->updateNumberOfFaqsInCategory($category_id);
             }
 
             if ($stores) {
                 $condition = ['faq_id = ?' => (int) $faq_id];
                 $adapter->delete($this->getTable('phpcuong_faq_store'), $condition);
 
-                $entity_type  = 'faq-question';
+                $entity_type  = Faq::FAQ_ENTITY_TYPE;
 
                 $url_rewrite_condition = [
                     'entity_id = ?' => (int) $faq_id,
@@ -310,8 +377,8 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 ];
                 $adapter->delete($this->getTable('url_rewrite'), $url_rewrite_condition);
 
-                $target_path  = 'faq/question/view/faq_id/'.$faq_id;
-                $request_path = Faq::FAQ_QUESTION_PATH.'/'.$object->getIdentifier().'.html';
+                $target_path  = Faq::FAQ_QUESTION_TARGET_PATH.$faq_id;
+                $request_path = Faq::FAQ_QUESTION_PATH.'/'.$object->getIdentifier().Faq::FAQ_DOT_HTML;
 
                 $data = [];
                 $url_rewrite_data = [];

@@ -5,9 +5,15 @@
  * See COPYING.txt for license details.
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="PHPCuong_Faq::css/faq/common.css"/>
+    </head>
     <referenceContainer name="content">
         <referenceBlock name="page.main.title" remove="true"/>
-        <block class="PHPCuong\Faq\Block\Question" name="faq.question.view" template="PHPCuong_Faq::question/view.phtml" />
+        <block class="PHPCuong\Faq\Block\Question\Question" name="faq.question.view" template="PHPCuong_Faq::question/view.phtml" />
+    </referenceContainer>
+    <referenceContainer name="sidebar.main">
+        <block class="PHPCuong\Faq\Block\Category\CategorySidebar" name="faq.category.sidebar.view" template="PHPCuong_Faq::category/categorySidebar.phtml" />
     </referenceContainer>
 </page>

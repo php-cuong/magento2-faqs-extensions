@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 05:09:06
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 00:25:20
+ * @Last Modified time: 2016-12-21 00:08:39
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -76,7 +76,8 @@ class Save extends \Magento\Backend\App\Action
             } catch (LocalizedException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the FAQ.'));
+                // $this->messageManager->addException($e, __('Something went wrong while saving the FAQ.'));
+                $this->messageManager->addError($e->getMessage());
             }
 
             $this->_getSession()->setFormData($data);
