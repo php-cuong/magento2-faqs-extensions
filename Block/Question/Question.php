@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 03:01:42
+ * @Last Modified time: 2016-12-21 04:34:52
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -49,6 +49,8 @@ class Question extends \Magento\Framework\View\Element\Template
 
     protected $_relatedQuestion = null;
 
+    protected $_faqId = null;
+
     /**
      * @param Context $context
      * @param \Magento\Framework\Registry $registry
@@ -91,6 +93,7 @@ class Question extends \Magento\Framework\View\Element\Template
         $this->_faqCreated   = $faq->getCreationTime();
         $this->_faqViewed    = $faq->getViewed();
         $this->_userFullName = $faq->getFullName();
+        $this->_faqId        = $faq->getFaqId();
 
         $breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs');
 
@@ -198,6 +201,11 @@ class Question extends \Magento\Framework\View\Element\Template
         return $this->_relatedQuestion;
     }
 
+    public function getFaqId()
+    {
+        return $this->_faqId;
+    }
+
     public function getFaqPath()
     {
         return Faq::FAQ_QUESTION_PATH;
@@ -206,10 +214,5 @@ class Question extends \Magento\Framework\View\Element\Template
     public function getFaqDotHtml()
     {
         return Faq::FAQ_DOT_HTML;
-    }
-
-    public function getBaseUrlStore()
-    {
-        return $this->_storeManager->getStore()->getBaseUrl();
     }
 }

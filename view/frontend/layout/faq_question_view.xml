@@ -8,6 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="PHPCuong_Faq::css/faq/common.css"/>
+        <script src="PHPCuong_Faq::js/js-question.js" />
     </head>
     <referenceContainer name="content">
         <referenceBlock name="page.main.title" remove="true"/>

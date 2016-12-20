@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:46:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 02:05:31
+ * @Last Modified time: 2016-12-21 04:24:00
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -73,8 +73,4 @@ class CategorySidebar extends \Magento\Framework\View\Element\Template
         return Faq::FAQ_DOT_HTML;
     }
 
-    public function getBaseUrlStore()
-    {
-        return $this->_storeManager->getStore()->getBaseUrl();
-    }
 }

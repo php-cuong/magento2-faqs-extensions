@@ -5,10 +5,13 @@
             <?php echo ($this->getFullName())? __('Created by').' '.$this->getFullName().' '.__('on').' '.$this->getFaqCreated().', ' : ''; ?> <?php echo ($this->getFaqCategoryTitle())? __('published in').' '.$this->getFaqCategoryTitle().',' : ''; ?> <?php echo $this->getFaqViewed(); ?> <?php echo __('Viewed'); ?>.
         </div>
         <div class="content"><?php echo $this->getFaqContent(); ?></div>
-        <div class="feedback">
+        <div class="feedback" id="feedback">
+            <div class="hidden" id="BASE_URL"><?php echo $block->getUrl('faq/question/ajax'); ?></div>
+            <div class="hidden" id="FAQ_ID"><?php echo $this->getFaqId(); ?></div>
+            <div class="hidden" id="message"><?php echo __('Glad to hear it — Thanks for the feedback'); ?></div>
             <span><?php echo __('Was this article helpful?'); ?></span>
-            <button class="btn btn-like"><?php echo __('Yes'); ?></button>
-            <button class="btn btn-dislike"><?php echo __('No'); ?></button>
+            <button class="btn" id="btn-like"><?php echo __('Yes'); ?></button>
+            <button class="btn" id="btn-dislike"><?php echo __('No'); ?></button>
         </div>
     </div>
     <?php if ($this->getRelatedQuestion()): ?>
@@ -17,7 +20,7 @@
             <ol class="items">
                 <?php foreach($this->getRelatedQuestion() as $faq): ?>
                     <li class="item">
-                        <a href="<?php echo $this->getBaseUrlStore().$this->getFaqPath(); ?>/<?php echo $faq['identifier']; ?><?php echo $this->getFaqDotHtml(); ?>"><?php echo $faq['title']; ?></a>
+                        <a href="<?php echo $block->getUrl($this->getFaqPath().'/'.$faq['identifier'].$this->getFaqDotHtml()); ?>"><?php echo $faq['title']; ?></a>
                     </li>
                 <?php endforeach; ?>
             </ol>
