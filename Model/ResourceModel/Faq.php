@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 04:58:22
+ * @Last Modified time: 2016-12-21 05:20:27
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -39,7 +39,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     const FAQ_ENTITY_TYPE = 'faq-question';
 
-    const FAQ_DOT_HTML = '.html';
+    const FAQ_DOT_HTML = '';
 
     const FAQ_QUESTION_TARGET_PATH = 'faq/question/view/faq_id/';
 
