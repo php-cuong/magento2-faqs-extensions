@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:46:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 04:24:00
+ * @Last Modified time: 2016-12-21 20:12:16
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -63,14 +63,8 @@ class CategorySidebar extends \Magento\Framework\View\Element\Template
         return $this->_faqCategoriesList;
     }
 
-    public function getFaqCategoryPath()
+    public function getFaqCategoryFullPath($identifier)
     {
-        return Faq::FAQ_CATEGORY_PATH;
+        return $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_CATEGORY_PATH.'/'.$identifier.Faq::FAQ_DOT_HTML;
     }
-
-    public function getFaqDotHtml()
-    {
-        return Faq::FAQ_DOT_HTML;
-    }
-
 }

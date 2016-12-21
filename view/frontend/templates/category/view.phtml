@@ -1,0 +1,12 @@
+<?php if ($this->getFaqsList()): ?>
+    <ol class="items faqs-list">
+        <?php foreach($this->getFaqsList() as $faq): ?>
+            <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
+                <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><?php echo $faq['title']; ?></a>
+                <div class="description" id="description">
+                    <?php echo $this->getFaqShortDescription($faq['content'], $faq['identifier']); ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ol>
+<?php endif; ?>

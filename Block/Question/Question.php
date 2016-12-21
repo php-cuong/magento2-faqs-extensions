@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 04:34:52
+ * @Last Modified time: 2016-12-22 05:24:21
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -111,7 +111,7 @@ class Question extends \Magento\Framework\View\Element\Template
             [
                 'label' => __('FAQ'),
                 'title' => __('Go to FAQ Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl().'faqs.html'
+                'link'  => $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_PAGE_PATH
             ]
         );
 
@@ -206,13 +206,14 @@ class Question extends \Magento\Framework\View\Element\Template
         return $this->_faqId;
     }
 
-    public function getFaqPath()
+    public function getFaqFullPath($identifier)
     {
-        return Faq::FAQ_QUESTION_PATH;
+        return $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_QUESTION_PATH.'/'.$identifier.Faq::FAQ_DOT_HTML;
     }
 
-    public function getFaqDotHtml()
+    public function getAjaxUrl()
     {
-        return Faq::FAQ_DOT_HTML;
+        return $this->_storeManager->getStore()->getUrl('faq/question/ajax', [
+        '_secure' => $this->_storeManager->getStore()->isCurrentlySecure()]);
     }
 }

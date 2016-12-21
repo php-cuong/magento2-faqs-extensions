@@ -7,7 +7,7 @@
             <ol class="items">
                 <?php foreach($this->getFaqCategoriesList() as $fclist): ?>
                     <li class="item">
-                        <a href="<?php echo $block->getUrl($this->getFaqCategoryPath().'/'.$fclist['identifier'].$this->getFaqDotHtml()); ?>">
+                        <a href="<?php echo $this->getFaqCategoryFullPath($fclist['identifier']); ?>">
                             <?php echo $fclist['title']; ?> <span class="count">(<?php echo $fclist['count']; ?>)</span>
                         </a>
                     </li>

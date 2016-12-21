@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 05:00:12
+ * @Last Modified time: 2016-12-22 05:35:36
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -239,6 +239,41 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             }
         }
         return $this;
+    }
+
+    /**
+     *
+     * @param $category_id
+     * @return array|boolen
+     */
+    public function getFaqCategoryStore($category_id = null, $textSearch = null)
+    {
+        if (!$category_id || ($category_id && (int) $category_id <= 0)) {
+            return false;
+        }
+
+        $storeIds = [
+            Store::DEFAULT_STORE_ID,
+            (int) $this->_storeManager->getStore()->getId()
+        ];
+
+        $select = $this->getConnection()->select()
+            ->from(['faqcat' => $this->getMainTable()])
+            ->joinLeft(
+                ['faqcat_store' => $this->getTable('phpcuong_faq_category_store')],
+                'faqcat.category_id = faqcat_store.category_id',
+                ['store_id']
+            )
+            ->where('faqcat.category_id = ?', $category_id)
+            ->where('faqcat.is_active = ?', '1')
+            ->where('faqcat_store.store_id IN (?)', $storeIds)
+            ->group('faqcat.category_id')
+            ->limit(1);
+
+        if ($results = $this->getConnection()->fetchRow($select)) {
+            return $results;
+        }
+        return false;
     }
 
     /**

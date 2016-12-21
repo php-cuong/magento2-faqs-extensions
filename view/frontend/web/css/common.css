@@ -2,7 +2,7 @@
 * @Author: Ngo Quang Cuong
 * @Date:   2016-12-20 21:41:27
 * @Last Modified by:   nquangcuong
-* @Last Modified time: 2016-12-21 04:45:56
+* @Last Modified time: 2016-12-22 06:17:24
 */
 /* faq content */
 .faq-content {
@@ -52,4 +52,8 @@
 .block-faq-category .block-content .items .item a .count{
   color: #858585;
   padding-right: 5px;
+}
+/* FAQs list */
+.faqs-list .description {
+  margin-top: 15px;
 }
