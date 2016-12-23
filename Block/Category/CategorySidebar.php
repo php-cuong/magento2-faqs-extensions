@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:46:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 20:12:16
+ * @Last Modified time: 2016-12-24 00:13:03
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -33,6 +33,8 @@ class CategorySidebar extends \Magento\Framework\View\Element\Template
 
     protected $_faqCategoriesList;
 
+    protected $_configHelper;
+
     /**
      * @param Context $context
      * @param CategoryHelper $categoryHelper
@@ -40,10 +42,12 @@ class CategorySidebar extends \Magento\Framework\View\Element\Template
     public function __construct(
         Context $context,
         StoreManagerInterface $storeManager,
-        CategoryHelper $categoryHelper
+        CategoryHelper $categoryHelper,
+        \PHPCuong\Faq\Helper\Config $configHelper
     ) {
         $this->_storeManager   = $storeManager;
         $this->_categoryHelper = $categoryHelper;
+        $this->_configHelper = $configHelper;
         parent::__construct($context);
     }
 
@@ -65,6 +69,6 @@ class CategorySidebar extends \Magento\Framework\View\Element\Template
 
     public function getFaqCategoryFullPath($identifier)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_CATEGORY_PATH.'/'.$identifier.Faq::FAQ_DOT_HTML;
+        return $this->_configHelper->getFaqCategoryFullPath($identifier);
     }
 }

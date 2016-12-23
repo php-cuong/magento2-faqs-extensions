@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 19:31:57
+ * @Last Modified time: 2016-12-24 00:14:34
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -141,7 +141,7 @@ class Question extends \Magento\Framework\View\Element\Template
             ]
         );
 
-        $this->_pageConfig->getTitle()->set(__('FAQs'));
+        $this->_pageConfig->getTitle()->set(__('FAQ'));
 
         $this->_pageConfig->getTitle()->prepend($this->_faqTitle);
 

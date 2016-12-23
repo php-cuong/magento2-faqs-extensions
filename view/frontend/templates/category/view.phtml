@@ -1,4 +1,5 @@
-<h2 class="faqcat-title first-title"><i></i><?php echo $this->getFaqCategoryTitle(); ?> - <?php echo __('FAQ');?></h2>
+<h2 class="faqcat-title first-title"><i></i>
+<img src="<?php echo !empty($this->getFaqCategoryIcon()) ? $this->getFaqCategoryIcon() : $block->getViewFileUrl('PHPCuong_Faq::images/faq81x81.png'); ?>"/><?php echo $this->getFaqCategoryTitle(); ?> - <?php echo __('FAQ');?></h2>
 <?php if ($this->getFaqsList()): ?>
     <ol class="items faqs-list">
         <?php foreach($this->getFaqsList() as $faq): ?>

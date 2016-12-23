@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 19:31:47
+ * @Last Modified time: 2016-12-24 01:27:04
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -48,6 +48,11 @@ class Category extends \Magento\Framework\View\Element\Template
     protected $_pageConfig = null;
 
     protected $_faqCategoryTitle = null;
+
+    protected $_configHelper = null;
+
+    protected $_faqCategoryIcon = null;
+
     /**
      * @param Context $context
      * @param StoreManagerInterface $storeManager
@@ -55,6 +60,7 @@ class Category extends \Magento\Framework\View\Element\Template
      * @param Config $pageConfig
      * @param FaqCatResourceModel $faqCatResourceModel
      * @param FaqResourceModel $faqResourceModel
+     * @param \PHPCuong\Faq\Helper\Config $configHelper
      */
     public function __construct(
         Context $context,
@@ -62,13 +68,15 @@ class Category extends \Magento\Framework\View\Element\Template
         CategoryHelper $categoryHelper,
         Config $pageConfig,
         FaqCatResourceModel $faqCatResourceModel,
-        FaqResourceModel $faqResourceModel
+        FaqResourceModel $faqResourceModel,
+        \PHPCuong\Faq\Helper\Config $configHelper
     ) {
         $this->_categoryHelper         = $categoryHelper;
         $this->_faqCatResourceModel    = $faqCatResourceModel;
         $this->_faqResourceModel       = $faqResourceModel;
         $this->_storeManager           = $storeManager;
         $this->_pageConfig             = $pageConfig;
+        $this->_configHelper = $configHelper;
         parent::__construct($context);
     }
 
@@ -108,6 +116,8 @@ class Category extends \Magento\Framework\View\Element\Template
 
         $this->_faqCategoryTitle = $faqCategory['title'];
 
+        $this->_faqCategoryIcon = $faqCategory['image'];
+
         $breadcrumbsBlock->addCrumb(
             'faq.category',
             [
@@ -123,6 +133,11 @@ class Category extends \Magento\Framework\View\Element\Template
         return parent::_prepareLayout();
     }
 
+    public function getFaqCategoryIcon()
+    {
+        return !empty($this->_faqCategoryIcon) ? $this->_configHelper->getFileBaseUrl($this->_faqCategoryIcon) : '';
+    }
+
     public function getFaqCategoryTitle()
     {
         return $this->_faqCategoryTitle;
@@ -130,7 +145,7 @@ class Category extends \Magento\Framework\View\Element\Template
 
     public function getFaqCategoryFullPath($identifier)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_CATEGORY_PATH.'/'.$identifier.FaqResourceModel::FAQ_DOT_HTML;
+        return $this->_configHelper->getFaqCategoryFullPath($identifier);
     }
 
     public function getAjaxUrl()
@@ -146,30 +161,11 @@ class Category extends \Magento\Framework\View\Element\Template
 
     public function getFaqFullPath($identifier)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_QUESTION_PATH.'/'.$identifier.FaqResourceModel::FAQ_DOT_HTML;
+        return $this->_configHelper->getFaqFullPath($identifier);
     }
 
     public function getFaqShortDescription($content, $identifier)
     {
-        $content = strip_tags($content);
-        while (stristr($content, '  '))
-        {
-            $content = str_replace('  ', ' ', $content);
-        }
-        $explode = explode(' ', $content);
-        if (count($explode) > 50)
-        {
-            $arg = '';
-            for ($i=0; $i<count($explode); $i++) {
-                if ($i<=50) {
-                    $arg .= $explode[$i].' ';
-                }
-            }
-            if (!empty($arg)) {
-                $arg = $arg.'... <a href="'.$this->getFaqFullPath($identifier).'">'.__('Read more').'</a>';
-            }
-            return $arg;
-        }
-        return $content;
+        return $this->_configHelper->getFaqShortDescription($content, $identifier);
     }
 }

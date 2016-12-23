@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:16:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 23:28:32
+ * @Last Modified time: 2016-12-24 00:08:10
  */
 namespace PHPCuong\Faq\Block\Faq;
 
@@ -16,6 +16,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\View\Page\Config;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use Magento\Framework\App\Filesystem\DirectoryList;
+
 
 class Faq extends \Magento\Framework\View\Element\Template
 {
@@ -54,6 +55,8 @@ class Faq extends \Magento\Framework\View\Element\Template
 
     protected $_faqCategoriesList = null;
 
+    protected $_configHelper = null;
+
     /**
      * @param Context $context
      */
@@ -64,7 +67,8 @@ class Faq extends \Magento\Framework\View\Element\Template
         CategoryHelper $categoryHelper,
         DirectoryList $directoryList,
         Config $pageConfig,
-        FaqResourceModel $faqResourceModel
+        FaqResourceModel $faqResourceModel,
+        \PHPCuong\Faq\Helper\Config $configHelper
     ) {
         $this->_questionHelper = $questionHelper;
         $this->_storeManager   = $storeManager;
@@ -72,6 +76,7 @@ class Faq extends \Magento\Framework\View\Element\Template
         $this->_categoryHelper = $categoryHelper;
         $this->_directoryList = $directoryList;
         $this->_faqResourceModel = $faqResourceModel;
+        $this->_configHelper = $configHelper;
         parent::__construct($context);
     }
 
@@ -158,40 +163,21 @@ class Faq extends \Magento\Framework\View\Element\Template
 
     public function getFaqCategoryFullPath($identifier)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_CATEGORY_PATH.'/'.$identifier.FaqResourceModel::FAQ_DOT_HTML;
+        return $this->_configHelper->getFaqCategoryFullPath($identifier);
     }
 
     public function getFileBaseUrl($path)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().DirectoryList::PUB.'/'.DirectoryList::MEDIA.'/'.$path;
+        return $this->_configHelper->getFileBaseUrl($path);
     }
 
     public function getFaqShortDescription($content, $identifier)
     {
-        $content = strip_tags($content);
-        while (stristr($content, '  '))
-        {
-            $content = str_replace('  ', ' ', $content);
-        }
-        $explode = explode(' ', $content);
-        if (count($explode) > 50)
-        {
-            $arg = '';
-            for ($i=0; $i<count($explode); $i++) {
-                if ($i<=50) {
-                    $arg .= $explode[$i].' ';
-                }
-            }
-            if (!empty($arg)) {
-                $arg = $arg.'... <a href="'.$this->getFaqFullPath($identifier).'">'.__('Read more').'</a>';
-            }
-            return $arg;
-        }
-        return $content;
+        return $this->_configHelper->getFaqShortDescription($content, $identifier);
     }
 
     public function getFaqFullPath($identifier)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_QUESTION_PATH.'/'.$identifier.FaqResourceModel::FAQ_DOT_HTML;
+        return $this->_configHelper->getFaqFullPath($identifier);
     }
 }

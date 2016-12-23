@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 23:30:17
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 21:47:00
+ * @Last Modified time: 2016-12-24 01:10:07
  */
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
 
@@ -149,8 +149,8 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
             'image',
             [
                 'name' => 'image',
-                'label' => __('Icon'),
-                'title' => __('Icon'),
+                'label' => __('Category icon'),
+                'title' => __('Category icon'),
                 'note'  => __('Allow image type: jpg, jpeg, gif, png')
             ]
         );
