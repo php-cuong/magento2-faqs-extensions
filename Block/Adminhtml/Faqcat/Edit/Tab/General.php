@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 23:30:17
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 02:13:27
+ * @Last Modified time: 2016-12-23 21:47:00
  */
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
 
@@ -145,13 +145,24 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
         );
 
         $fieldset->addField(
+            'image',
+            'image',
+            [
+                'name' => 'image',
+                'label' => __('Icon'),
+                'title' => __('Icon'),
+                'note'  => __('Allow image type: jpg, jpeg, gif, png')
+            ]
+        );
+
+        $fieldset->addField(
             'sort_order',
             'text',
             [
-                'name'  => 'sort_order',
+                'name' => 'sort_order',
                 'label' => __('Sort Order'),
                 'title' => __('Sort Order'),
-                'size'  => '10'
+                'size' => '10'
             ]
         );
 

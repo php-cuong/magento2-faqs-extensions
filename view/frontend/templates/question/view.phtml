@@ -10,13 +10,19 @@
             <div class="hidden" id="FAQ_ID"><?php echo $this->getFaqId(); ?></div>
             <div class="hidden" id="message"><?php echo __('Glad to hear it — Thanks for the feedback'); ?></div>
             <span><?php echo __('Was this article helpful?'); ?></span>
-            <button class="btn" id="btn-like"><?php echo __('Yes'); ?></button>
-            <button class="btn" id="btn-dislike"><?php echo __('No'); ?></button>
+            <button class="btn" id="btn-like">
+                <span class="faq-iconhappy"></span>
+                <span><?php echo __('Yes'); ?></span>
+            </button>
+            <button class="btn" id="btn-dislike">
+                <span class="faq-iconangry"></span>
+                <span><?php echo __('No'); ?></span>
+            </button>
         </div>
     </div>
     <?php if ($this->getRelatedQuestion()): ?>
         <div class="related-question">
-            <h2><?php echo __('Related Questions');?></h2>
+            <h2 class="faqcat-title first-title"><i></i><?php echo __('Related Questions: ');?></h2>
             <ol class="items">
                 <?php foreach($this->getRelatedQuestion() as $faq): ?>
                     <li class="item">

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-21 16:15:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-22 06:26:49
+ * @Last Modified time: 2016-12-23 21:19:23
  */
 
 namespace PHPCuong\Faq\Controller\Category;
@@ -53,9 +53,7 @@ class View extends \Magento\Framework\App\Action\Action
 
             $resultPage = $this->_resultPageFactory->create();
 
-            $resultPage->getConfig()->getTitle()->set(__('Home'));
-
-            $resultPage->getConfig()->getTitle()->prepend(__('FAQs'));
+            $resultPage->getConfig()->getTitle()->set(__('FAQ'));
 
             $resultPage->getConfig()->getTitle()
             ->prepend($category['title']);

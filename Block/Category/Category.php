@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-22 06:23:29
+ * @Last Modified time: 2016-12-23 19:31:47
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -47,6 +47,7 @@ class Category extends \Magento\Framework\View\Element\Template
      */
     protected $_pageConfig = null;
 
+    protected $_faqCategoryTitle = null;
     /**
      * @param Context $context
      * @param StoreManagerInterface $storeManager
@@ -99,11 +100,13 @@ class Category extends \Magento\Framework\View\Element\Template
             [
                 'label' => __('FAQ'),
                 'title' => __('Go to FAQ Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_PAGE_PATH
+                'link'  => $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_REQUEST_PATH
             ]
         );
 
         $faqCategory = $this->getFaqCategory();
+
+        $this->_faqCategoryTitle = $faqCategory['title'];
 
         $breadcrumbsBlock->addCrumb(
             'faq.category',
@@ -118,6 +121,11 @@ class Category extends \Magento\Framework\View\Element\Template
         $this->_pageConfig->setDescription($faqCategory['meta_description']? $faqCategory['meta_description'] : $faqCategory['title']);
 
         return parent::_prepareLayout();
+    }
+
+    public function getFaqCategoryTitle()
+    {
+        return $this->_faqCategoryTitle;
     }
 
     public function getFaqCategoryFullPath($identifier)
@@ -158,7 +166,7 @@ class Category extends \Magento\Framework\View\Element\Template
                 }
             }
             if (!empty($arg)) {
-                $arg = $arg.'...<a href="'.$this->getFaqFullPath($identifier).'"> '.__('Read more').'</a>';
+                $arg = $arg.'... <a href="'.$this->getFaqFullPath($identifier).'">'.__('Read more').'</a>';
             }
             return $arg;
         }

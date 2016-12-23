@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:11:40
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 05:16:21
+ * @Last Modified time: 2016-12-23 05:28:01
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;
@@ -84,7 +84,7 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
                 }
                 if (isset($item['identifier'])) {
                     $item[$name]['preview'] = [
-                        'href' => $this->_actionUrlBuilder->getUrl(.faqResourceModel::FAQ_CATEGORY_PATH.$item['identifier'].faqResourceModel::FAQ_DOT_HTML,
+                        'href' => $this->_actionUrlBuilder->getUrl(faqResourceModel::FAQ_CATEGORY_PATH.$item['identifier'].faqResourceModel::FAQ_DOT_HTML,
                             isset($item['store_id']) ? $item['store_id'] : null,
                             null
                         ),

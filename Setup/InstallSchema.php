@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 00:11:08
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 23:54:44
+ * @Last Modified time: 2016-12-23 06:45:34
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -201,6 +201,12 @@ class InstallSchema implements InstallSchemaInterface
             '64k',
             ['nullable' => true],
             'Category Meta Description'
+        )->addColumn(
+            'image',
+            \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+            '64k',
+            ['nullable' => true],
+            'Image of Category'
         )->addColumn(
             'identifier',
             \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,

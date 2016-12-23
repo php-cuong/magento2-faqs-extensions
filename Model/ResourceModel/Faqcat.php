@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-22 05:35:36
+ * @Last Modified time: 2016-12-23 18:04:31
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -21,6 +21,10 @@ use PHPCuong\Faq\Model\Config\Source\Urlkey;
 class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     const FAQ_CATEGORY_ENTITY_TYPE = 'faq-category';
+
+    const FAQ_CATEGORY_FILE_PATH_UPLOADED = 'phpcuong'.DIRECTORY_SEPARATOR.'faq'.DIRECTORY_SEPARATOR.'category'.DIRECTORY_SEPARATOR;
+
+    const FAQ_CATEGORY_FILE_PATH_ACCESS = 'phpcuong/faq/category/';
 
     /**
      * Store manager
@@ -208,7 +212,7 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
                 $url_rewrite_condition = [
                     'entity_id = ?' => (int) $category_id,
-                    'entity_type = ?' => (int) $entity_type,
+                    'entity_type = ?' => $entity_type,
                 ];
                 $adapter->delete($this->getTable('url_rewrite'), $url_rewrite_condition);
 

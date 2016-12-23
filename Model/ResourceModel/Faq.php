@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-22 05:48:45
+ * @Last Modified time: 2016-12-23 18:47:57
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -45,7 +45,9 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     const FAQ_CATEGORY_TARGET_PATH = 'faq/category/view/category_id/';
 
-    const FAQ_PAGE_PATH = 'faqs'.Faq::FAQ_DOT_HTML;
+    const FAQ_REQUEST_PATH = 'faqs'.Faq::FAQ_DOT_HTML;
+
+    const FAQ_TARGET_PATH = 'faq/faq/view';
 
     /**
      * @param Context $context
@@ -315,20 +317,31 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @param $category_id
      * @return $this
      */
-    public function updateNumberOfFaqsInCategory($category_id)
+    public function updateNumberOfFaqsInCategory()
     {
         $adapter = $this->getConnection();
 
         $select = $adapter->select()
-            ->from(['fci' => $this->getTable('phpcuong_faq_category_id')])
-            ->where('fci.category_id =?', (int) $category_id);
+            ->from($this->getTable('phpcuong_faq_category_id'),
+                [
+                    'count' => 'COUNT(category_id)',
+                    'category_id'
+                ]
+            )
+            ->group('category_id');
 
         $faq_category_results = $this->getConnection()->fetchAll($select);
 
         $adapter->update($this->getTable('phpcuong_faq_category'),
-            ['count' => count($faq_category_results)],
-            ['category_id = ?' => (int) $category_id]
+            ['count' => '0']
         );
+
+        foreach ($faq_category_results as $value) {
+            $adapter->update($this->getTable('phpcuong_faq_category'),
+                ['count' => $value['count']],
+                ['category_id = ?' => (int) $value['category_id']]
+            );
+        };
 
         return $this;
     }
@@ -365,7 +378,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 $adapter->insertMultiple($this->getTable('phpcuong_faq_category_id'), $faq_category);
 
                 // update number of FAQs in category
-                $this->updateNumberOfFaqsInCategory($category_id);
+                $this->updateNumberOfFaqsInCategory();
             }
 
             if ($stores) {
@@ -376,7 +389,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
                 $url_rewrite_condition = [
                     'entity_id = ?' => (int) $faq_id,
-                    'entity_type = ?' => (int) $entity_type,
+                    'entity_type = ?' => $entity_type,
                 ];
                 $adapter->delete($this->getTable('url_rewrite'), $url_rewrite_condition);
 

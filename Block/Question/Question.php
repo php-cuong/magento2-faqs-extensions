@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-22 05:24:21
+ * @Last Modified time: 2016-12-23 19:31:57
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -53,7 +53,6 @@ class Question extends \Magento\Framework\View\Element\Template
 
     /**
      * @param Context $context
-     * @param \Magento\Framework\Registry $registry
      */
     public function __construct(
         Context $context,
@@ -111,7 +110,7 @@ class Question extends \Magento\Framework\View\Element\Template
             [
                 'label' => __('FAQ'),
                 'title' => __('Go to FAQ Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_PAGE_PATH
+                'link'  => $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_REQUEST_PATH
             ]
         );
 
@@ -142,7 +141,9 @@ class Question extends \Magento\Framework\View\Element\Template
             ]
         );
 
-        $this->_pageConfig->getTitle()->set($this->_faqTitle);
+        $this->_pageConfig->getTitle()->set(__('FAQs'));
+
+        $this->_pageConfig->getTitle()->prepend($this->_faqTitle);
 
         $this->_pageConfig->setKeywords($faq->getMetaKeywords()? $faq->getMetaKeywords() : $this->_faqTitle);
 
