@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-21 03:06:06
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 04:41:46
+ * @Last Modified time: 2016-12-24 17:20:54
  */
 
 namespace PHPCuong\Faq\Controller\Question;
@@ -45,6 +45,12 @@ class Ajax extends \Magento\Framework\App\Action\Action
         return parent::__construct($context);
     }
 
+    /**
+     * Ajax action
+     *
+     * @return \Magento\Framework\Controller\Result\JsonFactory|\Magento\Framework\Controller\Result\ForwardFactory
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
     public function execute()
     {
         $result = $this->_resultJsonFactory->create();

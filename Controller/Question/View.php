@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 17:27:27
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 18:01:53
+ * @Last Modified time: 2016-12-24 17:20:12
  */
 
 namespace PHPCuong\Faq\Controller\Question;
@@ -30,7 +30,7 @@ class View extends \Magento\Framework\App\Action\Action
     /**
      * @param Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     @param \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
+     * @param \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
@@ -44,6 +44,12 @@ class View extends \Magento\Framework\App\Action\Action
         return parent::__construct($context);
     }
 
+    /**
+     * View action
+     *
+     * @return \Magento\Framework\View\Result\PageFactory|\Magento\Framework\Controller\Result\ForwardFactory
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
     public function execute()
     {
         $id = $this->getRequest()->getParam('faq_id');

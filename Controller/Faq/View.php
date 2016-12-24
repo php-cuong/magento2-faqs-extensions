@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 16:58:08
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 18:24:29
+ * @Last Modified time: 2016-12-24 17:18:16
  */
 
 namespace PHPCuong\Faq\Controller\Faq;
@@ -30,20 +30,21 @@ class View extends \Magento\Framework\App\Action\Action
     /**
      * @param Action\Context $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     @param \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel,
-        \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory)
-    {
-        $this->_faqResourceModel     = $faqResourceModel;
-        $this->_resultForwardFactory = $resultForwardFactory;
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+    ) {
         $this->_resultPageFactory    = $resultPageFactory;
         return parent::__construct($context);
     }
 
+    /**
+     * View action
+     *
+     * @return \Magento\Framework\View\Result\PageFactory
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
     public function execute()
     {
         $resultPage = $this->_resultPageFactory->create();

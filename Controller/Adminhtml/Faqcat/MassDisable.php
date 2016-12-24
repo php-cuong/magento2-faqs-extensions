@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 02:03:16
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 02:18:38
+ * @Last Modified time: 2016-12-24 17:11:50
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -15,9 +15,6 @@ use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
 use PHPCuong\Faq\Model\ResourceModel\Faqcat\CollectionFactory;
 
-/**
- * Class MassDisable
- */
 class MassDisable extends \Magento\Backend\App\Action
 {
     /**
@@ -26,6 +23,7 @@ class MassDisable extends \Magento\Backend\App\Action
      * @see _isAllowed()
      */
     const ADMIN_RESOURCE = 'PHPCuong_Faq::category_edit';
+
     /**
      * @var Filter
      */
@@ -41,8 +39,11 @@ class MassDisable extends \Magento\Backend\App\Action
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
-    {
+    public function __construct(
+        Context $context,
+        Filter $filter,
+        CollectionFactory $collectionFactory
+    ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         parent::__construct($context);

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 04:12:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 02:05:05
+ * @Last Modified time: 2016-12-24 17:41:56
  */
 
 namespace PHPCuong\Faq\Model\Config\Source;
@@ -13,8 +13,12 @@ namespace PHPCuong\Faq\Model\Config\Source;
 class IsActive implements \Magento\Framework\Option\ArrayInterface
 {
     const STATUS_ENABLED = 1;
+
     const STATUS_DISABLED = 0;
+
     /**
+     * Options getter
+     *
      * @return array
      */
     public function toOptionArray()
@@ -25,6 +29,11 @@ class IsActive implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 
+    /**
+     * Options getter
+     *
+     * @return array
+     */
     public function getStatusOptions()
     {
         $options = [

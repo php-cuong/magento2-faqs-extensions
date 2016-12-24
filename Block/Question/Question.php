@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 00:14:34
+ * @Last Modified time: 2016-12-24 18:05:57
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -15,6 +15,7 @@ use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\View\Page\Config;
 use PHPCuong\Faq\Model\ResourceModel\Faq;
+use PHPCuong\Faq\Helper\Config as ConfigHelper;
 
 class Question extends \Magento\Framework\View\Element\Template
 {
@@ -24,8 +25,11 @@ class Question extends \Magento\Framework\View\Element\Template
     protected $_questionHelper;
 
     /**
-     * Store manager
-     *
+     * @var \PHPCuong\Faq\Helper\Config
+     */
+    protected $_configHelper;
+
+    /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $_storeManager;
@@ -33,45 +37,88 @@ class Question extends \Magento\Framework\View\Element\Template
     /**
      * @var \Magento\Framework\View\Page\Config
      */
-    protected $_pageConfig = null;
+    protected $_pageConfig;
 
+    /**
+     * @var string
+     */
     protected $_faqContent = null;
 
+    /**
+     * @var string
+     */
     protected $_faqTitle = null;
 
+    /**
+     * @var string
+     */
     protected $_faqCreated = null;
 
+    /**
+     * @var string
+     */
     protected $_faqViewed = null;
 
+    /**
+     * @var string
+     */
     protected $_userFullName = null;
 
+    /**
+     * @var string
+     */
     protected $_faqCategoryTitle = null;
 
+    /**
+     * @var array
+     */
     protected $_relatedQuestion = null;
 
+    /**
+     * @var string
+     */
     protected $_faqId = null;
 
     /**
+     *
      * @param Context $context
+     * @param StoreManagerInterface $storeManager
+     * @param QuestionHelper $questionHelper
+     * @param Config $pageConfig
+     * @param ConfigHelper $configHelper
      */
     public function __construct(
         Context $context,
         StoreManagerInterface $storeManager,
         QuestionHelper $questionHelper,
-        Config $pageConfig
+        Config $pageConfig,
+        ConfigHelper $configHelper
     ) {
         $this->_questionHelper = $questionHelper;
-        $this->_storeManager   = $storeManager;
-        $this->_pageConfig     = $pageConfig;
+        $this->_storeManager = $storeManager;
+        $this->_pageConfig = $pageConfig;
+        $this->_configHelper = $configHelper;
         parent::__construct($context);
     }
 
+    /**
+     * Get the list of questions
+     *
+     * @param $faq_id
+     * @return array|bool
+     */
     protected function getFaq()
     {
         $faq_id = $this->getRequest()->getParam('faq_id');
         return $this->_questionHelper->getFaq($faq_id);
     }
 
+    /**
+     * Get the list of categories via faq_id
+     *
+     * @param $faq_id
+     * @return array|bool
+     */
     protected function getFaqCategory()
     {
         $faq_id = $this->getRequest()->getParam('faq_id');
@@ -79,9 +126,9 @@ class Question extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * Add meta information from product to head block
+     * Return Prepare Layout Parent
      *
-     * @return \PHPCuong\Faq\Block\Question
+     * @return parent
      */
     protected function _prepareLayout()
     {
@@ -152,12 +199,19 @@ class Question extends \Magento\Framework\View\Element\Template
         return parent::_prepareLayout();
     }
 
+    /**
+     * Get the Category Title
+     *
+     * @return string
+     */
     public function getFaqCategoryTitle()
     {
         return $this->_faqCategoryTitle;
     }
 
     /**
+     * Get the full name of author, who created the question
+     *
      * @return string
      */
     public function getFullName()
@@ -166,6 +220,8 @@ class Question extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get the content of question
+     *
      * @return string
      */
     public function getFaqContent()
@@ -174,6 +230,8 @@ class Question extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get the title of question
+     *
      * @return string
      */
     public function getFaqTitle()
@@ -182,6 +240,8 @@ class Question extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get the creation time of question
+     *
      * @return string
      */
     public function getFaqCreated()
@@ -190,6 +250,8 @@ class Question extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * Get the view number of question
+     *
      * @return string
      */
     public function getFaqViewed()
@@ -197,21 +259,43 @@ class Question extends \Magento\Framework\View\Element\Template
         return $this->_faqViewed;
     }
 
+    /**
+     * Get the list of related questions
+     *
+     * @param $faq_id and $category_id
+     * @return string
+     */
     public function getRelatedQuestion()
     {
         return $this->_relatedQuestion;
     }
 
+    /**
+     * Get the question id
+     *
+     * @return string
+     */
     public function getFaqId()
     {
         return $this->_faqId;
     }
 
+    /**
+     * Get the URL of question
+     *
+     * @param $identifier
+     * @return string
+     */
     public function getFaqFullPath($identifier)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_QUESTION_PATH.'/'.$identifier.Faq::FAQ_DOT_HTML;
+        return $this->_configHelper->getFaqFullPath($identifier);
     }
 
+    /**
+     * Get Ajax URL
+     *
+     * @return string
+     */
     public function getAjaxUrl()
     {
         return $this->_storeManager->getStore()->getUrl('faq/question/ajax', [

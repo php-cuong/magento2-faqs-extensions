@@ -5,12 +5,13 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:05:33
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 02:06:15
+ * @Last Modified time: 2016-12-24 18:06:23
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel\Faq;
 
-class CollectionFactory {
+class CollectionFactory
+{
     /**
      * Object Manager instance
      *

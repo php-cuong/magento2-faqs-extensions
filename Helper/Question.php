@@ -5,15 +5,13 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 17:35:37
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 04:36:43
+ * @Last Modified time: 2016-12-24 16:59:21
  */
 
 namespace PHPCuong\Faq\Helper;
 
-use Magento\Framework\App\Action\Action;
-
 /**
- * FAQ Helper
+ * Question Helper
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  * @SuppressWarnings(PHPMD.NPathComplexity)
@@ -45,11 +43,16 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
         \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel,
         \Magento\User\Model\UserFactory $userFactory
     ) {
-        $this->_faqResourceModel     = $faqResourceModel;
+        $this->_faqResourceModel = $faqResourceModel;
         $this->_userFactory = $userFactory;
         parent::__construct($context);
     }
 
+    /**
+     * Get the full name of author, who created the question
+     *
+     * @return string|null
+     */
     public function getFullName()
     {
         $user_id = ($this->_faqData['user_id'] != null) ? $this->_faqData['user_id'] : '';
@@ -61,7 +64,10 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * @return parent
+     * Set value for the $_faqData param
+     *
+     * @param $faq_id
+     * @return $this
      */
     public function getFaq($faq_id)
     {
@@ -70,6 +76,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the ID of Question
+     *
      * @return string
      */
     public function getFaqId()
@@ -81,6 +89,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Title of Question
+     *
      * @return string
      */
     public function getTitle()
@@ -92,6 +102,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Meta Keywords of Question
+     *
      * @return string
      */
     public function getMetaKeywords()
@@ -103,6 +115,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Meta Description of Question
+     *
      * @return string
      */
     public function getMetaDescription()
@@ -114,6 +128,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Content of Question
+     *
      * @return string
      */
     public function getContent()
@@ -125,6 +141,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Creation Time of Question
+     *
      * @return string
      */
     public function getCreationTime()
@@ -137,6 +155,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the View number of Question
+     *
      * @return string
      */
     public function getViewed()
@@ -148,8 +168,10 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Category via $faq_id
+     *
      * @param $faq_id
-     * @return parent
+     * @return $this
      */
     public function getFaqCategory($faq_id)
     {
@@ -158,6 +180,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the Identifier of Category
+     *
      * @return string
      */
     public function getCategoryIndentifier()
@@ -169,6 +193,8 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get the ID of Category
+     *
      * @return string
      */
     public function getCategoryId()
@@ -179,6 +205,12 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
         return '';
     }
 
+    /**
+     * Get the related question via $faq_id and $category_id
+     *
+     * @param $faq_id, $category_id
+     * @return array|null
+     */
     public function getRelatedQuestion($faq_id = null, $category_id = null)
     {
         return $this->_faqResourceModel->getRelatedQuestion($faq_id, $category_id);

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 01:32:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 04:26:40
+ * @Last Modified time: 2016-12-24 15:24:33
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
@@ -21,25 +21,17 @@ class SearchEngineOptimisation extends \Magento\Backend\Block\Widget\Form\Generi
     protected $_coreRegistry;
 
     /**
-     * @var \Magento\Framework\View\Design\Theme\LabelFactory
-     */
-    protected $_themeLabelFactory;
-
-    /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory,
         array $data = []
     ) {
-        $this->_themeLabelFactory = $themeLabelFactory;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 

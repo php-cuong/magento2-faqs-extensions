@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 00:11:08
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 06:45:34
+ * @Last Modified time: 2016-12-24 20:44:55
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -19,10 +19,15 @@ class InstallSchema implements InstallSchemaInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
-    {
+    public function install(
+        SchemaSetupInterface $setup,
+        ModuleContextInterface $context
+    ) {
         $installer = $setup;
 
         $installer->startSetup();

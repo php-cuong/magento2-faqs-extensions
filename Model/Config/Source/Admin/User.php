@@ -5,15 +5,23 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 04:43:54
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 22:35:55
+ * @Last Modified time: 2016-12-24 17:42:16
  */
 
 namespace PHPCuong\Faq\Model\Config\Source\Admin;
 
 class User implements \Magento\Framework\Option\ArrayInterface
 {
+    /**
+     *
+     * @var \Magento\User\Model\UserFactory
+     */
     protected $userFactory;
 
+    /**
+     *
+     * @param \Magento\User\Model\UserFactory $userFactory
+     */
     public function __construct(
         \Magento\User\Model\UserFactory $userFactory
     ) {
@@ -21,6 +29,8 @@ class User implements \Magento\Framework\Option\ArrayInterface
     }
 
     /**
+     * Options getter
+     *
      * @return array
      */
     public function toOptionArray()

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:07:42
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 22:11:00
+ * @Last Modified time: 2016-12-24 18:07:10
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel\Faqcat\Grid;
@@ -143,6 +143,11 @@ class Collection extends \PHPCuong\Faq\Model\ResourceModel\Faqcat\Collection imp
         return $this;
     }
 
+    /**
+     * Join faq_category_store relation table
+     *
+     * @inheritdoc
+     */
     protected function _renderFiltersBefore() {
         $this->getSelect()->joinLeft(
             ['fcs' => $this->getTable('phpcuong_faq_category_store')],

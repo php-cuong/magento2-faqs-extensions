@@ -5,14 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 01:11:17
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-21 02:02:50
- */
-/**
- *
- * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-17 00:18:36
- * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 01:07:38
+ * @Last Modified time: 2016-12-24 15:25:43
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
@@ -35,15 +28,10 @@ class Websites extends \Magento\Backend\Block\Widget\Form\Generic implements
     protected $_systemStore;
 
     /**
-     * @var \Magento\Framework\View\Design\Theme\LabelFactory
-     */
-    protected $_themeLabelFactory;
-
-    /**
+     * @param \Magento\Store\Model\System\Store $systemStore
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory
      * @param array $data
      */
     public function __construct(
@@ -51,11 +39,9 @@ class Websites extends \Magento\Backend\Block\Widget\Form\Generic implements
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory,
         array $data = []
     ) {
         $this->_systemStore = $systemStore;
-        $this->_themeLabelFactory = $themeLabelFactory;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -85,7 +71,7 @@ class Websites extends \Magento\Backend\Block\Widget\Form\Generic implements
      */
     public function getTabTitle()
     {
-        return __('FAQ in Websites');
+        return $this->getTabLabel();
     }
 
     /**

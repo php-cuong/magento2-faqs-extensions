@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 01:38:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 15:09:56
+ * @Last Modified time: 2016-12-24 15:21:28
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
@@ -27,15 +27,10 @@ class Content extends \Magento\Backend\Block\Widget\Form\Generic implements
     protected $_coreRegistry;
 
     /**
-     * @var \Magento\Framework\View\Design\Theme\LabelFactory
-     */
-    protected $_themeLabelFactory;
-
-    /**
+     * @param \Magento\Cms\Model\Wysiwyg\Config $wysiwygConfig
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory
      * @param array $data
      */
     public function __construct(
@@ -43,11 +38,9 @@ class Content extends \Magento\Backend\Block\Widget\Form\Generic implements
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory,
         array $data = []
     ) {
         $this->_wysiwygConfig            = $wysiwygConfig;
-        $this->_themeLabelFactory        = $themeLabelFactory;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 

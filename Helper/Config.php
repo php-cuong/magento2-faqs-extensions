@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 23:54:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 01:22:57
+ * @Last Modified time: 2016-12-24 16:49:41
  */
 
 namespace PHPCuong\Faq\Helper;
@@ -15,7 +15,7 @@ use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
- * FAQ Helper
+ * Config Helper
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  * @SuppressWarnings(PHPMD.NPathComplexity)
@@ -32,9 +32,7 @@ class Config
     /**
      * Constructor
      *
-     * @param \Magento\Framework\App\Helper\Context $context
-     * @param \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel
-     * @param \Magento\User\Model\UserFactory $userFactory
+     * @param StoreManagerInterface $storeManager
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -43,16 +41,34 @@ class Config
         $this->_storeManager = $storeManager;
     }
 
+    /**
+     * Get URL of the category
+     *
+     * @param $identifier
+     * @return string|null
+     */
     public function getFaqCategoryFullPath($identifier)
     {
         return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_CATEGORY_PATH.'/'.$identifier.FaqResourceModel::FAQ_DOT_HTML;
     }
 
+    /**
+     * Get URL of the files in pub/media folder
+     *
+     * @param $path
+     * @return string
+     */
     public function getFileBaseUrl($path)
     {
         return $this->_storeManager->getStore()->getBaseUrl().DirectoryList::PUB.'/'.DirectoryList::MEDIA.'/'.$path;
     }
 
+    /**
+     * Get short description of the question
+     *
+     * @param $content, $identifier
+     * @return string
+     */
     public function getFaqShortDescription($content, $identifier)
     {
         $content = strip_tags($content);
@@ -77,11 +93,22 @@ class Config
         return $content;
     }
 
+    /**
+     * Get URL of the category
+     *
+     * @param $identifier
+     * @return string
+     */
     public function getFaqFullPath($identifier)
     {
         return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_QUESTION_PATH.'/'.$identifier.FaqResourceModel::FAQ_DOT_HTML;
     }
 
+    /**
+     * Get URL of the FAQ page
+     *
+     * @return string
+     */
     public function getFaqPage()
     {
         return $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_REQUEST_PATH;

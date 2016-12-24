@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 18:04:31
+ * @Last Modified time: 2016-12-24 20:40:24
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -32,12 +32,14 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @var StoreManagerInterface
      */
     protected $_storeManager;
+
     /**
      * Url key
      *
      * @var Urlkey
      */
     protected $_urlKey;
+
     /**
      * @param Context $context
      * @param StoreManagerInterface $storeManager
@@ -52,8 +54,10 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_storeManager = $storeManager;
         parent::__construct($context, $connectionName);
     }
+
     /**
-     * construct
+     * Construct
+     *
      * @return void
      */
     protected function _construct()
@@ -65,7 +69,7 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * Method to run after load
      *
      * @param \Magento\Framework\Model\AbstractModel $object
-     * @return $this
+     * @return parent
      */
     protected function _afterLoad(AbstractModel $object)
     {
@@ -107,6 +111,7 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 __('The Category URL key cannot be made of only numbers.')
             );
         }
+        return $this;
     }
 
     /**
@@ -152,6 +157,8 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Get the list of Stores
+     *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return array
      */
@@ -179,7 +186,7 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * after save callback
+     * After save callback
      *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return parent
@@ -191,6 +198,8 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Save the related datas after the category saved
+     *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return $this
      */
@@ -246,11 +255,12 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Get the category via $category_id and $storeIds
      *
      * @param $category_id
-     * @return array|boolen
+     * @return array|bool
      */
-    public function getFaqCategoryStore($category_id = null, $textSearch = null)
+    public function getFaqCategoryStore($category_id = null)
     {
         if (!$category_id || ($category_id && (int) $category_id <= 0)) {
             return false;
@@ -281,17 +291,24 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+    * Get the list of Categories via storeIds
+    *
     * @return array;
     */
     public function getCategoriesList()
     {
         $adapter = $this->getConnection();
 
+        $storeIds = [
+            Store::DEFAULT_STORE_ID,
+            (int) $this->_storeManager->getStore()->getId()
+        ];
+
         $select = $adapter->select()
             ->from(['cat' => $this->getTable('phpcuong_faq_category')])
             ->join(['cat_store' => $this->getTable('phpcuong_faq_category_store')], 'cat.category_id = cat_store.category_id', ['store_id'])
             ->where('cat.is_active =?', '1')
-            ->where('cat_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
+            ->where('cat_store.store_id IN (?)', $storeIds)
             ->group('cat.category_id')
             ->order('cat.sort_order ASC');
 

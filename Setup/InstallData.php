@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:31:24
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 19:02:51
+ * @Last Modified time: 2016-12-24 20:43:14
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -21,8 +21,16 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class InstallData implements InstallDataInterface
 {
+    /**
+     * @var Magento\Store\Model\StoreManagerInterface
+     */
     protected $_storeManager;
 
+    /**
+     * Construct
+     *
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         StoreManagerInterface $storeManager
         ) {
@@ -31,10 +39,15 @@ class InstallData implements InstallDataInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @param ModuleDataSetupInterface $setup
+     * @param ModuleContextInterface $context
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
-    {
+    public function install(
+        ModuleDataSetupInterface $setup,
+        ModuleContextInterface $context
+    ) {
         $setup->startSetup();
 
         $setup->getConnection()->delete(

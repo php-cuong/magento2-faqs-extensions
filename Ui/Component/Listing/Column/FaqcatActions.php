@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:11:40
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 05:28:01
+ * @Last Modified time: 2016-12-24 21:07:45
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;
@@ -20,12 +20,14 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
      * @var string
      */
     const FAQ_CATEGORY_URL_PATH_EDIT = 'phpcuong/faqcat/edit';
+
     /**
      * Url path to delete
      *
      * @var string
      */
     const FAQ_CATEGORY_URL_PATH_DELETE = 'phpcuong/faqcat/delete';
+
     /**
      * URL builder
      *
@@ -33,12 +35,16 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
      */
     protected $_urlBuilder;
 
-    /** @var UrlBuilder */
+    /**
+     * @var \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder
+     */
     protected $_actionUrlBuilder;
+
     /**
      * constructor
      *
      * @param \Magento\Framework\UrlInterface $urlBuilder
+     * @param \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder $actionUrlBuilder
      * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
      * @param \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory
      * @param array $components
@@ -57,6 +63,7 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
         $this->_actionUrlBuilder = $actionUrlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
+
     /**
      * Prepare Data Source
      *
@@ -77,8 +84,8 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
                         'href' => $this->_urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_DELETE, ['category_id' => $item['category_id']]),
                         'label' => __('Delete'),
                         'confirm' => [
-                            'title' => __('Delete ${ $.$data.title }'),
-                            'message' => __('Are you sure you wan\'t to delete a ${ $.$data.title } record?')
+                            'title' => __('Delete "${ $.$data.title }"'),
+                            'message' => __('Are you sure you wan\'t to delete this category?')
                         ]
                     ];
                 }

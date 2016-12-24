@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 02:30:05
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 21:16:55
+ * @Last Modified time: 2016-12-24 17:05:41
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -24,6 +24,7 @@ class MassDelete extends \Magento\Backend\App\Action
      * @see _isAllowed()
      */
     const ADMIN_RESOURCE = 'PHPCuong_Faq::faq_delete';
+
     /**
      * @var Filter
      */
@@ -39,8 +40,11 @@ class MassDelete extends \Magento\Backend\App\Action
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
-    {
+    public function __construct(
+        Context $context,
+        Filter $filter,
+        CollectionFactory $collectionFactory
+    ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         parent::__construct($context);

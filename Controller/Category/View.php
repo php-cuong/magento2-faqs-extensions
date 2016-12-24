@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-21 16:15:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 21:19:23
+ * @Last Modified time: 2016-12-24 17:16:44
  */
 
 namespace PHPCuong\Faq\Controller\Category;
@@ -45,6 +45,12 @@ class View extends \Magento\Framework\App\Action\Action
         return parent::__construct($context);
     }
 
+    /**
+     * View action
+     *
+     * @return \Magento\Framework\View\Result\PageFactory|\Magento\Framework\Controller\Result\ForwardFactory
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     */
     public function execute()
     {
         $id = $this->getRequest()->getParam('category_id');

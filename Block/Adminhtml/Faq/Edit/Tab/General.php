@@ -5,8 +5,9 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 00:18:36
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 02:15:53
+ * @Last Modified time: 2016-12-24 15:23:33
  */
+
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
 
 class General extends \Magento\Backend\Block\Widget\Form\Generic implements
@@ -18,18 +19,21 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
      * @var \PHPCuong\Faq\Model\Config\Source\IsActive
      */
     protected $_status;
+
     /**
      * Yes or No
      *
      * @var \PHPCuong\Faq\Model\Config\Source\Yesno
      */
     protected $_yesNo;
+
     /**
      * Category
      *
      * @var \PHPCuong\Faq\Model\Config\Source\Category
      */
     protected $_category;
+
     /**
      * Core registry
      *
@@ -38,15 +42,12 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
     protected $_coreRegistry;
 
     /**
-     * @var \Magento\Framework\View\Design\Theme\LabelFactory
-     */
-    protected $_themeLabelFactory;
-
-    /**
+     * @param \PHPCuong\Faq\Model\Config\Source\Category $category
+     * @param \PHPCuong\Faq\Model\Config\Source\Yesno $yesNo
+     * @param \PHPCuong\Faq\Model\Config\Source\IsActive $status
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Data\FormFactory $formFactory
-     * @param \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory
      * @param array $data
      */
     public function __construct(
@@ -56,13 +57,11 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Framework\View\Design\Theme\LabelFactory $themeLabelFactory,
         array $data = []
     ) {
         $this->_category = $category;
         $this->_yesNo    = $yesNo;
         $this->_status   = $status;
-        $this->_themeLabelFactory = $themeLabelFactory;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 

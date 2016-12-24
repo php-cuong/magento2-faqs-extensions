@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 18:47:57
+ * @Last Modified time: 2016-12-24 20:33:23
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -26,6 +26,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * @var StoreManagerInterface
      */
     protected $_storeManager;
+
     /**
      * Url key
      *
@@ -63,6 +64,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_storeManager = $storeManager;
         parent::__construct($context, $connectionName);
     }
+
     /**
      * construct
      * @return void
@@ -76,7 +78,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      * Method to run after load
      *
      * @param \Magento\Framework\Model\AbstractModel $object
-     * @return $this
+     * @return parent
      */
     protected function _afterLoad(AbstractModel $object)
     {
@@ -129,6 +131,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 __('The faq URL key cannot be made of only numbers.')
             );
         }
+        return $this;
     }
 
     /**
@@ -163,7 +166,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     *  Check whether FAQ identifier is numeric
+     *  Check whether Question identifier is numeric
      *
      * @param AbstractModel $object
      * @return bool
@@ -174,7 +177,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * after save callback
+     * After save callback
      *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return parent
@@ -186,9 +189,10 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Get the Question information via $faq_id and $store_id
      *
      * @param $faq_id
-     * @return array|boolen
+     * @return array|bool
      */
     public function getFaqStore($faq_id = null)
     {
@@ -221,9 +225,10 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Get the Question information and FAQ Category information via $faq_id and $store_id
      *
      * @param $faq_id
-     * @return array|boolen
+     * @return array|bool
      */
     public function getFaqCategory($faq_id = null)
     {
@@ -256,9 +261,10 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Get the list of related questions
      *
-     * @param $faq_id
-     * @return array|boolen
+     * @param $faq_id, $category_id
+     * @return array|bool
      */
     public function getRelatedQuestion($faq_id = null, $category_id = null)
     {
@@ -314,7 +320,8 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-     * @param $category_id
+     * Update the question number in category
+     *
      * @return $this
      */
     public function updateNumberOfFaqsInCategory()
@@ -347,6 +354,8 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
+     * Save the related datas after the question saved
+     *
      * @param \Magento\Framework\Model\AbstractModel $object
      * @return $this
      */
@@ -377,7 +386,7 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 ];
                 $adapter->insertMultiple($this->getTable('phpcuong_faq_category_id'), $faq_category);
 
-                // update number of FAQs in category
+                // update the question number in category
                 $this->updateNumberOfFaqsInCategory();
             }
 

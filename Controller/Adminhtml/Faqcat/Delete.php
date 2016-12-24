@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 01:57:49
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-20 03:00:12
+ * @Last Modified time: 2016-12-24 21:05:46
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -20,7 +20,9 @@ class Delete extends \Magento\Backend\App\Action
      * @see _isAllowed()
      */
     const ADMIN_RESOURCE = 'PHPCuong_Faq::category_delete';
+
     /**
+     * Delete FAQ Category
      *
      * @return \Magento\Framework\View\Result\PageFactory
      */
@@ -54,7 +56,7 @@ class Delete extends \Magento\Backend\App\Action
                         $url_rewrite_model->load($value['url_rewrite_id'])->delete();
                     }
 
-                    $this->messageManager->addSuccess(__('The '.$title.' Category has been deleted.'));
+                    $this->messageManager->addSuccess(__('The "'.$title.'" Category has been deleted.'));
 
                     return $resultRedirect->setPath('*/*/');
                 }

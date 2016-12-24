@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 23:12:25
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 23:16:27
+ * @Last Modified time: 2016-12-24 17:10:18
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -63,7 +63,7 @@ class Edit extends \Magento\Backend\App\Action
     }
 
     /**
-     * Edit Region page
+     * Edit FAQ Category page
      *
      * @return \Magento\Backend\Model\View\Result\Page|\Magento\Backend\Model\View\Result\Redirect
      * @SuppressWarnings(PHPMD.NPathComplexity)

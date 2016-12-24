@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 17:46:49
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 04:32:27
+ * @Last Modified time: 2016-12-24 15:26:41
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit;
@@ -27,8 +27,8 @@ class Form extends Generic
                 'data' => [
                     'id' => 'edit_form',
                     'action' => $this->getData('action'),
-                    'method' => 'post',
-                ],
+                    'method' => 'post'
+                ]
             ]
         );
 

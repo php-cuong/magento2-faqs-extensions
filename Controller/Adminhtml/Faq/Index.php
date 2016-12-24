@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 01:57:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-16 02:48:57
+ * @Last Modified time: 2016-12-24 17:04:23
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -31,6 +31,8 @@ class Index extends \Magento\Backend\App\Action
         parent::__construct($context, $coreRegistry);
     }
     /**
+     * FAQs Manager Page
+     *
      * @return \Magento\Framework\View\Result\PageFactory
      */
     public function execute()

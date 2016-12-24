@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 01:27:04
+ * @Last Modified time: 2016-12-24 18:05:13
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -15,6 +15,7 @@ use PHPCuong\Faq\Helper\Category as CategoryHelper;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\View\Page\Config;
+use PHPCuong\Faq\Helper\Config as ConfigHelper;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use PHPCuong\Faq\Model\ResourceModel\Faqcat as FaqCatResourceModel;
 
@@ -47,10 +48,19 @@ class Category extends \Magento\Framework\View\Element\Template
      */
     protected $_pageConfig = null;
 
+    /**
+     * @var array
+     */
     protected $_faqCategoryTitle = null;
 
+    /**
+     * @var \PHPCuong\Faq\Helper\Config
+     */
     protected $_configHelper = null;
 
+    /**
+     * @var string
+     */
     protected $_faqCategoryIcon = null;
 
     /**
@@ -60,7 +70,7 @@ class Category extends \Magento\Framework\View\Element\Template
      * @param Config $pageConfig
      * @param FaqCatResourceModel $faqCatResourceModel
      * @param FaqResourceModel $faqResourceModel
-     * @param \PHPCuong\Faq\Helper\Config $configHelper
+     * @param ConfigHelper $configHelper
      */
     public function __construct(
         Context $context,
@@ -69,26 +79,30 @@ class Category extends \Magento\Framework\View\Element\Template
         Config $pageConfig,
         FaqCatResourceModel $faqCatResourceModel,
         FaqResourceModel $faqResourceModel,
-        \PHPCuong\Faq\Helper\Config $configHelper
+        ConfigHelper $configHelper
     ) {
-        $this->_categoryHelper         = $categoryHelper;
-        $this->_faqCatResourceModel    = $faqCatResourceModel;
-        $this->_faqResourceModel       = $faqResourceModel;
-        $this->_storeManager           = $storeManager;
-        $this->_pageConfig             = $pageConfig;
+        $this->_categoryHelper = $categoryHelper;
+        $this->_faqCatResourceModel = $faqCatResourceModel;
+        $this->_faqResourceModel = $faqResourceModel;
+        $this->_storeManager = $storeManager;
+        $this->_pageConfig = $pageConfig;
         $this->_configHelper = $configHelper;
         parent::__construct($context);
     }
 
+    /**
+     * Get FAQs Category
+     * @param $category_id
+     * @return array|null
+     */
     protected function getFaqCategory()
     {
         return $this->_faqCatResourceModel->getFaqCategoryStore($this->getRequest()->getParam('category_id'));
     }
 
     /**
-     * Add meta information from product to head block
      *
-     * @return \PHPCuong\Faq\Block\Category\Category
+     * @return parent
      */
     protected function _prepareLayout()
     {
@@ -133,37 +147,65 @@ class Category extends \Magento\Framework\View\Element\Template
         return parent::_prepareLayout();
     }
 
+    /**
+     * Get Category Icon
+     *
+     * @return string|null
+     */
     public function getFaqCategoryIcon()
     {
         return !empty($this->_faqCategoryIcon) ? $this->_configHelper->getFileBaseUrl($this->_faqCategoryIcon) : '';
     }
 
+    /**
+     * Get Category Title
+     *
+     * @return string|null
+     */
     public function getFaqCategoryTitle()
     {
         return $this->_faqCategoryTitle;
     }
 
+    /**
+     * Get URL of the category
+     *
+     * @param $identifier
+     * @return string|null
+     */
     public function getFaqCategoryFullPath($identifier)
     {
         return $this->_configHelper->getFaqCategoryFullPath($identifier);
     }
 
-    public function getAjaxUrl()
-    {
-        return $this->_storeManager->getStore()->getUrl('faq/category/ajax', [
-        '_secure' => $this->_storeManager->getStore()->isCurrentlySecure()]);
-    }
-
+    /**
+     * Get FAQs List
+     *
+     * @param $category_id
+     * @return array|null
+     */
     public function getFaqsList()
     {
         return $this->_faqResourceModel->getRelatedQuestion(null, (int) $this->getRequest()->getParam('category_id'));
     }
 
+    /**
+     * Get URL of the question
+     *
+     * @param $identifier
+     * @return string|null
+     */
     public function getFaqFullPath($identifier)
     {
         return $this->_configHelper->getFaqFullPath($identifier);
     }
 
+    /**
+     * Get Short Description of the question
+     *
+     * @param $content, $identifier
+     * @return string|null
+     */
     public function getFaqShortDescription($content, $identifier)
     {
         return $this->_configHelper->getFaqShortDescription($content, $identifier);

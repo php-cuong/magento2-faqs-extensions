@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 17:33:52
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-18 02:28:41
+ * @Last Modified time: 2016-12-24 17:02:53
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -63,9 +63,9 @@ class Edit extends \Magento\Backend\App\Action
     }
 
     /**
-     * Edit Region page
+     * Edit Question page
      *
-     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Backend\Model\View\Result\Redirect
+     * @return \Magento\Backend\Model\View\Result\Page
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function execute()
@@ -86,9 +86,9 @@ class Edit extends \Magento\Backend\App\Action
             $title = $model->getTitle();
         }
 
-        $FormData = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
-        if (!empty($FormData)) {
-            $model->setData($FormData);
+        $formData = $this->_objectManager->get('Magento\Backend\Model\Session')->getFormData(true);
+        if (!empty($formData)) {
+            $model->setData($formData);
         }
 
         $this->_coreRegistry->register('phpcuong_faq', $model);

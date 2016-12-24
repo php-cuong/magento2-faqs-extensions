@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 02:25:42
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 02:29:24
+ * @Last Modified time: 2016-12-24 17:41:48
  */
 
 namespace PHPCuong\Faq\Model\Config\Source;
@@ -21,9 +21,11 @@ class Yesno implements \Magento\Framework\Option\ArrayInterface
     {
         return [];
     }
+
     /**
      * Options getter
      *
+     * @return array
      */
     public function getYesnoOptions()
     {
