@@ -6,7 +6,7 @@
     </head>
     <referenceContainer name="content">
         <block class="PHPCuong\Faq\Block\Search\SearchForm" name="faq.search.searchform.form" template="PHPCuong_Faq::faq/form.phtml" />
-        <block class="PHPCuong\Faq\Block\Faq\Faq" name="faq.faq.view" template="PHPCuong_Faq::faq/view.phtml" />
+        <block class="PHPCuong\Faq\Block\Search\Search" name="faq.search.search.result" template="PHPCuong_Faq::search/result.phtml" />
     </referenceContainer>
     <referenceContainer name="sidebar.main">
         <block class="PHPCuong\Faq\Block\Category\CategorySidebar" name="faq.category.sidebar.view" template="PHPCuong_Faq::category/categorySidebar.phtml" />

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 18:05:57
+ * @Last Modified time: 2016-12-27 08:57:38
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -298,7 +298,7 @@ class Question extends \Magento\Framework\View\Element\Template
      */
     public function getAjaxUrl()
     {
-        return $this->_storeManager->getStore()->getUrl('faq/question/ajax', [
+        return $this->_storeManager->getStore()->getUrl('faq/question/ajax/faq_id/'.$this->getRequest()->getParam('faq_id'), [
         '_secure' => $this->_storeManager->getStore()->isCurrentlySecure()]);
     }
 }

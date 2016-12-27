@@ -3,14 +3,14 @@
 /**
  *
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
- * @Date                2016-12-23 16:58:08
+ * @Date                2016-12-27 16:25:49
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 16:30:33
+ * @Last Modified time: 2016-12-27 16:31:09
  */
 
-namespace PHPCuong\Faq\Controller\Faq;
+namespace PHPCuong\Faq\Controller\Search;
 
-class View extends \Magento\Framework\App\Action\Action
+class Index extends \Magento\Framework\App\Action\Action
 {
     /**
      * @var \Magento\Framework\View\Result\PageFactory
@@ -30,7 +30,7 @@ class View extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * View action
+     * Index action
      *
      * @return \Magento\Framework\View\Result\PageFactory
      * @SuppressWarnings(PHPMD.NPathComplexity)

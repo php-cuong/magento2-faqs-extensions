@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 01:38:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 15:21:28
+ * @Last Modified time: 2016-12-27 08:44:11
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
@@ -60,7 +60,7 @@ class Content extends \Magento\Backend\Block\Widget\Form\Generic implements
      */
     public function getTabLabel()
     {
-        return __('Content');
+        return __('Answer');
     }
 
     /**
@@ -105,7 +105,7 @@ class Content extends \Magento\Backend\Block\Widget\Form\Generic implements
 
         $fieldset = $form->addFieldset(
             'base_fieldset',
-            ['legend' => __('Content')]
+            ['legend' => __('Answer')]
         );
 
         $this->_addElementTypes($fieldset);
@@ -115,8 +115,8 @@ class Content extends \Magento\Backend\Block\Widget\Form\Generic implements
             'editor',
             [
                 'name' => 'content',
-                'label' => __('FAQ Content'),
-                'title' => __('FAQ Content'),
+                'label' => __('Answer'),
+                'title' => __('Answer'),
                 'required' => true,
                 'config'    => $this->_wysiwygConfig->getConfig()
             ]

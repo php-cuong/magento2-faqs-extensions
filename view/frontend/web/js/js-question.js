@@ -2,7 +2,7 @@
 * @Author: Ngo Quang Cuong
 * @Date:   2016-12-21 03:13:56
 * @Last Modified by:   nquangcuong
-* @Last Modified time: 2016-12-22 18:58:09
+* @Last Modified time: 2016-12-27 08:59:07
 */
 
 require([
@@ -20,7 +20,6 @@ require([
 
     function addFeedBackPHPCuongFaq(type) {
       var BASE_URL = $('#feedback #BASE_URL').text();
-      var FAQ_ID = $('#feedback #FAQ_ID').text();
       var selector = null;
       if (type === 1) {
         selector = '#feedback #btn-like';
@@ -31,7 +30,6 @@ require([
         $('#feedback').text($('#feedback #message').text()).addClass('green');
         var formData = new FormData();
         formData.append('type', type);
-        formData.append('faq_id', FAQ_ID);
         $.ajax({
           url: BASE_URL,
           data: formData,

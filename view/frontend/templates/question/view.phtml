@@ -2,12 +2,25 @@
     <h1><?php echo $this->getFaqTitle();?></h1>
     <div class="details">
         <div class="created-by">
-            <?php echo ($this->getFullName())? __('Created by').' '.$this->getFullName().' '.__('on').' '.$this->getFaqCreated().', ' : ''; ?> <?php echo ($this->getFaqCategoryTitle())? __('published in').' '.$this->getFaqCategoryTitle().',' : ''; ?> <?php echo $this->getFaqViewed(); ?> <?php echo __('Viewed'); ?>.
+            <span class="author">
+                <i class="faq-iconuser"></i>
+                <?php echo ($this->getFullName())? __('Created by').' '.$this->getFullName().' ' : ''; ?>
+            </span>
+            <span class="calendar">
+                <i class="faq-iconcalendar"></i>
+                <?php  echo ($this->getFaqCreated()) ? $this->getFaqCreated() : '' ; ?>
+            </span>
+            <span class="category">
+                <?php echo ($this->getFaqCategoryTitle())? __('Published in').' '.$this->getFaqCategoryTitle().' ' : ''; ?>
+            </span>
+            <span class="viewed">
+                <i class="faq-iconeye"></i>
+                <?php echo $this->getFaqViewed(); ?> <?php echo __('Views.'); ?>
+            </span>
         </div>
         <div class="content"><?php echo $this->getFaqContent(); ?></div>
         <div class="feedback" id="feedback">
             <div class="hidden" id="BASE_URL"><?php echo $this->getAjaxUrl(); ?></div>
-            <div class="hidden" id="FAQ_ID"><?php echo $this->getFaqId(); ?></div>
             <div class="hidden" id="message"><?php echo __('Glad to hear it — Thanks for the feedback'); ?></div>
             <span><?php echo __('Was this article helpful?'); ?></span>
             <button class="btn" id="btn-like">
