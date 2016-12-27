@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 02:25:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 21:05:30
+ * @Last Modified time: 2016-12-27 04:57:34
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -43,18 +43,6 @@ class Delete extends \Magento\Backend\App\Action
                     $title = $model->getTitle();
 
                     $model->delete();
-
-                    $url_rewrite_model = $this->_objectManager->create('Magento\UrlRewrite\Model\UrlRewrite');
-
-                    $urls_rewrite = $url_rewrite_model->getCollection()
-                    ->addFieldToFilter('entity_type', Faq::FAQ_ENTITY_TYPE)
-                    ->addFieldToFilter('entity_id', $faq_id)
-                    ->load()->getData();
-
-                    foreach ($urls_rewrite as $value) {
-                        $url_rewrite_model = $this->_objectManager->create('Magento\UrlRewrite\Model\UrlRewrite');
-                        $url_rewrite_model->load($value['url_rewrite_id'])->delete();
-                    }
 
                     $this->messageManager->addSuccess(__('The "'.$title.'" FAQ has been deleted.'));
                     return $resultRedirect->setPath('*/*/');

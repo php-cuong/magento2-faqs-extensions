@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 20:40:24
+ * @Last Modified time: 2016-12-27 05:13:37
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -17,6 +17,7 @@ use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use PHPCuong\Faq\Model\Config\Source\Urlkey;
+use Magento\Framework\App\Filesystem\DirectoryList;
 
 class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
@@ -41,17 +42,29 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     protected $_urlKey;
 
     /**
+     * Directory List
+     *
+     * @var DirectoryList
+     */
+    protected $_directoryList;
+
+    /**
      * @param Context $context
      * @param StoreManagerInterface $storeManager
+     * @param Urlkey $urlKey
+     * @param DirectoryList $directoryList
+     * @param $connectionName
      */
     public function __construct(
         Context $context,
         StoreManagerInterface $storeManager,
         Urlkey $urlKey,
+        DirectoryList $directoryList,
         $connectionName = null
     ) {
         $this->_urlKey       = $urlKey;
         $this->_storeManager = $storeManager;
+        $this->_directoryList = $directoryList;
         parent::__construct($context, $connectionName);
     }
 
@@ -313,5 +326,30 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             ->order('cat.sort_order ASC');
 
         return $this->getConnection()->fetchAll($select);
+    }
+
+    /**
+     * After delete callback
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return parent
+     */
+    protected function _afterDelete(AbstractModel $object)
+    {
+        // delete the url rewrite of category
+        $adapter = $this->getConnection();
+        $condition = [
+            'entity_type =?' => Faqcat::FAQ_CATEGORY_ENTITY_TYPE,
+            'entity_id =?' => (int) $object->getCategoryId()
+        ];
+        $adapter->delete($this->getTable('url_rewrite'), $condition);
+
+        // delete the icon file of category
+        $image_path = $this->_directoryList->getRoot().DIRECTORY_SEPARATOR.DirectoryList::PUB.DIRECTORY_SEPARATOR.DirectoryList::MEDIA.DIRECTORY_SEPARATOR.$object->getImage();
+        if (file_exists($image_path)) {
+            unlink($image_path);
+        }
+
+        return parent::_afterDelete($object);
     }
 }

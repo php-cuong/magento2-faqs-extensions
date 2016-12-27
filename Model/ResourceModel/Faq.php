@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 20:33:23
+ * @Last Modified time: 2016-12-27 04:59:05
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -429,5 +429,22 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             }
         }
         return $this;
+    }
+
+    /**
+     * After delete callback
+     *
+     * @param \Magento\Framework\Model\AbstractModel $object
+     * @return parent
+     */
+    protected function _afterDelete(AbstractModel $object)
+    {
+        $adapter = $this->getConnection();
+        $condition = [
+            'entity_type =?' => Faq::FAQ_ENTITY_TYPE,
+            'entity_id =?' => (int) $object->getFaqId()
+        ];
+        $adapter->delete($this->getTable('url_rewrite'), $condition);
+        return parent::_afterDelete($object);
     }
 }

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 02:17:36
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 17:11:14
+ * @Last Modified time: 2016-12-27 05:04:24
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -62,21 +62,7 @@ class MassDelete extends \Magento\Backend\App\Action
         $collectionSize = $collection->getSize();
 
         foreach ($collection as $page) {
-
             $page->delete();
-
-            $category_id = $page->getData()['category_id'];
-
-            $url_rewrite_model = $this->_objectManager->create('Magento\UrlRewrite\Model\UrlRewrite');
-
-            $urls_rewrite = $url_rewrite_model->getCollection()
-            ->addFieldToFilter('entity_type', Faqcat::FAQ_CATEGORY_ENTITY_TYPE)
-            ->addFieldToFilter('entity_id', $category_id)
-            ->load()->getData();
-            foreach ($urls_rewrite as $value) {
-                $url_rewrite_model = $this->_objectManager->create('Magento\UrlRewrite\Model\UrlRewrite');
-                $url_rewrite_model->load($value['url_rewrite_id'])->delete();
-            }
         }
 
         $this->messageManager->addSuccess(__('A total of %1 record(s) have been deleted.', $collectionSize));
