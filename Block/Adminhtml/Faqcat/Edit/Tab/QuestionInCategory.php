@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-27 06:54:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 08:31:08
+ * @Last Modified time: 2016-12-28 00:03:16
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
@@ -60,10 +60,7 @@ class QuestionInCategory extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareCollection()
     {
-        $collection = $this->_faqModel->getCollection()
-        ->addFieldToSelect('faq_id')
-        ->addFieldToSelect('title', 'faq_title')
-        ->addFieldToSelect('is_active', 'faq_is_active');
+        $collection = $this->_faqModel->getCollection();
         if ($category_id = $this->getRequest()->getParam('category_id')) {
             $collection->getSelect()->join(['fcat' => 'phpcuong_faq_category_id'], 'main_table.faq_id = fcat.faq_id', array('category_id'))->where('fcat.category_id =?', (int) $category_id);
         }
@@ -86,19 +83,19 @@ class QuestionInCategory extends \Magento\Backend\Block\Widget\Grid\Extended
         );
 
         $this->addColumn(
-            'faq_title',
+            'title',
             [
                 'header' => __('Title'),
-                'index' => 'faq_title',
+                'index' => 'title',
                 'type' => 'text'
             ]
         );
 
         $this->addColumn(
-            'faq_is_active',
+            'is_active',
             [
                 'header' => __('Status'),
-                'index' => 'faq_is_active',
+                'index' => 'is_active',
                 'type' => 'options',
                 'options' => $this->_status->getStatusOptions(1)
             ]

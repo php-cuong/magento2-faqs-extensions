@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:09:30
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 21:07:52
+ * @Last Modified time: 2016-12-28 00:11:36
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;

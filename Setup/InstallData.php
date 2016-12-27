@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:31:24
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 20:43:14
+ * @Last Modified time: 2016-12-27 22:53:41
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -50,14 +50,6 @@ class InstallData implements InstallDataInterface
     ) {
         $setup->startSetup();
 
-        $setup->getConnection()->delete(
-            $setup->getTable('url_rewrite'),
-            [
-                'entity_type' => 'faq-faq',
-                'entity_id' => '1'
-            ]
-        );
-
         $value = [
             'entity_type' => 'faq-faq',
             'entity_id' => '1',
@@ -70,7 +62,7 @@ class InstallData implements InstallDataInterface
         foreach ($stores as $store) {
             if ($store->getData()['store_id'] > 0) {
                 $value['store_id'] = $store->getData()['store_id'];
-                $setup->getConnection()->insertForce(
+                $setup->getConnection()->insertOnDuplicate(
                     $setup->getTable('url_rewrite'),
                     $value
                 );

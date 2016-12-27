@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 05:13:37
+ * @Last Modified time: 2016-12-28 00:16:00
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -346,7 +346,7 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
         // delete the icon file of category
         $image_path = $this->_directoryList->getRoot().DIRECTORY_SEPARATOR.DirectoryList::PUB.DIRECTORY_SEPARATOR.DirectoryList::MEDIA.DIRECTORY_SEPARATOR.$object->getImage();
-        if (file_exists($image_path)) {
+        if (!empty($object->getImage()) && file_exists($image_path)) {
             unlink($image_path);
         }
 

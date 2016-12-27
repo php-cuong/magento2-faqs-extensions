@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 00:23:20
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-23 17:34:17
+ * @Last Modified time: 2016-12-28 00:17:39
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -69,6 +69,11 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
 
         if ($data) {
+
+            !empty($data['title']) ? unset($data['title']) : '';
+            !empty($data['is_active']) ? unset($data['is_active']) : '';
+            $data['title'] = $data['faqcat_title'];
+            $data['is_active'] = $data['faqcat_is_active'];
 
             $id = $this->getRequest()->getParam('category_id');
 

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 23:30:17
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 15:29:00
+ * @Last Modified time: 2016-12-28 00:03:44
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
@@ -122,7 +122,7 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
             'is_active',
             'select',
             [
-                'name' => 'is_active',
+                'name' => 'faqcat_is_active',
                 'label' => __('Status'),
                 'title' => __('Status'),
                 'required' => true,
@@ -134,7 +134,7 @@ class General extends \Magento\Backend\Block\Widget\Form\Generic implements
             'title',
             'text',
             [
-                'name' => 'title',
+                'name' => 'faqcat_title',
                 'label' => __('Title'),
                 'title' => __('Title'),
                 'required' => true
