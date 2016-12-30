@@ -35,8 +35,17 @@ composer require php-cuong/magento2-faqs-extensions
 
 ```
 
-####2 - Enable Regions Manager
- * php bin/magento module:enable PHPCuong_Region
+###2 - Enable FAQ extension
+ * php bin/magento module:enable PHPCuong_Faq
  * php bin/magento setup:upgrade
- * php bin/magento cache:flush
+ * php bin/magento cache:clean
  * php bin/magento setup:static-content:deploy
+
+###3 - See results
+Log into your Magento admin, goto FAQs -> FAQs Manager
+
+##Video how to use this extension
+https://www.youtube.com/watch?v=o9Kr_yC8Rq8
+
+##ScreenShot
+
