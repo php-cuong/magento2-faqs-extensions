@@ -42,7 +42,7 @@ composer require php-cuong/magento2-faqs-extensions
  * php bin/magento setup:static-content:deploy
 
 ###3 - See results
-Log into your Magento admin, goto FAQs -> FAQs Manager
+Log into your Magento admin, goto FAQs -> Manage FAQs, goto FAQs -> Manage FAQs Categories
 
 ##Video how to use this extension
 https://www.youtube.com/watch?v=o9Kr_yC8Rq8
