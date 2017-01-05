@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 17:41:25
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-17 04:18:56
+ * @Last Modified time: 2017-01-05 09:19:37
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq;
@@ -76,7 +76,7 @@ class Edit extends Container
             );
 
             $faq = $this->_coreRegistry->registry('phpcuong_faq');
-            if(!empty($faq)) {
+            if (!empty($faq)) {
                 if ($faq->getFaqId() && $this->_isAllowedAction('PHPCuong_Faq::faq_delete')) {
                     $this->buttonList->add(
                         'delete',

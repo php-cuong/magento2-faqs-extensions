@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 23:54:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 16:49:41
+ * @Last Modified time: 2017-01-05 09:03:57
  */
 
 namespace PHPCuong\Faq\Helper;
@@ -72,13 +72,12 @@ class Config
     public function getFaqShortDescription($content, $identifier)
     {
         $content = strip_tags($content);
-        while (stristr($content, '  '))
-        {
+        while (stristr($content, '  ')) {
             $content = str_replace('  ', ' ', $content);
         }
+
         $explode = explode(' ', $content);
-        if (count($explode) > 50)
-        {
+        if (count($explode) > 50) {
             $arg = '';
             for ($i=0; $i<count($explode); $i++) {
                 if ($i<=50) {

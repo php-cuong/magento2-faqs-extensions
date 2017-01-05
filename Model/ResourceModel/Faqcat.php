@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-28 00:16:00
+ * @Last Modified time: 2017-01-05 08:50:17
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -223,7 +223,6 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $stores = $this->getStores($object);
 
         if ($category_id && (int) $category_id > 0) {
-
             $adapter = $this->getConnection();
 
             if ($stores) {
@@ -304,10 +303,10 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     }
 
     /**
-    * Get the list of Categories via storeIds
-    *
-    * @return array;
-    */
+     * Get the list of Categories via storeIds
+     *
+     * @return array;
+     */
     public function getCategoriesList()
     {
         $adapter = $this->getConnection();

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:31:24
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 22:53:41
+ * @Last Modified time: 2017-01-05 09:24:09
  */
 
 namespace PHPCuong\Faq\Setup;
@@ -33,7 +33,7 @@ class InstallData implements InstallDataInterface
      */
     public function __construct(
         StoreManagerInterface $storeManager
-        ) {
+    ) {
         $this->_storeManager = $storeManager;
     }
 

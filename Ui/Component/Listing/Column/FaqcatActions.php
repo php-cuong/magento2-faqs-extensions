@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:11:40
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-28 00:11:01
+ * @Last Modified time: 2017-01-05 08:45:02
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;
@@ -33,12 +33,12 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
      *
      * @var \Magento\Framework\UrlInterface
      */
-    protected $_urlBuilder;
+    protected $urlBuilder;
 
     /**
      * @var \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder
      */
-    protected $_actionUrlBuilder;
+    protected $actionUrlBuilder;
 
     /**
      * constructor
@@ -57,10 +57,9 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
         \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
         array $components = [],
         array $data = []
-    )
-    {
-        $this->_urlBuilder = $urlBuilder;
-        $this->_actionUrlBuilder = $actionUrlBuilder;
+    ) {
+        $this->urlBuilder = $urlBuilder;
+        $this->actionUrlBuilder = $actionUrlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -77,11 +76,11 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
                 $name = $this->getData('name');
                 if (isset($item['category_id'])) {
                     $item[$name]['edit'] = [
-                        'href' => $this->_urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_EDIT, ['category_id' => $item['category_id']]),
+                        'href' => $this->urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_EDIT, ['category_id' => $item['category_id']]),
                         'label' => __('Edit')
                     ];
                     $item[$name]['delete'] = [
-                        'href' => $this->_urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_DELETE, ['category_id' => $item['category_id']]),
+                        'href' => $this->urlBuilder->getUrl(self::FAQ_CATEGORY_URL_PATH_DELETE, ['category_id' => $item['category_id']]),
                         'label' => __('Delete'),
                         'confirm' => [
                             'title' => __('Delete "${ $.$data.title }"'),
@@ -89,12 +88,10 @@ class FaqcatActions extends \Magento\Ui\Component\Listing\Columns\Column
                         ]
                     ];
                 }
+
                 if (isset($item['identifier'])) {
                     $item[$name]['preview'] = [
-                        'href' => $this->_actionUrlBuilder->getUrl(faqResourceModel::FAQ_CATEGORY_PATH.'/'.$item['identifier'].faqResourceModel::FAQ_DOT_HTML,
-                            isset($item['store_id']) ? $item['store_id'] : null,
-                            null
-                        ),
+                        'href' => $this->actionUrlBuilder->getUrl(faqResourceModel::FAQ_CATEGORY_PATH.'/'.$item['identifier'].faqResourceModel::FAQ_DOT_HTML, isset($item['store_id']) ? $item['store_id'] : null, null),
                         'label' => __('View')
                     ];
                 }

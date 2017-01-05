@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:07:42
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 18:07:10
+ * @Last Modified time: 2017-01-05 08:51:42
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel\Faqcat\Grid;
@@ -46,8 +46,7 @@ class Collection extends \PHPCuong\Faq\Model\ResourceModel\Faqcat\Collection imp
         $model = 'Magento\Framework\View\Element\UiComponent\DataProvider\Document',
         $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
-    )
-    {
+    ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_eventPrefix = $eventPrefix;
         $this->_eventObject = $eventObject;
@@ -148,7 +147,8 @@ class Collection extends \PHPCuong\Faq\Model\ResourceModel\Faqcat\Collection imp
      *
      * @inheritdoc
      */
-    protected function _renderFiltersBefore() {
+    protected function _renderFiltersBefore()
+    {
         $this->getSelect()->joinLeft(
             ['fcs' => $this->getTable('phpcuong_faq_category_store')],
             'main_table.category_id = fcs.category_id',

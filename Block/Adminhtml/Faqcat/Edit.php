@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 23:21:42
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-19 23:51:31
+ * @Last Modified time: 2017-01-05 09:14:14
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat;
@@ -76,7 +76,7 @@ class Edit extends Container
             );
 
             $faqCat = $this->_coreRegistry->registry('phpcuong_faqcat');
-            if(!empty($faqCat)) {
+            if (!empty($faqCat)) {
                 if ($faqCat->getCategoryId() && $this->_isAllowedAction('PHPCuong_Faq::category_delete')) {
                     $this->buttonList->add(
                         'delete',

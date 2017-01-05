@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:16:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 17:59:15
+ * @Last Modified time: 2017-01-05 09:13:36
  */
 
 namespace PHPCuong\Faq\Block\Faq;
@@ -168,22 +168,22 @@ class Faq extends \Magento\Framework\View\Element\Template
             ->where('faq_store.store_id =?', $this->_storeManager->getStore()->getStoreId())
             ->where('faq.is_active = ?', '1');
 
-            if ($frequently) {
-                $select->where('faq.most_frequently = ?', '1');
-            }
+        if ($frequently) {
+            $select->where('faq.most_frequently = ?', '1');
+        }
 
-            $select->group('faq.faq_id');
+        $select->group('faq.faq_id');
 
-            if ($frequently) {
-                $select->order('faq.sort_order ASC');
-            }
+        if ($frequently) {
+            $select->order('faq.sort_order ASC');
+        }
 
-            if ($lastest) {
-                $select->where('faq.most_frequently <> ?', '1');
-                $select->order('faq.faq_id DESC');
-            }
+        if ($lastest) {
+            $select->where('faq.most_frequently <> ?', '1');
+            $select->order('faq.faq_id DESC');
+        }
 
-            $select->limit(8);
+        $select->limit(8);
 
         if ($results = $this->_faqResourceModel->getConnection()->fetchAll($select)) {
             return $results;

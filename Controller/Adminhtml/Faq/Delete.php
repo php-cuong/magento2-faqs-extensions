@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 02:25:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 04:57:34
+ * @Last Modified time: 2017-01-05 09:11:37
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -39,7 +39,6 @@ class Delete extends \Magento\Backend\App\Action
                 $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faq');
                 $model->load($faq_id);
                 if ($model->getFaqId()) {
-
                     $title = $model->getTitle();
 
                     $model->delete();
@@ -47,7 +46,6 @@ class Delete extends \Magento\Backend\App\Action
                     $this->messageManager->addSuccess(__('The "'.$title.'" FAQ has been deleted.'));
                     return $resultRedirect->setPath('*/*/');
                 }
-
             } catch (\Exception $e) {
                 // display error message
                 $this->messageManager->addError($e->getMessage());

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 00:23:20
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-28 00:17:39
+ * @Last Modified time: 2017-01-05 09:09:36
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -69,9 +69,6 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
 
         if ($data) {
-
-            !empty($data['title']) ? unset($data['title']) : '';
-            !empty($data['is_active']) ? unset($data['is_active']) : '';
             $data['title'] = $data['faqcat_title'];
             $data['is_active'] = $data['faqcat_is_active'];
 
@@ -103,7 +100,6 @@ class Save extends \Magento\Backend\App\Action
             $model->setData($data);
 
             try {
-
                 $model->save();
 
                 $this->messageManager->addSuccess(__('You saved the Category.'));
@@ -116,32 +112,32 @@ class Save extends \Magento\Backend\App\Action
                     }
                 }
 
-                if(isset($_FILES['image']['name']) and (file_exists($_FILES['image']['tmp_name']))) {
-                    try {
-                        $uploader = $this->_fileUploaderFactory->create(['fileId' => 'image']);
-                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+                try {
+                    $uploader = $this->_fileUploaderFactory->create(['fileId' => 'image']);
+                    $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
 
-                        $uploader->setAllowRenameFiles(true);
+                    $uploader->setAllowRenameFiles(true);
 
-                        $image = $uploader->save($faq_path_upload.Faqcat::FAQ_CATEGORY_FILE_PATH_UPLOADED);
+                    $image = $uploader->save($faq_path_upload.Faqcat::FAQ_CATEGORY_FILE_PATH_UPLOADED);
 
-                        if (!empty($image['file'])) {
-                            $image_old = !empty($data['image']) ? $data['image'] : 'search-test.jpg';
-                            $data['image'] = Faqcat::FAQ_CATEGORY_FILE_PATH_ACCESS.$image['file'];
-                            $data['category_id'] = $category_id;
-                            $model->setData($data);
-                            try {
-                                $model->save();
-                                if (file_exists($faq_path_upload.$image_old)) {
-                                    unlink($faq_path_upload.$image_old);
-                                }
-                            } catch (\Exception $e) {
-                                $this->messageManager->addError($e->getMessage());
+                    if (!empty($image['file'])) {
+                        $image_old = !empty($data['image']) ? $data['image'] : 'search-image-file.jpg';
+                        $data['image'] = Faqcat::FAQ_CATEGORY_FILE_PATH_ACCESS.$image['file'];
+                        $data['category_id'] = $category_id;
+                        $model->setData($data);
+                        try {
+                            $model->save();
+                            if (file_exists($faq_path_upload.$image_old)) {
+                                unlink($faq_path_upload.$image_old);
                             }
+                        } catch (\Exception $e) {
+                            $this->messageManager->addError($e->getMessage());
                         }
-                    } catch (\Exception $e) {
-                        $this->messageManager->addError(__('Something went wrong while saving the image'));
-                        $this->messageManager->addError($e->getMessage());
+                    }
+                } catch (\Exception $e) {
+                    if ($e->getCode() != \Magento\Framework\File\Uploader::TMP_NAME_EMPTY) {
+                        $this->messageManager->addError(__('Can not save the Category icon: '.$e->getMessage()));
+                        return $resultRedirect->setPath('*/*/edit', ['category_id' => $model->getCategoryId()]);
                     }
                 }
 
@@ -153,7 +149,7 @@ class Save extends \Magento\Backend\App\Action
             } catch (LocalizedException $e) {
                 $this->messageManager->addError($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the Category.'));
+                $this->messageManager->addException($e, __('Something went wrong while saving the Category: '.$e->getMessage()));
             }
 
             $this->_getSession()->setFormData($data);
@@ -177,5 +173,4 @@ class Save extends \Magento\Backend\App\Action
         }
         return false;
     }
-
 }

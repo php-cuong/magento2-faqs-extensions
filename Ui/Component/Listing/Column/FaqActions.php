@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:09:30
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-28 00:11:36
+ * @Last Modified time: 2017-01-05 08:44:04
  */
 
 namespace PHPCuong\Faq\Ui\Component\Listing\Column;
@@ -57,8 +57,7 @@ class FaqActions extends \Magento\Ui\Component\Listing\Columns\Column
         \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
         array $components = [],
         array $data = []
-    )
-    {
+    ) {
         $this->_urlBuilder = $urlBuilder;
         $this->_actionUrlBuilder = $actionUrlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
@@ -89,13 +88,10 @@ class FaqActions extends \Magento\Ui\Component\Listing\Columns\Column
                         ]
                     ];
                 }
+
                 if (isset($item['identifier'])) {
                     $item[$name]['preview'] = [
-                        'href' => $this->_actionUrlBuilder->getUrl(
-                            faqResourceModel::FAQ_QUESTION_PATH.'/'.$item['identifier'].faqResourceModel::FAQ_DOT_HTML,
-                            isset($item['store_id']) ? $item['store_id'] : null,
-                            null
-                        ),
+                        'href' => $this->_actionUrlBuilder->getUrl(faqResourceModel::FAQ_QUESTION_PATH.'/'.$item['identifier'].faqResourceModel::FAQ_DOT_HTML, isset($item['store_id']) ? $item['store_id'] : null, null),
                         'label' => __('View')
                     ];
                 }

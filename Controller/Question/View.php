@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 17:27:27
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 17:20:12
+ * @Last Modified time: 2017-01-05 09:07:27
  */
 
 namespace PHPCuong\Faq\Controller\Question;
@@ -36,8 +36,8 @@ class View extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \PHPCuong\Faq\Model\ResourceModel\Faq $faqResourceModel,
-        \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory)
-    {
+        \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
+    ) {
         $this->_faqResourceModel     = $faqResourceModel;
         $this->_resultForwardFactory = $resultForwardFactory;
         $this->_resultPageFactory    = $resultPageFactory;
@@ -56,10 +56,7 @@ class View extends \Magento\Framework\App\Action\Action
         $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faq');
         if ($id && (int) $id > 0 && $this->_faqResourceModel->getFaqStore($id)) {
             $faq = $model->load($id);
-            $this->_faqResourceModel->getConnection()->update( $this->_faqResourceModel->getTable('phpcuong_faq'),
-                ['viewed' => $faq->getViewed()+1],
-                ['faq_id = ?' => (int) $id]
-            );
+            $this->_faqResourceModel->getConnection()->update($this->_faqResourceModel->getTable('phpcuong_faq'), ['viewed' => $faq->getViewed()+1], ['faq_id = ?' => (int) $id]);
             return $this->_resultPageFactory->create();
         }
         $resultForward = $this->_resultForwardFactory->create();

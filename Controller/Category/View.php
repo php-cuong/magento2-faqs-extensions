@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-21 16:15:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-29 04:19:16
+ * @Last Modified time: 2017-01-05 09:08:38
  */
 
 namespace PHPCuong\Faq\Controller\Category;
@@ -37,8 +37,8 @@ class View extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \PHPCuong\Faq\Model\ResourceModel\Faqcat $faqCatResourceModel,
-        \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory)
-    {
+        \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
+    ) {
         $this->_faqCatResourceModel  = $faqCatResourceModel;
         $this->_resultForwardFactory = $resultForwardFactory;
         $this->_resultPageFactory    = $resultPageFactory;
@@ -56,13 +56,11 @@ class View extends \Magento\Framework\App\Action\Action
         $id = $this->getRequest()->getParam('category_id');
         $textSearch =  $this->getRequest()->getParam('s');
         if ($category = $this->_faqCatResourceModel->getFaqCategoryStore($id, $textSearch)) {
-
             $resultPage = $this->_resultPageFactory->create();
 
             $resultPage->getConfig()->getTitle()->set(__('FAQ'));
 
-            $resultPage->getConfig()->getTitle()
-            ->prepend($category['title']);
+            $resultPage->getConfig()->getTitle()->prepend($category['title']);
 
             return $resultPage;
         }

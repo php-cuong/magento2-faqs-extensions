@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 05:09:06
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 17:08:42
+ * @Last Modified time: 2017-01-05 09:10:48
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -48,7 +48,6 @@ class Save extends \Magento\Backend\App\Action
 
         $data = $this->getRequest()->getPostValue();
         if ($data) {
-
             $id = $this->getRequest()->getParam('faq_id');
 
             /** @var \PHPCuong\Faq\Model\Faq $model */

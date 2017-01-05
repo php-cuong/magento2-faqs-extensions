@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 01:57:49
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 05:03:58
+ * @Last Modified time: 2017-01-05 09:10:28
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faqcat;
@@ -38,8 +38,8 @@ class Delete extends \Magento\Backend\App\Action
                 // init model and delete
                 $model = $this->_objectManager->create('PHPCuong\Faq\Model\Faqcat');
                 $category = $model->load($category_id);
-                if ($category->getCategoryId()) {
 
+                if ($category->getCategoryId()) {
                     $title = $model->getTitle();
 
                     $model->delete();

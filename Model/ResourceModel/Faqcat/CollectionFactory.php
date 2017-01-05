@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 02:04:22
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 18:07:31
+ * @Last Modified time: 2017-01-05 08:54:00
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel\Faqcat;
@@ -44,7 +44,7 @@ class CollectionFactory
      * @param array $data
      * @return \PHPCuong\Faq\Model\ResourceModel\Faq\Collection
      */
-    public function create(array $data = array())
+    public function create(array $data = [])
     {
         return $this->_objectManager->create($this->_instanceName, $data);
     }

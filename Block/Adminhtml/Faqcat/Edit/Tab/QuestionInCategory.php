@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-27 06:54:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-28 00:03:16
+ * @Last Modified time: 2017-01-05 09:19:12
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faqcat\Edit\Tab;
@@ -62,7 +62,7 @@ class QuestionInCategory extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         $collection = $this->_faqModel->getCollection();
         if ($category_id = $this->getRequest()->getParam('category_id')) {
-            $collection->getSelect()->join(['fcat' => 'phpcuong_faq_category_id'], 'main_table.faq_id = fcat.faq_id', array('category_id'))->where('fcat.category_id =?', (int) $category_id);
+            $collection->getSelect()->join(['fcat' => 'phpcuong_faq_category_id'], 'main_table.faq_id = fcat.faq_id', ['category_id'])->where('fcat.category_id =?', (int) $category_id);
         }
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -73,15 +73,6 @@ class QuestionInCategory extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareColumns()
     {
-        $this->addColumn(
-            'faq_id',
-            [
-                'header' => __('ID'),
-                'index' => 'faq_id',
-                'type' => 'text'
-            ]
-        );
-
         $this->addColumn(
             'title',
             [

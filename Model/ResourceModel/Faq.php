@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 04:59:05
+ * @Last Modified time: 2017-01-05 08:59:44
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -328,26 +328,14 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     {
         $adapter = $this->getConnection();
 
-        $select = $adapter->select()
-            ->from($this->getTable('phpcuong_faq_category_id'),
-                [
-                    'count' => 'COUNT(category_id)',
-                    'category_id'
-                ]
-            )
-            ->group('category_id');
+        $select = $adapter->select()->from($this->getTable('phpcuong_faq_category_id'), ['count' => 'COUNT(category_id)', 'category_id'])->group('category_id');
 
         $faq_category_results = $this->getConnection()->fetchAll($select);
 
-        $adapter->update($this->getTable('phpcuong_faq_category'),
-            ['count' => '0']
-        );
+        $adapter->update($this->getTable('phpcuong_faq_category'), ['count' => '0']);
 
         foreach ($faq_category_results as $value) {
-            $adapter->update($this->getTable('phpcuong_faq_category'),
-                ['count' => $value['count']],
-                ['category_id = ?' => (int) $value['category_id']]
-            );
+            $adapter->update($this->getTable('phpcuong_faq_category'), ['count' => $value['count']], ['category_id = ?' => (int) $value['category_id']]);
         };
 
         return $this;
@@ -372,11 +360,9 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $stores = $this->getStores($object);
 
         if ($faq_id && (int) $faq_id > 0) {
-
             $adapter = $this->getConnection();
 
             if ($category_id) {
-
                 $condition = ['faq_id = ?' => (int) $faq_id];
                 $adapter->delete($this->getTable('phpcuong_faq_category_id'), $condition);
 

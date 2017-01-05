@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 17:35:37
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 16:59:21
+ * @Last Modified time: 2017-01-05 09:03:18
  */
 
 namespace PHPCuong\Faq\Helper;
@@ -149,7 +149,7 @@ class Question extends \Magento\Framework\App\Helper\AbstractHelper
     {
         if (!empty($this->_faqData['creation_time'])) {
             $date = new \DateTime($this->_faqData['creation_time']);
-            return $date->format('M d, Y H:i:s A');;
+            return $date->format('M d, Y H:i:s A');
         }
         return '';
     }
