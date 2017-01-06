@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-29 03:41:12
+ * @Last Modified time: 2017-01-06 08:14:36
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -13,8 +13,6 @@ namespace PHPCuong\Faq\Block\Category;
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Category as CategoryHelper;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\View\Page\Config;
 use PHPCuong\Faq\Helper\Config as ConfigHelper;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use PHPCuong\Faq\Model\ResourceModel\Faqcat as FaqCatResourceModel;
@@ -35,18 +33,6 @@ class Category extends \Magento\Framework\View\Element\Template
      * @var \PHPCuong\Faq\Helper\Category
      */
     protected $_categoryHelper;
-
-    /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
-     * @var \Magento\Framework\View\Page\Config
-     */
-    protected $_pageConfig = null;
 
     /**
      * @var array
@@ -74,9 +60,7 @@ class Category extends \Magento\Framework\View\Element\Template
      */
     public function __construct(
         Context $context,
-        StoreManagerInterface $storeManager,
         CategoryHelper $categoryHelper,
-        Config $pageConfig,
         FaqCatResourceModel $faqCatResourceModel,
         FaqResourceModel $faqResourceModel,
         ConfigHelper $configHelper
@@ -84,8 +68,6 @@ class Category extends \Magento\Framework\View\Element\Template
         $this->_categoryHelper = $categoryHelper;
         $this->_faqCatResourceModel = $faqCatResourceModel;
         $this->_faqResourceModel = $faqResourceModel;
-        $this->_storeManager = $storeManager;
-        $this->_pageConfig = $pageConfig;
         $this->_configHelper = $configHelper;
         parent::__construct($context);
     }
@@ -140,9 +122,9 @@ class Category extends \Magento\Framework\View\Element\Template
             ]
         );
 
-        $this->_pageConfig->setKeywords($faqCategory['meta_keywords']? $faqCategory['meta_keywords'] : $faqCategory['title']);
+        $this->pageConfig->setKeywords($faqCategory['meta_keywords']? $faqCategory['meta_keywords'] : $faqCategory['title']);
 
-        $this->_pageConfig->setDescription($faqCategory['meta_description']? $faqCategory['meta_description'] : $faqCategory['title']);
+        $this->pageConfig->setDescription($faqCategory['meta_description']? $faqCategory['meta_description'] : $faqCategory['title']);
 
         return parent::_prepareLayout();
     }

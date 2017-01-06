@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 01:57:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 17:04:23
+ * @Last Modified time: 2017-01-06 07:51:01
  */
 
 namespace PHPCuong\Faq\Controller\Adminhtml\Faq;
@@ -19,16 +19,14 @@ class Index extends \Magento\Backend\App\Action
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
-        parent::__construct($context, $coreRegistry);
+        parent::__construct($context);
     }
     /**
      * FAQs Manager Page

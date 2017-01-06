@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:16:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-05 09:13:36
+ * @Last Modified time: 2017-01-06 08:14:21
  */
 
 namespace PHPCuong\Faq\Block\Faq;
@@ -13,8 +13,6 @@ namespace PHPCuong\Faq\Block\Faq;
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use PHPCuong\Faq\Helper\Category as CategoryHelper;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\View\Page\Config;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use PHPCuong\Faq\Helper\Config as ConfigHelper;
@@ -37,22 +35,10 @@ class Faq extends \Magento\Framework\View\Element\Template
     protected $_faqResourceModel;
 
     /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
-    /**
      *
      * @var \Magento\Framework\App\Filesystem\DirectoryList
      */
     protected $_directoryList;
-
-    /**
-     * @var \Magento\Framework\View\Page\Config
-     */
-    protected $_pageConfig;
 
     /**
      * @var array
@@ -67,27 +53,21 @@ class Faq extends \Magento\Framework\View\Element\Template
     /**
      *
      * @param Context $context
-     * @param StoreManagerInterface $storeManager
      * @param QuestionHelper $questionHelper
      * @param CategoryHelper $categoryHelper
      * @param DirectoryList $directoryList
-     * @param Config $pageConfig
      * @param FaqResourceModel $faqResourceModel
      * @param ConfigHelper $configHelper
      */
     public function __construct(
         Context $context,
-        StoreManagerInterface $storeManager,
         QuestionHelper $questionHelper,
         CategoryHelper $categoryHelper,
         DirectoryList $directoryList,
-        Config $pageConfig,
         FaqResourceModel $faqResourceModel,
         ConfigHelper $configHelper
     ) {
         $this->_questionHelper = $questionHelper;
-        $this->_storeManager = $storeManager;
-        $this->_pageConfig = $pageConfig;
         $this->_categoryHelper = $categoryHelper;
         $this->_directoryList = $directoryList;
         $this->_faqResourceModel = $faqResourceModel;
@@ -103,11 +83,11 @@ class Faq extends \Magento\Framework\View\Element\Template
     {
         $this->_faqCategoriesList = $this->_categoryHelper->getCategoriesList();
 
-        $this->_pageConfig->getTitle()->set(__('FAQ'));
+        $this->pageConfig->getTitle()->set(__('FAQ'));
 
-        $this->_pageConfig->setKeywords(__('FAQ'));
+        $this->pageConfig->setKeywords(__('FAQ'));
 
-        $this->_pageConfig->setDescription(__('FAQ'));
+        $this->pageConfig->setDescription(__('FAQ'));
 
         $breadcrumbBlock = $this->getLayout()->getBlock('breadcrumbs');
 

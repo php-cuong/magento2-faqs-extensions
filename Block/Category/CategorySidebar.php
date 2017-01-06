@@ -5,26 +5,18 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:46:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 18:05:36
+ * @Last Modified time: 2017-01-06 07:59:25
  */
 
 namespace PHPCuong\Faq\Block\Category;
 
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Category as CategoryHelper;
-use Magento\Store\Model\StoreManagerInterface;
 use PHPCuong\Faq\Model\ResourceModel\Faq;
 use PHPCuong\Faq\Helper\Config as ConfigHelper;
 
 class CategorySidebar extends \Magento\Framework\View\Element\Template
 {
-    /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $_storeManager;
-
     /**
      *
      * @var \PHPCuong\Faq\Helper\Category
@@ -43,17 +35,14 @@ class CategorySidebar extends \Magento\Framework\View\Element\Template
 
     /**
      * @param Context $context
-     * @param StoreManagerInterface $storeManager
      * @param CategoryHelper $categoryHelper
      * @param ConfigHelper $configHelper
      */
     public function __construct(
         Context $context,
-        StoreManagerInterface $storeManager,
         CategoryHelper $categoryHelper,
         ConfigHelper $configHelper
     ) {
-        $this->_storeManager = $storeManager;
         $this->_categoryHelper = $categoryHelper;
         $this->_configHelper = $configHelper;
         parent::__construct($context);
