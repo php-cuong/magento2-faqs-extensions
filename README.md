@@ -45,7 +45,7 @@ composer require php-cuong/magento2-faqs-extensions
 Log into your Magento admin, goto FAQs -> Manage FAQs, goto FAQs -> Manage FAQs Categories
 
 ##Video how to use this extension
-[![Alt text](https://i.ytimg.com/vi/DxDDMHZ3nAc/hqdefault.jpg)](https://www.youtube.com/watch?v=DxDDMHZ3nAc)
+[![Alt text](https://i.ytimg.com/vi/DxDDMHZ3nAc/hqdefault.jpg)](https://www.youtube.com/watch?v=DxDDMHZ3nAc "Click to play on Youtube")
 
 
 ##ScreenShot
