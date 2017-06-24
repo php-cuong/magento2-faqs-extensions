@@ -3,6 +3,10 @@ This is an awesome module, Admin can create unlimited, update, delete FAQs and F
 
 In the business, times equals money while there are always thousands of questions in a customer’s mind both before and after purchasing. Thus, the faster answers, the happier customers, the more successful business.
 
+Please donate if you enjoy my extension.
+
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SLETZ2BY26LQ)
+
 ## Features of this extension:
 
 ### Frontend:
