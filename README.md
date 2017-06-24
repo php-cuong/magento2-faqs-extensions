@@ -3,9 +3,9 @@ This is an awesome module, Admin can create unlimited, update, delete FAQs and F
 
 In the business, times equals money while there are always thousands of questions in a customer’s mind both before and after purchasing. Thus, the faster answers, the happier customers, the more successful business.
 
-##Features of this extension:
+## Features of this extension:
 
-###Frontend:
+### Frontend:
 - Advanced Search for FAQs
 - Filter the FAQs via Category
 - The page detail about FAQ
@@ -13,13 +13,13 @@ In the business, times equals money while there are always thousands of question
 - URL rewrite standard for SEO
 - Display FAQs via multi stores
 
-###Backend:
+### Backend:
 - Add unlimited FAQs and FAQ categories
 - Update, delete FAQs and FAQ categories
 
-##Introduction installation:
+## Introduction installation:
 
-###1 - Installation Magento 2 FAQ extension
+### 1 - Installation Magento 2 FAQ extension
 #### Manual Installation
 Install FAQ extension for Magento2
  * Download the extension
@@ -28,27 +28,26 @@ Install FAQ extension for Magento2
  * Copy the content from the unzip folder
 
 
-#####Using Composer
+##### Using Composer
 
 ```
 composer require php-cuong/magento2-faqs-extensions
 
 ```
 
-###2 - Enable FAQ extension
+### 2 - Enable FAQ extension
  * php bin/magento module:enable PHPCuong_Faq
  * php bin/magento setup:upgrade
  * php bin/magento cache:clean
  * php bin/magento setup:static-content:deploy
 
-###3 - See results
+### 3 - See results
 Log into your Magento admin, goto FAQs -> Manage FAQs, goto FAQs -> Manage FAQs Categories
 
-##Video how to use this extension
-[![Alt text](https://i.ytimg.com/vi/o9Kr_yC8Rq8/maxresdefault.jpg)](https://www.youtube.com/watch?v=o9Kr_yC8Rq8 "Click to play on Youtube")
+## Video how to use this extension
+[https://www.youtube.com/watch?v=o9Kr_yC8Rq8](https://www.youtube.com/watch?v=o9Kr_yC8Rq8)
 
-
-##ScreenShot
+## ScreenShot
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/menu.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/FAQ-manager.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/edit-FAQ.png)
