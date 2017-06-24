@@ -110,34 +110,25 @@ class Websites extends \Magento\Backend\Block\Widget\Form\Generic implements
 
         $formData = $this->_coreRegistry->registry('phpcuong_faqcat');
 
-        /**
-         * Check is single store mode
-         */
-        if (!$this->_storeManager->hasSingleStore()) {
-            $field = $fieldset->addField(
-                'stores',
-                'multiselect',
-                [
-                    'label' => __('Stores View'),
-                    'title' => __('Stores View'),
-                    'required' => true,
-                    'name' => 'stores[]',
-                    'values' => $this->_systemStore->getStoreValuesForForm(false, true)
-                ]
-            );
-            $renderer = $this->getLayout()->createBlock(
-                'Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element'
-            );
-            $field->setRenderer($renderer);
-            $formData->setSelectStores($formData->getStores());
-        } else {
-            $fieldset->addField(
-                'stores',
-                'hidden',
-                ['name' => 'stores[]', 'value' => $this->_storeManager->getStore(true)->getId()]
-            );
-            $formData->setSelectStores($this->_storeManager->getStore(true)->getId());
-        }
+        $field = $fieldset->addField(
+            'stores',
+            'multiselect',
+            [
+                'label' => __('Stores View'),
+                'title' => __('Stores View'),
+                'required' => true,
+                'name' => 'stores[]',
+                'values' => $this->_systemStore->getStoreValuesForForm(false, true)
+            ]
+        );
+        
+        $renderer = $this->getLayout()->createBlock(
+            'Magento\Backend\Block\Store\Switcher\Form\Renderer\Fieldset\Element'
+        );
+
+        $field->setRenderer($renderer);
+
+        $formData->setSelectStores($formData->getStores());
 
         if ($formData) {
             if ($formData->getStores() == null) {
