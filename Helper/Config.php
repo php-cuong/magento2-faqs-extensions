@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 23:54:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-07-14 23:37:23
+ * @Last Modified time: 2017-07-14 23:44:44
  */
 
 namespace PHPCuong\Faq\Helper;
@@ -85,9 +85,9 @@ class Config
                 }
             }
             if (!empty($arg)) {
+                $arg = $this->findUrlsInText($arg);
                 $arg = $arg.'... <a href="'.$this->getFaqFullPath($identifier).'">'.__('Read more').'</a>';
             }
-            $arg = $this->findUrlsInText($arg);
             return $arg;
         }
         $content = $this->findUrlsInText($content);
