@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 23:54:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-05 09:03:57
+ * @Last Modified time: 2017-07-14 23:37:23
  */
 
 namespace PHPCuong\Faq\Helper;
@@ -87,7 +87,25 @@ class Config
             if (!empty($arg)) {
                 $arg = $arg.'... <a href="'.$this->getFaqFullPath($identifier).'">'.__('Read more').'</a>';
             }
+            $arg = $this->findUrlsInText($arg);
             return $arg;
+        }
+        $content = $this->findUrlsInText($content);
+        return $content;
+    }
+
+    /**
+     * Find and Replace the text is a Url
+     *
+     * @param $content
+     * @return string
+     */
+    public function findUrlsInText($content)
+    {
+        $pattern = '~[a-z]+://\S+~';
+        preg_match_all($pattern, $content, $urls);
+        foreach ($urls[0] as $url) {
+            $content = str_replace($url, "<a href=".$url." target='_blank'>".$url."</a> ", $content);
         }
         return $content;
     }
