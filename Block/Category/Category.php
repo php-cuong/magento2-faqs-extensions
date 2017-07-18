@@ -10,6 +10,7 @@
 
 namespace PHPCuong\Faq\Block\Category;
 
+use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Category as CategoryHelper;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
@@ -90,23 +91,25 @@ class Category extends \Magento\Framework\View\Element\Template
     {
         $breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs');
 
-        $breadcrumbsBlock->addCrumb(
-            'home',
-            [
-                'label' => __('Home'),
-                'title' => __('Go to Home Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl()
-            ]
-        );
+        if($breadcrumbsBlock instanceof BlockInterface) {
+            $breadcrumbsBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Go to Home Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl()
+                ]
+            );
 
-        $breadcrumbsBlock->addCrumb(
-            'faq',
-            [
-                'label' => __('FAQ'),
-                'title' => __('Go to FAQ Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_REQUEST_PATH
-            ]
-        );
+            $breadcrumbsBlock->addCrumb(
+                'faq',
+                [
+                    'label' => __('FAQ'),
+                    'title' => __('Go to FAQ Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl() . FaqResourceModel::FAQ_REQUEST_PATH
+                ]
+            );
+        }
 
         $faqCategory = $this->getFaqCategory();
 
@@ -114,13 +117,15 @@ class Category extends \Magento\Framework\View\Element\Template
 
         $this->_faqCategoryIcon = $faqCategory['image'];
 
-        $breadcrumbsBlock->addCrumb(
-            'faq.category',
-            [
-                'label' => $faqCategory['title'],
-                'title' => $faqCategory['title']
-            ]
-        );
+        if($breadcrumbsBlock instanceof BlockInterface) {
+            $breadcrumbsBlock->addCrumb(
+                'faq.category',
+                [
+                    'label' => $faqCategory['title'],
+                    'title' => $faqCategory['title']
+                ]
+            );
+        }
 
         $this->pageConfig->setKeywords($faqCategory['meta_keywords']? $faqCategory['meta_keywords'] : $faqCategory['title']);
 

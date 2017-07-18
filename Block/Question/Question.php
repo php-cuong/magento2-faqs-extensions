@@ -10,6 +10,7 @@
 
 namespace PHPCuong\Faq\Block\Question;
 
+use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use PHPCuong\Faq\Model\ResourceModel\Faq;
@@ -125,23 +126,25 @@ class Question extends \Magento\Framework\View\Element\Template
 
         $breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs');
 
-        $breadcrumbsBlock->addCrumb(
-            'home',
-            [
-                'label' => __('Home'),
-                'title' => __('Go to Home Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl()
-            ]
-        );
+        if($breadcrumbsBlock instanceof BlockInterface) {
+            $breadcrumbsBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Go to Home Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl()
+                ]
+            );
 
-        $breadcrumbsBlock->addCrumb(
-            'faq',
-            [
-                'label' => __('FAQ'),
-                'title' => __('Go to FAQ Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_REQUEST_PATH
-            ]
-        );
+            $breadcrumbsBlock->addCrumb(
+                'faq',
+                [
+                    'label' => __('FAQ'),
+                    'title' => __('Go to FAQ Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl() . Faq::FAQ_REQUEST_PATH
+                ]
+            );
+        }
 
         $faqCategory = $this->getFaqCategory();
         if ($identifier = $faqCategory->getCategoryIndentifier()) {
@@ -151,23 +154,27 @@ class Question extends \Magento\Framework\View\Element\Template
 
             $this->_relatedQuestion = $this->_questionHelper->getRelatedQuestion($faq->getFaqId(), $faqCategory->getCategoryId());
 
+            if($breadcrumbsBlock instanceof BlockInterface) {
+                $breadcrumbsBlock->addCrumb(
+                    'faq.category',
+                    [
+                        'label' => $faqCategory->getTitle(),
+                        'title' => $faqCategory->getTitle(),
+                        'link' => $link
+                    ]
+                );
+            }
+        }
+
+        if($breadcrumbsBlock instanceof BlockInterface) {
             $breadcrumbsBlock->addCrumb(
-                'faq.category',
+                'faq.question.view',
                 [
-                    'label' => $faqCategory->getTitle(),
-                    'title' => $faqCategory->getTitle(),
-                    'link'  => $link
+                    'label' => $this->_faqTitle,
+                    'title' => $this->_faqTitle
                 ]
             );
         }
-
-        $breadcrumbsBlock->addCrumb(
-            'faq.question.view',
-            [
-                'label' => $this->_faqTitle,
-                'title' => $this->_faqTitle
-            ]
-        );
 
         $this->pageConfig->getTitle()->set(__('FAQ'));
 
