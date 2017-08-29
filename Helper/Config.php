@@ -60,7 +60,7 @@ class Config
      */
     public function getFileBaseUrl($path)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().DirectoryList::PUB.'/'.DirectoryList::MEDIA.'/'.$path;
+        return $this->_storeManager->getStore()->getBaseUrl().'/'.DirectoryList::MEDIA.'/'.$path;
     }
 
     /**
