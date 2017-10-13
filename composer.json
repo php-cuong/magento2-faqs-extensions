@@ -10,9 +10,8 @@
         "FAQ Module"
     ],
     "require": {
-        "php": "~5.6.0|7.0.2|~7.0.6",
-        "magento/module-backend": "100.0.*|100.1.*",
-        "magento/framework": "100.0.*|100.1.*"
+        "php": "~5.6.0|7.0.2|~7.0.6|~7.1.0",
+        "magento/framework": "100.0.*|100.1.*|101.0.*"
     },
     "suggest": {
         "php-cuong/magento2-faq-sample-data-extension": "Sample Data version:2.1.*"
