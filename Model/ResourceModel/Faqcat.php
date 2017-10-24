@@ -60,7 +60,7 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         StoreManagerInterface $storeManager,
         Urlkey $urlKey,
         DirectoryList $directoryList,
-        $connectionName = null
+        string $connectionName = null
     ) {
         $this->_urlKey       = $urlKey;
         $this->_storeManager = $storeManager;
