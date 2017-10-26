@@ -11,7 +11,7 @@
     <virtualType name="PHPCuongFaqFaqGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
             <argument name="collection" xsi:type="object" shared="false">PHPCuong\Faq\Model\ResourceModel\Faq\Collection</argument>
-            <argument name="filterPool" xsi:type="object" shared="false">PHPCuongFaqGirdFilterPool</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">PHPCuongFaqGridFilterPool</argument>
         </arguments>
     </virtualType>
     <type name="PHPCuong\Faq\Model\ResourceModel\Faq\Grid\Collection">
