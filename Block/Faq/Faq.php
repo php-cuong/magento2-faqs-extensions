@@ -10,6 +10,7 @@
 
 namespace PHPCuong\Faq\Block\Faq;
 
+use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use PHPCuong\Faq\Helper\Category as CategoryHelper;
@@ -91,22 +92,24 @@ class Faq extends \Magento\Framework\View\Element\Template
 
         $breadcrumbBlock = $this->getLayout()->getBlock('breadcrumbs');
 
-        $breadcrumbBlock->addCrumb(
-            'home',
-            [
-                'label' => __('Home'),
-                'title' => __('Home'),
-                'link' => $this->_storeManager->getStore()->getBaseUrl(),
-            ]
-        );
+        if($breadcrumbBlock instanceof BlockInterface) {
+            $breadcrumbBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Home'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl(),
+                ]
+            );
 
-        $breadcrumbBlock->addCrumb(
-            'faq',
-            [
-                'label' => __('FAQ'),
-                'title' => __('FAQ')
-            ]
-        );
+            $breadcrumbBlock->addCrumb(
+                'faq',
+                [
+                    'label' => __('FAQ'),
+                    'title' => __('FAQ')
+                ]
+            );
+        }
 
         return parent::_prepareLayout();
     }

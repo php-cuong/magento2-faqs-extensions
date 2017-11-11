@@ -10,6 +10,7 @@
 
 namespace PHPCuong\Faq\Block\Search;
 
+use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use PHPCuong\Faq\Helper\Category as CategoryHelper;
@@ -94,31 +95,33 @@ class Search extends \Magento\Framework\View\Element\Template
 
         $breadcrumbBlock = $this->getLayout()->getBlock('breadcrumbs');
 
-        $breadcrumbBlock->addCrumb(
-            'home',
-            [
-                'label' => __('Home'),
-                'title' => __('Home'),
-                'link' => $this->_storeManager->getStore()->getBaseUrl(),
-            ]
-        );
+        if($breadcrumbBlock instanceof BlockInterface) {
+            $breadcrumbBlock->addCrumb(
+                'home',
+                [
+                    'label' => __('Home'),
+                    'title' => __('Home'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl(),
+                ]
+            );
 
-        $breadcrumbBlock->addCrumb(
-            'faq',
-            [
-                'label' => __('FAQ'),
-                'title' => __('Go to FAQ Page'),
-                'link'  => $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_REQUEST_PATH
-            ]
-        );
+            $breadcrumbBlock->addCrumb(
+                'faq',
+                [
+                    'label' => __('FAQ'),
+                    'title' => __('Go to FAQ Page'),
+                    'link' => $this->_storeManager->getStore()->getBaseUrl() . FaqResourceModel::FAQ_REQUEST_PATH
+                ]
+            );
 
-        $breadcrumbBlock->addCrumb(
-            'search',
-            [
-                'label' => __('Search: ').$this->getTextSearch(),
-                'title' => __('Search: ').$this->getTextSearch()
-            ]
-        );
+            $breadcrumbBlock->addCrumb(
+                'search',
+                [
+                    'label' => __('Search: ') . $this->getTextSearch(),
+                    'title' => __('Search: ') . $this->getTextSearch()
+                ]
+            );
+        }
 
         $this->pageConfig->getTitle()->set(__('FAQ'));
 
