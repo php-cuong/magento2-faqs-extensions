@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-06 08:13:53
+ * @Last Modified time: 2017-11-11 20:24:37
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -14,6 +14,7 @@ use Magento\Framework\View\Element\Template\Context;
 use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use PHPCuong\Faq\Model\ResourceModel\Faq;
 use PHPCuong\Faq\Helper\Config as ConfigHelper;
+use Magento\Cms\Model\Template\FilterProvider;
 
 class Question extends \Magento\Framework\View\Element\Template
 {
@@ -68,19 +69,40 @@ class Question extends \Magento\Framework\View\Element\Template
     protected $_faqId = null;
 
     /**
+     * @var \Magento\Cms\Model\Template\FilterProvider
+     */
+    protected $filterProvider;
+
+    /**
      *
      * @param Context $context
      * @param QuestionHelper $questionHelper
      * @param ConfigHelper $configHelper
+     * @param FilterProvider $filterProvider
      */
     public function __construct(
         Context $context,
         QuestionHelper $questionHelper,
-        ConfigHelper $configHelper
+        ConfigHelper $configHelper,
+        FilterProvider $filterProvider
     ) {
         $this->_questionHelper = $questionHelper;
         $this->_configHelper = $configHelper;
+        $this->filterProvider = $filterProvider;
         parent::__construct($context);
+    }
+
+    /**
+     * Filter provider
+     *
+     * @param string $content
+     * @return string
+     */
+    public function filterProvider($content)
+    {
+        return $this->filterProvider->getBlockFilter()
+            ->setStoreId($this->_storeManager->getStore()->getId())
+            ->filter($content);
     }
 
     /**

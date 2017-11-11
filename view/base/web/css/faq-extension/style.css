@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'faq-extension';
-  src:  url('fonts/faq-extension.eot?qvl7za');
-  src:  url('fonts/faq-extension.eot?qvl7za#iefix') format('embedded-opentype'),
-    url('fonts/faq-extension.ttf?qvl7za') format('truetype'),
-    url('fonts/faq-extension.woff?qvl7za') format('woff'),
-    url('fonts/faq-extension.svg?qvl7za#faq-extension') format('svg');
+  src:  url('fonts/faq-extension.eot?e7yg6v');
+  src:  url('fonts/faq-extension.eot?e7yg6v#iefix') format('embedded-opentype'),
+    url('fonts/faq-extension.ttf?e7yg6v') format('truetype'),
+    url('fonts/faq-extension.woff?e7yg6v') format('woff'),
+    url('fonts/faq-extension.svg?e7yg6v#faq-extension') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.faq-iconicon-gpg:before {
+  content: "\e901";
+}
+.faq-iconfaq-icon:before {
+  content: "\e900";
+  color: #fff;
+}
 .faq-iconcalendar:before {
   content: "\e953";
 }
@@ -44,8 +51,4 @@
 }
 .faq-iconminus:before {
   content: "\ea0b";
-}
-.faq-iconfaq-icon:before {
-  content: "\e900";
-  color: #fff;
 }

@@ -21,5 +21,9 @@
         <referenceContainer name="content">
             <uiComponent name="faqcat_listing"/>
         </referenceContainer>
+        <referenceContainer name="legal.copyright">
+            <block class="Magento\Backend\Block\Page\Copyright" name="faq-copyright" template="PHPCuong_Faq::footer/copyright.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="copyright" remove="true"/>
     </body>
 </page>

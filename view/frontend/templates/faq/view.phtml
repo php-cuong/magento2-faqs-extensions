@@ -34,7 +34,7 @@
                 <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
                     <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><span class="faq-iconplus"></span><?php echo $faq['title']; ?></a>
                     <div class="description" id="description">
-                        <?php echo $faq['content']; ?>
+                        <?php echo $block->filterProvider($faq['content']); ?>
                     </div>
                     <div class="read-more"><?php echo __('Read more'); ?></div>
                 </li>
@@ -55,7 +55,7 @@
                 <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
                     <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><span class="faq-iconplus"></span><?php echo $faq['title']; ?></a>
                     <div class="description" id="description">
-                        <?php echo $faq['content']; ?>
+                        <?php echo $block->filterProvider($faq['content']); ?>
                     </div>
                     <div class="read-more"><?php echo __('Read more'); ?></div>
                 </li>

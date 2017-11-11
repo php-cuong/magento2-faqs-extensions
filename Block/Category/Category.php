@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-06 08:14:36
+ * @Last Modified time: 2017-11-11 20:23:49
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -16,6 +16,7 @@ use PHPCuong\Faq\Helper\Question as QuestionHelper;
 use PHPCuong\Faq\Helper\Config as ConfigHelper;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use PHPCuong\Faq\Model\ResourceModel\Faqcat as FaqCatResourceModel;
+use Magento\Cms\Model\Template\FilterProvider;
 
 class Category extends \Magento\Framework\View\Element\Template
 {
@@ -50,6 +51,11 @@ class Category extends \Magento\Framework\View\Element\Template
     protected $_faqCategoryIcon = null;
 
     /**
+     * @var \Magento\Cms\Model\Template\FilterProvider
+     */
+    protected $filterProvider;
+
+    /**
      * @param Context $context
      * @param StoreManagerInterface $storeManager
      * @param CategoryHelper $categoryHelper
@@ -57,18 +63,21 @@ class Category extends \Magento\Framework\View\Element\Template
      * @param FaqCatResourceModel $faqCatResourceModel
      * @param FaqResourceModel $faqResourceModel
      * @param ConfigHelper $configHelper
+     * @param FilterProvider $filterProvider
      */
     public function __construct(
         Context $context,
         CategoryHelper $categoryHelper,
         FaqCatResourceModel $faqCatResourceModel,
         FaqResourceModel $faqResourceModel,
-        ConfigHelper $configHelper
+        ConfigHelper $configHelper,
+        FilterProvider $filterProvider
     ) {
         $this->_categoryHelper = $categoryHelper;
         $this->_faqCatResourceModel = $faqCatResourceModel;
         $this->_faqResourceModel = $faqResourceModel;
         $this->_configHelper = $configHelper;
+        $this->filterProvider = $filterProvider;
         parent::__construct($context);
     }
 
@@ -127,6 +136,19 @@ class Category extends \Magento\Framework\View\Element\Template
         $this->pageConfig->setDescription($faqCategory['meta_description']? $faqCategory['meta_description'] : $faqCategory['title']);
 
         return parent::_prepareLayout();
+    }
+
+    /**
+     * Filter provider
+     *
+     * @param string $content
+     * @return string
+     */
+    public function filterProvider($content)
+    {
+        return $this->filterProvider->getBlockFilter()
+            ->setStoreId($this->_storeManager->getStore()->getId())
+            ->filter($content);
     }
 
     /**

@@ -13,6 +13,8 @@
 		el.innerHTML = '<span style="font-family: \'faq-extension\'">' + entity + '</span>' + html;
 	}
 	var icons = {
+		'faq-iconicon-gpg': '&#xe901;',
+		'faq-iconfaq-icon': '&#xe900;',
 		'faq-iconcalendar': '&#xe953;',
 		'faq-iconuser': '&#xe971;',
 		'faq-iconeye': '&#xe9ce;',
@@ -20,7 +22,6 @@
 		'faq-iconangry': '&#xe9ed;',
 		'faq-iconplus': '&#xea0a;',
 		'faq-iconminus': '&#xea0b;',
-		'faq-iconfaq-icon': '&#xe900;',
 		'0': 0
 		},
 		els = document.getElementsByTagName('*'),
