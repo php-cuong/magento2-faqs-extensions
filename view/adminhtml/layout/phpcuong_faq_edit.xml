@@ -39,7 +39,13 @@
         </referenceContainer>
         <referenceContainer name="legal.copyright">
             <block class="Magento\Backend\Block\Page\Copyright" name="faq-copyright" template="PHPCuong_Faq::footer/copyright.phtml"/>
+            <referenceBlock name="copyright" remove="true"/>
         </referenceContainer>
-        <referenceBlock name="copyright" remove="true"/>
+        <referenceContainer name="legal.system">
+            <referenceBlock name="report" remove="true"/>
+            <referenceBlock name="version" remove="true"/>
+            <block class="Magento\Framework\View\Element\Template" name="faq-version" template="PHPCuong_Faq::footer/version.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="faq-report" template="PHPCuong_Faq::footer/report.phtml"/>
+        </referenceContainer>
     </body>
 </page>

@@ -55,6 +55,7 @@ Log into your Magento admin, goto FAQs -> Manage FAQs, goto FAQs -> Manage FAQs 
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/menu.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/FAQ-manager.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/edit-FAQ.png)
+![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/faq-category-list.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/edit-category.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/linking-to-faq-page.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/faq-page.png)
