@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:02:38
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-05 08:59:44
+ * @Last Modified time: 2017-11-11 14:36:23
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -116,6 +116,8 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     protected function _beforeSave(AbstractModel $object)
     {
+        $this->cleanInputs($object);
+
         $identifier = empty($object->getData('identifier')) ? $object->getTitle() : $object->getData('identifier');
 
         $object->setIdentifier($this->_urlKey->generateIdentifier($identifier));
@@ -131,6 +133,21 @@ class Faq extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
                 __('The faq URL key cannot be made of only numbers.')
             );
         }
+        return $this;
+    }
+
+    /**
+     * Clean inputs
+     *
+     * @param AbstractModel $object
+     * @return this
+     */
+    protected function cleanInputs(AbstractModel $object)
+    {
+        $object->setTitle(trim(strip_tags($object->getTitle())));
+        $object->setIdentifier(trim(strip_tags($object->getIdentifier())));
+        $object->setMetaKeywords(trim(strip_tags($object->getMetaKeywords())));
+        $object->setMetaDescription(trim($object->getMetaDescription()));
         return $this;
     }
 

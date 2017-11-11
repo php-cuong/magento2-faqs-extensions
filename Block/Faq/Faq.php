@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:16:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-06 08:14:21
+ * @Last Modified time: 2017-11-11 14:20:19
  */
 
 namespace PHPCuong\Faq\Block\Faq;
@@ -118,7 +118,7 @@ class Faq extends \Magento\Framework\View\Element\Template
      */
     public function getFrequentlyAskedQuestion()
     {
-        return $this->getFAQ(1);
+        return $this->getFaq(1);
     }
 
     /**
@@ -128,7 +128,7 @@ class Faq extends \Magento\Framework\View\Element\Template
      */
     public function getLastestFAQ()
     {
-        return $this->getFAQ(null, 1);
+        return $this->getFaq(null, 1);
     }
 
     /**
@@ -136,7 +136,7 @@ class Faq extends \Magento\Framework\View\Element\Template
      *
      * @return array|bool
      */
-    public function getFAQ($frequently = null, $lastest = null)
+    public function getFaq($frequently = null, $lastest = null)
     {
         $select = $this->_faqResourceModel->getConnection()->select()
             ->from(['faq' => $this->_faqResourceModel->getMainTable()])
@@ -201,17 +201,6 @@ class Faq extends \Magento\Framework\View\Element\Template
     public function getFileBaseUrl($path)
     {
         return $this->_configHelper->getFileBaseUrl($path);
-    }
-
-    /**
-     * Get short description of the question
-     *
-     * @param $content, $identifier
-     * @return string
-     */
-    public function getFaqShortDescription($content, $identifier)
-    {
-        return $this->_configHelper->getFaqShortDescription($content, $identifier);
     }
 
     /**

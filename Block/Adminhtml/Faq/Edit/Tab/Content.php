@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-17 01:38:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 08:44:11
+ * @Last Modified time: 2017-11-11 14:36:05
  */
 
 namespace PHPCuong\Faq\Block\Adminhtml\Faq\Edit\Tab;
@@ -19,6 +19,7 @@ class Content extends \Magento\Backend\Block\Widget\Form\Generic implements
      * @var \Magento\Cms\Model\Wysiwyg\Config
      */
     protected $_wysiwygConfig;
+
     /**
      * Core registry
      *

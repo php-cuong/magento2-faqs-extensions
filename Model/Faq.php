@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:01:39
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-24 20:40:39
+ * @Last Modified time: 2017-11-11 13:42:36
  */
 
 namespace PHPCuong\Faq\Model;

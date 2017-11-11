@@ -1,68 +1,73 @@
-<h2 class="faqcat-title first-title"><i></i><?php echo __('Welcome you to our support portal');?></h2>
-<?php if ($this->getFaqCategoriesList()): ?>
-    <ul class="category-list">
-        <?php foreach ($this->getFaqCategoriesList() as $category): ?>
-            <li class="col-xs-6 col-sm-3 col-md-3 category">
-                <div class="block">
-                    <a href="<?php echo $this->getFaqCategoryFullPath($category['identifier']); ?>">
-                        <img src="<?php echo !empty($category['image']) ? $this->getFileBaseUrl($category['image']) : $block->getViewFileUrl('PHPCuong_Faq::images/faq81x81.png'); ?>" alt="<?php echo $category['title'];?>" title="<?php echo $category['title'];?> - <?php echo __('FAQ'); ?>" />
-                    </a>
-                    <h3>
+<div class="faq-category">
+    <h2 class="faqcat-title first-title"><i></i><?php echo __('Welcome to our support portal');?></h2>
+    <?php if ($this->getFaqCategoriesList()): ?>
+        <ul class="category-list">
+            <?php foreach ($this->getFaqCategoriesList() as $category): ?>
+                <li class="col-xs-6 col-sm-3 col-md-3 category">
+                    <div class="block">
                         <a href="<?php echo $this->getFaqCategoryFullPath($category['identifier']); ?>">
-                            <?php echo $category['title'];?>
+                            <img src="<?php echo !empty($category['image']) ? $this->getFileBaseUrl($category['image']) : $block->getViewFileUrl('PHPCuong_Faq::images/faq81x81.png'); ?>" alt="<?php echo $category['title'];?>" title="<?php echo $category['title'];?> - <?php echo __('FAQ'); ?>" />
                         </a>
-                    </h3>
-                </div>
+                        <h3>
+                            <a href="<?php echo $this->getFaqCategoryFullPath($category['identifier']); ?>">
+                                <?php echo $category['title'];?>
+                            </a>
+                        </h3>
+                    </div>
+                </li>
+            <?php endforeach;?>
+        </ul>
+    <?php else: ?>
+        <ol class="items faqs-list">
+            <li class="item no-question">
+                <a href="#"><?php echo __('There are no FAQ Categories was found.'); ?></a>
             </li>
-        <?php endforeach;?>
-    </ul>
-<?php else: ?>
-    <ol class="items faqs-list">
-        <li class="item no-question">
-            <a href="#"><?php echo __('No FAQ Categories.'); ?></a>
-        </li>
-    </ol>
-<?php endif; ?>
+        </ol>
+    <?php endif; ?>
 
-<h2 class="faqcat-title">
-    <i></i><?php echo __('Frequently Asked Questions');?>
-</h2>
-<?php if ($this->getFrequentlyAskedQuestion()): ?>
-    <ol class="items faqs-list">
-        <?php foreach($this->getFrequentlyAskedQuestion() as $faq): ?>
-            <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
-                <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><span class="faq-iconplus"></span><?php echo $faq['title']; ?></a>
-                <div class="description" id="description">
-                    <?php echo $this->getFaqShortDescription($faq['content'], $faq['identifier']); ?>
-                </div>
+    <h2 class="faqcat-title">
+        <i></i><?php echo __('Frequently Asked Questions');?>
+    </h2>
+    <?php if ($this->getFrequentlyAskedQuestion()): ?>
+        <ol class="items faqs-list">
+            <?php foreach($this->getFrequentlyAskedQuestion() as $faq): ?>
+                <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
+                    <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><span class="faq-iconplus"></span><?php echo $faq['title']; ?></a>
+                    <div class="description" id="description">
+                        <?php echo $faq['content']; ?>
+                    </div>
+                    <div class="read-more"><?php echo __('Read more'); ?></div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php else: ?>
+        <ol class="items faqs-list">
+            <li class="item no-question">
+                <a href="#"><?php echo __('There are no frequently asked questions was found.'); ?></a>
             </li>
-        <?php endforeach; ?>
-    </ol>
-<?php else: ?>
-    <ol class="items faqs-list">
-        <li class="item no-question">
-            <a href="#"><?php echo __('No frequently asked questions.'); ?></a>
-        </li>
-    </ol>
-<?php endif; ?>
+        </ol>
+    <?php endif; ?>
 
-<h2 class="faqcat-title"><i></i><?php echo __('Lastest Questions');?></h2>
-<?php if ($this->getLastestFAQ()): ?>
-    <ol class="items faqs-list">
-        <?php foreach($this->getLastestFAQ() as $faq): ?>
-            <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
-                <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><span class="faq-iconplus"></span><?php echo $faq['title']; ?></a>
-                <div class="description" id="description">
-                    <?php echo $this->getFaqShortDescription($faq['content'], $faq['identifier']); ?>
-                </div>
+    <h2 class="faqcat-title"><i></i><?php echo __('Latest Questions');?></h2>
+    <?php if ($this->getLastestFAQ()): ?>
+        <ol class="items faqs-list">
+            <?php foreach($this->getLastestFAQ() as $faq): ?>
+                <li class="item" id="faq-id-<?php echo $faq['faq_id']; ?>">
+                    <a href="<?php echo $this->getFaqFullPath($faq['identifier']); ?>"><span class="faq-iconplus"></span><?php echo $faq['title']; ?></a>
+                    <div class="description" id="description">
+                        <?php echo $faq['content']; ?>
+                    </div>
+                    <div class="read-more"><?php echo __('Read more'); ?></div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    <?php else: ?>
+        <ol class="items faqs-list">
+            <li class="item no-question">
+                <a href="#"><?php echo __('There are no latest questions was found.'); ?></a>
             </li>
-        <?php endforeach; ?>
-    </ol>
-<?php else: ?>
-    <ol class="items faqs-list">
-        <li class="item no-question">
-            <a href="#"><?php echo __('No lastest question.'); ?></a>
-        </li>
-    </ol>
-<?php endif; ?>
+        </ol>
+    <?php endif; ?>
+</div>
+
 
