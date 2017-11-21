@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-16 02:06:33
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-05 09:00:41
+ * @Last Modified time: 2017-11-22 02:59:22
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel\Faq\Grid;
@@ -44,7 +44,7 @@ class Collection extends \PHPCuong\Faq\Model\ResourceModel\Faq\Collection implem
         $eventObject,
         $resourceModel,
         $model = 'Magento\Framework\View\Element\UiComponent\DataProvider\Document',
-        $connection = null,
+        \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);

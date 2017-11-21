@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-19 22:03:35
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-11 14:15:21
+ * @Last Modified time: 2017-11-22 02:52:40
  */
 
 namespace PHPCuong\Faq\Model\ResourceModel;
@@ -59,13 +59,12 @@ class Faqcat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         Context $context,
         StoreManagerInterface $storeManager,
         Urlkey $urlKey,
-        DirectoryList $directoryList,
-        $connectionName = null
+        DirectoryList $directoryList
     ) {
         $this->_urlKey       = $urlKey;
         $this->_storeManager = $storeManager;
         $this->_directoryList = $directoryList;
-        parent::__construct($context, $connectionName);
+        parent::__construct($context);
     }
 
     /**
