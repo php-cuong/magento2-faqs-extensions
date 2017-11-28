@@ -8,7 +8,7 @@
                 <?php foreach($this->getFaqCategoriesList() as $fclist): ?>
                     <li class="item">
                         <a href="<?php echo $this->getFaqCategoryFullPath($fclist['identifier']); ?>">
-                            <?php echo $fclist['title']; ?> <span class="count">(<?php echo $fclist['count']; ?>)</span>
+                            <?php echo __($fclist['title']); ?> <span class="count">(<?php echo $fclist['count']; ?>)</span>
                         </a>
                     </li>
                 <?php endforeach; ?>

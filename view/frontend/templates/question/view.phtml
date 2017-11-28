@@ -11,7 +11,7 @@
                 <?php  echo ($this->getFaqCreated()) ? $this->getFaqCreated() : '' ; ?>
             </span>
             <span class="category">
-                <?php echo ($this->getFaqCategoryTitle())? __('Published in').' '.$this->getFaqCategoryTitle().' ' : ''; ?>
+                <?php echo ($this->getFaqCategoryTitle())? __('Published in').' '.__($this->getFaqCategoryTitle()).' ' : ''; ?>
             </span>
             <span class="viewed">
                 <i class="faq-iconeye"></i>
