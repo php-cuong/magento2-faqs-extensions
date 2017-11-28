@@ -1,3 +1,6 @@
+.faq-iconkeyboard_arrow_right {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe902;');
+}
 .faq-iconicon-gpg {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe901;');
 }
@@ -24,5 +27,8 @@
 }
 .faq-iconminus {
   *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xea0b;');
+}
+.faq-iconsearch {
+  *zoom: expression(this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe986;');
 }
 

@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-11 20:23:49
+ * @Last Modified time: 2017-11-28 18:11:42
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -111,8 +111,8 @@ class Category extends \Magento\Framework\View\Element\Template
         $breadcrumbsBlock->addCrumb(
             'faq',
             [
-                'label' => __('FAQ'),
-                'title' => __('Go to FAQ Page'),
+                'label' => __('FAQs'),
+                'title' => __('Go to FAQs Page'),
                 'link'  => $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_REQUEST_PATH
             ]
         );

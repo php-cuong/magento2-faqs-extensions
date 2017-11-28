@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-11 20:24:37
+ * @Last Modified time: 2017-11-28 18:09:15
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -159,8 +159,8 @@ class Question extends \Magento\Framework\View\Element\Template
         $breadcrumbsBlock->addCrumb(
             'faq',
             [
-                'label' => __('FAQ'),
-                'title' => __('Go to FAQ Page'),
+                'label' => __('FAQs'),
+                'title' => __('Go to FAQs Page'),
                 'link'  => $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_REQUEST_PATH
             ]
         );
@@ -191,7 +191,7 @@ class Question extends \Magento\Framework\View\Element\Template
             ]
         );
 
-        $this->pageConfig->getTitle()->set(__('FAQ'));
+        $this->pageConfig->getTitle()->set(__('FAQs'));
 
         $this->pageConfig->getTitle()->prepend($this->_faqTitle);
 

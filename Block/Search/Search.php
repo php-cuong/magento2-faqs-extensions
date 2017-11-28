@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-27 16:35:58
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-06 08:15:00
+ * @Last Modified time: 2017-11-28 18:18:36
  */
 
 namespace PHPCuong\Faq\Block\Search;
@@ -82,7 +82,7 @@ class Search extends \Magento\Framework\View\Element\Template
      */
     public function getTextSearch()
     {
-        return ($this->getRequest()->getParam('s')) ? $this->getRequest()->getParam('s') : '';
+        return ($this->getRequest()->getParam('s')) ? $this->escapeHtml($this->getRequest()->getParam('s')) : '';
     }
 
     /**
@@ -106,8 +106,8 @@ class Search extends \Magento\Framework\View\Element\Template
         $breadcrumbBlock->addCrumb(
             'faq',
             [
-                'label' => __('FAQ'),
-                'title' => __('Go to FAQ Page'),
+                'label' => __('FAQs'),
+                'title' => __('Go to FAQs Page'),
                 'link'  => $this->_storeManager->getStore()->getBaseUrl().FaqResourceModel::FAQ_REQUEST_PATH
             ]
         );
@@ -120,7 +120,7 @@ class Search extends \Magento\Framework\View\Element\Template
             ]
         );
 
-        $this->pageConfig->getTitle()->set(__('FAQ'));
+        $this->pageConfig->getTitle()->set(__('FAQs'));
 
         $this->pageConfig->getTitle()->prepend(__('Search: ').$this->getTextSearch());
 

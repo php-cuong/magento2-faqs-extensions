@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-27 15:42:40
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2016-12-27 17:38:30
+ * @Last Modified time: 2017-11-28 18:18:55
  */
 
 namespace PHPCuong\Faq\Block\Search;
@@ -30,6 +30,6 @@ class SearchForm extends \Magento\Framework\View\Element\Template
      */
     public function getTextSearch()
     {
-        return ($this->getRequest()->getParam('s')) ? $this->getRequest()->getParam('s') : '';
+        return ($this->getRequest()->getParam('s')) ? $this->escapeHtml($this->getRequest()->getParam('s')) : '';
     }
 }

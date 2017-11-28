@@ -3,7 +3,7 @@
     <?php if ($this->getFaqCategoriesList()): ?>
         <ul class="category-list">
             <?php foreach ($this->getFaqCategoriesList() as $category): ?>
-                <li class="col-xs-6 col-sm-3 col-md-3 category">
+                <li class="col-xs-6 col-sm-4 col-md-3 category">
                     <div class="block">
                         <a href="<?php echo $this->getFaqCategoryFullPath($category['identifier']); ?>">
                             <img src="<?php echo !empty($category['image']) ? $this->getFileBaseUrl($category['image']) : $block->getViewFileUrl('PHPCuong_Faq::images/faq81x81.png'); ?>" alt="<?php echo $category['title'];?>" title="<?php echo $category['title'];?> - <?php echo __('FAQ'); ?>" />
