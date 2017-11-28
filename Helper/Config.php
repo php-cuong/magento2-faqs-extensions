@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 23:54:46
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-11 14:20:15
+ * @Last Modified time: 2017-11-28 17:21:02
  */
 
 namespace PHPCuong\Faq\Helper;
@@ -60,7 +60,7 @@ class Config
      */
     public function getFileBaseUrl($path)
     {
-        return $this->_storeManager->getStore()->getBaseUrl().DirectoryList::PUB.'/'.DirectoryList::MEDIA.'/'.$path;
+        return '/'.DirectoryList::PUB.'/'.DirectoryList::MEDIA.'/'.$path;
     }
 
     /**

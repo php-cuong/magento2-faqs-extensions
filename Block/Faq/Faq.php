@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-23 18:16:21
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-11 20:11:48
+ * @Last Modified time: 2017-11-28 17:21:05
  */
 
 namespace PHPCuong\Faq\Block\Faq;
@@ -92,11 +92,11 @@ class Faq extends \Magento\Framework\View\Element\Template
     {
         $this->_faqCategoriesList = $this->_categoryHelper->getCategoriesList();
 
-        $this->pageConfig->getTitle()->set(__('FAQ'));
+        $this->pageConfig->getTitle()->set(__('FAQs'));
 
-        $this->pageConfig->setKeywords(__('FAQ'));
+        $this->pageConfig->setKeywords(__('FAQs'));
 
-        $this->pageConfig->setDescription(__('FAQ'));
+        $this->pageConfig->setDescription(__('FAQs'));
 
         $breadcrumbBlock = $this->getLayout()->getBlock('breadcrumbs');
 
@@ -112,8 +112,8 @@ class Faq extends \Magento\Framework\View\Element\Template
         $breadcrumbBlock->addCrumb(
             'faq',
             [
-                'label' => __('FAQ'),
-                'title' => __('FAQ')
+                'label' => __('FAQs'),
+                'title' => __('FAQs')
             ]
         );
 
