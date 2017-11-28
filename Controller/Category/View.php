@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-21 16:15:56
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-01-05 09:08:38
+ * @Last Modified time: 2017-11-28 19:30:54
  */
 
 namespace PHPCuong\Faq\Controller\Category;
@@ -58,9 +58,9 @@ class View extends \Magento\Framework\App\Action\Action
         if ($category = $this->_faqCatResourceModel->getFaqCategoryStore($id, $textSearch)) {
             $resultPage = $this->_resultPageFactory->create();
 
-            $resultPage->getConfig()->getTitle()->set(__('FAQ'));
+            $resultPage->getConfig()->getTitle()->set(__('FAQs'));
 
-            $resultPage->getConfig()->getTitle()->prepend($category['title']);
+            $resultPage->getConfig()->getTitle()->prepend(__($category['title']));
 
             return $resultPage;
         }

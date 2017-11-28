@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-18 15:27:53
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-28 18:09:15
+ * @Last Modified time: 2017-11-28 19:26:53
  */
 
 namespace PHPCuong\Faq\Block\Question;
@@ -169,15 +169,15 @@ class Question extends \Magento\Framework\View\Element\Template
         if ($identifier = $faqCategory->getCategoryIndentifier()) {
             $link = $this->_storeManager->getStore()->getBaseUrl().Faq::FAQ_CATEGORY_PATH.'/'.$identifier.Faq::FAQ_DOT_HTML;
 
-            $this->_faqCategoryTitle = '<a href="'.$link.'">'.$faqCategory->getTitle().'</a>';
+            $this->_faqCategoryTitle = '<a href="'.$link.'">'.__($faqCategory->getTitle()).'</a>';
 
             $this->_relatedQuestion = $this->_questionHelper->getRelatedQuestion($faq->getFaqId(), $faqCategory->getCategoryId());
 
             $breadcrumbsBlock->addCrumb(
                 'faq.category',
                 [
-                    'label' => $faqCategory->getTitle(),
-                    'title' => $faqCategory->getTitle(),
+                    'label' => __($faqCategory->getTitle()),
+                    'title' => __($faqCategory->getTitle()),
                     'link'  => $link
                 ]
             );

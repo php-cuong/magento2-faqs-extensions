@@ -5,7 +5,7 @@
  * @Author              Ngo Quang Cuong <bestearnmoney87@gmail.com>
  * @Date                2016-12-20 23:13:15
  * @Last modified by:   nquangcuong
- * @Last Modified time: 2017-11-28 18:11:42
+ * @Last Modified time: 2017-11-28 19:25:54
  */
 
 namespace PHPCuong\Faq\Block\Category;
@@ -119,21 +119,21 @@ class Category extends \Magento\Framework\View\Element\Template
 
         $faqCategory = $this->getFaqCategory();
 
-        $this->_faqCategoryTitle = $faqCategory['title'];
+        $this->_faqCategoryTitle = __($faqCategory['title']);
 
         $this->_faqCategoryIcon = $faqCategory['image'];
 
         $breadcrumbsBlock->addCrumb(
             'faq.category',
             [
-                'label' => $faqCategory['title'],
-                'title' => $faqCategory['title']
+                'label' => __($faqCategory['title']),
+                'title' => __($faqCategory['title'])
             ]
         );
 
-        $this->pageConfig->setKeywords($faqCategory['meta_keywords']? $faqCategory['meta_keywords'] : $faqCategory['title']);
+        $this->pageConfig->setKeywords($faqCategory['meta_keywords']? __($faqCategory['meta_keywords']) : $this->_faqCategoryTitle);
 
-        $this->pageConfig->setDescription($faqCategory['meta_description']? $faqCategory['meta_description'] : $faqCategory['title']);
+        $this->pageConfig->setDescription($faqCategory['meta_description']? __($faqCategory['meta_description']) : $this->_faqCategoryTitle);
 
         return parent::_prepareLayout();
     }
