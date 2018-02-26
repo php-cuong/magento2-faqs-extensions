@@ -10,6 +10,7 @@
 
 namespace PHPCuong\Faq\Helper;
 
+use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -60,7 +61,7 @@ class Config
      */
     public function getFileBaseUrl($path)
     {
-        return '/'.DirectoryList::PUB.'/'.DirectoryList::MEDIA.'/'.$path;
+        return $this ->_storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . $path;
     }
 
     /**
