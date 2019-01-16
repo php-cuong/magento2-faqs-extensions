@@ -49,7 +49,7 @@ composer require php-cuong/magento2-faqs-extensions
 Log into your Magento admin, goto FAQs -> Manage FAQs, goto FAQs -> Manage FAQs Categories
 
 ## Magento 2 Tutorial Videos
-[https://www.youtube.com/watch?v=akcaOBrLTzM&list=PL98CDCbI3TNvPczWSOnpaMoyxVISLVzYQ](Magento 2 Tutorial Videos)
+https://www.youtube.com/watch?v=akcaOBrLTzM&list=PL98CDCbI3TNvPczWSOnpaMoyxVISLVzYQ
 
 ## ScreenShot
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/menu.png)
