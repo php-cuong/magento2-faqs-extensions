@@ -3,9 +3,7 @@ This is an awesome module, Admin can create unlimited, update, delete FAQs and F
 
 In the business, times equals money while there are always thousands of questions in a customer’s mind both before and after purchasing. Thus, the faster answers, the happier customers, the more successful business.
 
-Please donate if you enjoy my extension.
-
-[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SLETZ2BY26LQ)
+Purchase this professional extension here https://www.giaphugroup.com/magento-2-professional-faqs-extension.html
 
 ## Features of this extension:
 
@@ -62,7 +60,5 @@ https://www.youtube.com/watch?v=akcaOBrLTzM&list=PL98CDCbI3TNvPczWSOnpaMoyxVISLV
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/FAQ-details.png)
 ![ScreenShot](https://github.com/php-cuong/magento2-faqs-extensions/blob/master/Screenshot/faq-category.png)
 
-## Donations
-Please donate if you enjoy my extension.
-
-[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3SLETZ2BY26LQ)
+## Purchase
+Purchase this professional extension here https://www.giaphugroup.com/magento-2-professional-faqs-extension.html
