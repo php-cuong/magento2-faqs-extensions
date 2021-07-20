@@ -16,6 +16,7 @@ use PHPCuong\Faq\Helper\Category as CategoryHelper;
 use PHPCuong\Faq\Model\ResourceModel\Faq as FaqResourceModel;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use PHPCuong\Faq\Helper\Config as ConfigHelper;
+use Magento\Cms\Model\Template\FilterProvider;
 
 class Search extends \Magento\Framework\View\Element\Template
 {
@@ -51,6 +52,12 @@ class Search extends \Magento\Framework\View\Element\Template
     protected $_configHelper;
 
     /**
+     * @var \Magento\Cms\Model\Template\FilterProvider
+     */
+    protected $filterProvider;
+
+
+    /**
      *
      * @param Context $context
      * @param QuestionHelper $questionHelper
@@ -58,6 +65,7 @@ class Search extends \Magento\Framework\View\Element\Template
      * @param DirectoryList $directoryList
      * @param FaqResourceModel $faqResourceModel
      * @param ConfigHelper $configHelper
+     * @param FilterProvider $filterProvider
      */
     public function __construct(
         Context $context,
@@ -65,13 +73,15 @@ class Search extends \Magento\Framework\View\Element\Template
         CategoryHelper $categoryHelper,
         DirectoryList $directoryList,
         FaqResourceModel $faqResourceModel,
-        ConfigHelper $configHelper
+        ConfigHelper $configHelper,
+        FilterProvider $filterProvider
     ) {
         $this->_questionHelper = $questionHelper;
         $this->_categoryHelper = $categoryHelper;
         $this->_directoryList = $directoryList;
         $this->_faqResourceModel = $faqResourceModel;
         $this->_configHelper = $configHelper;
+        $this->filterProvider = $filterProvider;
         parent::__construct($context);
     }
 
@@ -129,6 +139,19 @@ class Search extends \Magento\Framework\View\Element\Template
         $this->pageConfig->setDescription(__('Search: ').$this->getTextSearch());
 
         return parent::_prepareLayout();
+    }
+
+    /**
+     * Filter provider
+     *
+     * @param string $content
+     * @return string
+     */
+    public function filterProvider($content)
+    {
+        return $this->filterProvider->getBlockFilter()
+            ->setStoreId($this->_storeManager->getStore()->getId())
+            ->filter($content);
     }
 
     /**
